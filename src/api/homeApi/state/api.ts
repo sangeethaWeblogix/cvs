@@ -1,0 +1,19 @@
+const API_BASE = process.env.NEXT_PUBLIC_MFS_API_BASE;
+const API_KEY = process.env.MFS_API_KEY; // ✅ Add this
+
+export const fetchStateBasedCaravans = async () => {
+  try {
+    const res = await fetch(`${API_BASE}/by-state`, {
+      next: { revalidate: 3600 },
+      headers: {
+        Accept: "application/json",
+        ...(API_KEY && { "X-Secret-Key": API_KEY }),
+      },
+    });
+    if (!res.ok) return [];
+    const json = await res.json();
+    return json?.states || [];
+  } catch {
+    return [];
+  }
+};
