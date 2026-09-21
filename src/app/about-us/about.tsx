@@ -14,33 +14,33 @@ export default function AboutUs() {
 
               <h2 className="wp-block-heading">Welcome to Marketplace Network</h2>
               <p>
-                At Marketplace Network, we’re dedicated to making your motorhome research
+                At Marketplace Network, we’re dedicated to making your campervan research
                 experience seamless, convenient, and importantly valuable. We have put
-                together a wide range of motorhome models from a range of motorhome
+                together a wide range of campervan models from a range of campervan
                 manufacturers.
               </p>
 
-              <h4 className="wp-block-heading">Discover Your Perfect Motorhome</h4>
+              <h4 className="wp-block-heading">Discover Your Perfect Campervan</h4>
               <p>
                 <strong>Extensive Data :</strong> Explore thousands of new and used
-                motorhomes available on Marketplace Network. With a wide range of
-                motorhomes to choose from, we are confident that you’ll find the perfect
-                motorhome to suit your needs and preferences.
+                campervans available on Marketplace Network. With a wide range of
+                campervans to choose from, we are confident that you’ll find the perfect
+                campervan to suit your needs and preferences.
               </p>
 
               <h4 className="wp-block-heading">
                 Find Quality Manufacturers Advertising With Us <strong>:</strong>
               </h4>
               <p>
-                We have identified specific motorhome manufacturers who build quality
-                motorhomes. These manufacturers don’t spend big on advertising and do not
+                We have identified specific campervan manufacturers who build quality
+                campervans. These manufacturers don’t spend big on advertising and do not
                 participate much on the show. However, the quality of the van is as good
                 as or even better than the big brands who spend big on their marketing.
                 They spend a fraction of the cost on advertising with us, however, we
                 are determined to showcase them to the buyer so it is a win-win for both
                 manufacturer and the buyer. Hence, you get better value for money and
                 higher quality vans, while the manufacturer can focus solely on building
-                quality motorhomes.
+                quality campervans.
               </p>
 
               <p>
@@ -48,14 +48,14 @@ export default function AboutUs() {
                 to narrow down your options based on criteria such as category,
                 location, price range, brand, weights, and more. This helps you find
                 exactly what you’re looking for without hassle. In your search results,
-                along with the regular motorhomes listed for sale, we will also display
-                and suggest the best motorhomes in that market. We show them in the form
+                along with the regular campervans listed for sale, we will also display
+                and suggest the best campervans in that market. We show them in the form
                 of banner ads across the search results.
               </p>
 
               <p>
                 <strong>Comparative Analysis:</strong> Make informed decisions with our
-                comparative analysis tools. Easily compare multiple motorhomes side by
+                comparative analysis tools. Easily compare multiple campervans side by
                 side to evaluate their specifications, features, and pricing, ensuring
                 you get the best value for your investment.
               </p>
@@ -82,9 +82,9 @@ export default function AboutUs() {
 
               <h4 className="wp-block-heading">Browse Marketplace Network Today</h4>
               <p>
-                Experience the convenience, reliability, and efficiency of Marketplace Network. If you are looking to buy a quality motorhome at the right
-                price, we’re your trusted partner in the motorhome market. Join us today
-                and embark on your next motorhome adventure with confidence!
+                Experience the convenience, reliability, and efficiency of Marketplace Network. If you are looking to buy a quality campervan at the right
+                price, we’re your trusted partner in the campervan market. Join us today
+                and embark on your next campervan adventure with confidence!
               </p>
             </div>
           </div>

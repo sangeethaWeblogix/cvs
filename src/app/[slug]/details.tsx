@@ -56,14 +56,14 @@ const BROWSE_TABS: BrowseTab[] = [
     viewAll: { text: "View all locations", href: "/listings/" },
     links: [],
     states: [
-      { text: "Motorhomes for Sale in Victoria",          href: "/listings/victoria-state/" },
-      { text: "Motorhomes for Sale in New South Wales",   href: "/listings/new-south-wales-state/" },
-      { text: "Motorhomes for Sale in Queensland",        href: "/listings/queensland-state/" },
-      { text: "Motorhomes for Sale in South Australia",   href: "/listings/south-australia-state/" },
-      { text: "Motorhomes for Sale in Western Australia", href: "/listings/western-australia-state/" },
-      { text: "Motorhomes for Sale in Tasmania",          href: "/listings/tasmania-state/" },
-      { text: "Motorhomes for Sale in ACT",               href: "/listings/australian-capital-territory-state/" },
-      { text: "Motorhomes for Sale in Northern Territory",href: "/listings/northern-territory-state/" },
+      { text: "Campervans for Sale in Victoria",          href: "/listings/victoria-state/" },
+      { text: "Campervans for Sale in New South Wales",   href: "/listings/new-south-wales-state/" },
+      { text: "Campervans for Sale in Queensland",        href: "/listings/queensland-state/" },
+      { text: "Campervans for Sale in South Australia",   href: "/listings/south-australia-state/" },
+      { text: "Campervans for Sale in Western Australia", href: "/listings/western-australia-state/" },
+      { text: "Campervans for Sale in Tasmania",          href: "/listings/tasmania-state/" },
+      { text: "Campervans for Sale in ACT",               href: "/listings/australian-capital-territory-state/" },
+      { text: "Campervans for Sale in Northern Territory",href: "/listings/northern-territory-state/" },
     ],
     regions: [
       { text: "Melbourne",     href: "/listings/victoria-state/melbourne-region/" },
@@ -89,34 +89,34 @@ const BROWSE_TABS: BrowseTab[] = [
     icon: "bi-buildings",
     viewAll: { text: "View all manufacturers", href: "/caravan-manufacturers/" },
     links: [
-      { text: "Jayco Motorhomes for Sale",       href: "/listings/jayco/" },
-      { text: "Snowy River Motorhomes for Sale", href: "/listings/snowy-river/" },
-      { text: "Evernew Motorhomes for Sale",     href: "/listings/evernew/" },
-      { text: "Crusader Motorhomes for Sale",    href: "/listings/crusader/" },
-      { text: "New Age Motorhomes for Sale",     href: "/listings/new-age/" },
-      { text: "MDC Motorhomes for Sale",         href: "/listings/mdc/" },
-      { text: "Essential Motorhomes for Sale",   href: "/listings/essential/" },
-      { text: "Design RV Motorhomes for Sale",   href: "/listings/design-rv/" },
-      { text: "JB Motorhomes for Sale",          href: "/listings/jb/" },
-      { text: "Supreme Motorhomes for Sale",     href: "/listings/supreme/" },
-      { text: "Avan Motorhomes for Sale",        href: "/listings/avan/" },
-      { text: "Lotus Motorhomes for Sale",       href: "/listings/lotus/" },
-      { text: "Royal Flair Motorhomes for Sale", href: "/listings/royal-flair/" },
-      { text: "Windsor Motorhomes for Sale",     href: "/listings/windsor/" },
-      { text: "Golf Motorhomes for Sale",        href: "/listings/golf/" },
-      { text: "Nova Motorhomes for Sale",        href: "/listings/nova/" },
-      { text: "Retreat Motorhomes for Sale",     href: "/listings/retreat/" },
-      { text: "Adria Motorhomes for Sale",       href: "/listings/adria/" },
-      { text: "Coromal Motorhomes for Sale",     href: "/listings/coromal/" },
+      { text: "Jayco Campervans for Sale",       href: "/listings/jayco/" },
+      { text: "Snowy River Campervans for Sale", href: "/listings/snowy-river/" },
+      { text: "Evernew Campervans for Sale",     href: "/listings/evernew/" },
+      { text: "Crusader Campervans for Sale",    href: "/listings/crusader/" },
+      { text: "New Age Campervans for Sale",     href: "/listings/new-age/" },
+      { text: "MDC Campervans for Sale",         href: "/listings/mdc/" },
+      { text: "Essential Campervans for Sale",   href: "/listings/essential/" },
+      { text: "Design RV Campervans for Sale",   href: "/listings/design-rv/" },
+      { text: "JB Campervans for Sale",          href: "/listings/jb/" },
+      { text: "Supreme Campervans for Sale",     href: "/listings/supreme/" },
+      { text: "Avan Campervans for Sale",        href: "/listings/avan/" },
+      { text: "Lotus Campervans for Sale",       href: "/listings/lotus/" },
+      { text: "Royal Flair Campervans for Sale", href: "/listings/royal-flair/" },
+      { text: "Windsor Campervans for Sale",     href: "/listings/windsor/" },
+      { text: "Golf Campervans for Sale",        href: "/listings/golf/" },
+      { text: "Nova Campervans for Sale",        href: "/listings/nova/" },
+      { text: "Retreat Campervans for Sale",     href: "/listings/retreat/" },
+      { text: "Adria Campervans for Sale",       href: "/listings/adria/" },
+      { text: "Coromal Campervans for Sale",     href: "/listings/coromal/" },
     ],
   },
   {
     label: "Condition",
     icon: "bi-patch-check",
-    viewAll: { text: "Browse all motorhomes", href: "/listings/" },
+    viewAll: { text: "Browse all campervans", href: "/listings/" },
     links: [
-      { text: "New Motorhomes for Sale", href: "/listings/new-condition/" },
-      { text: "Used Motorhomes for Sale", href: "/listings/used-condition/" },
+      { text: "New Campervans for Sale", href: "/listings/new-condition/" },
+      { text: "Used Campervans for Sale", href: "/listings/used-condition/" },
     ],
   },
   {
@@ -483,15 +483,15 @@ export default function BlogDetailsPage({
                   <img src="/images/category.svg" alt="" width={32} height={32} className="blog-browse-cta__icon-img" />
                   <div>
                     <h3 className="blog-browse-cta__heading">
-                      {catLabel ? `Ready to Browse ${catLabel} Motorhomes?` : "Ready to Browse Motorhomes?"}
+                      {catLabel ? `Ready to Browse ${catLabel} Campervans?` : "Ready to Browse Campervans?"}
                     </h3>
                     <p className="blog-browse-cta__desc">
-                      {catLabel ? `Explore hundreds of ${catLabel.toLowerCase()} motorhomes for sale across Australia.` : "Explore thousands of motorhomes for sale across Australia."}
+                      {catLabel ? `Explore hundreds of ${catLabel.toLowerCase()} campervans for sale across Australia.` : "Explore thousands of campervans for sale across Australia."}
                     </p>
                   </div>
                 </div>
                 <a href={catLink} className="blog-browse-cta__btn">
-                  {catLabel ? `Browse ${catLabel} Motorhomes` : "Browse Motorhomes"} <i className="bi bi-arrow-right" />
+                  {catLabel ? `Browse ${catLabel} Campervans` : "Browse Campervans"} <i className="bi bi-arrow-right" />
                 </a>
               </div>
 
@@ -583,16 +583,16 @@ export default function BlogDetailsPage({
               )}
               <div className="blog-sidebar-sticky">
                 <div className="blog-sidebar-cta">
-                  <h3 className="blog-sidebar-cta__heading">Ready to Find Your Next Motorhome?</h3>
-                  <p className="blog-sidebar-cta__desc">Browse thousands of new and used motorhomes from trusted dealers and private sellers across Australia.</p>
+                  <h3 className="blog-sidebar-cta__heading">Ready to Find Your Next Campervan?</h3>
+                  <p className="blog-sidebar-cta__desc">Browse thousands of new and used campervans from trusted dealers and private sellers across Australia.</p>
                   <a href="/listings/" className="blog-sidebar-cta__btn">
-                    Search Motorhomes Now <i className="bi bi-arrow-right" />
+                    Search Campervans Now <i className="bi bi-arrow-right" />
                   </a>
                 </div>
                 <div className="blog-sidebar-cta blog-sidebar-cta--sell">
-                  <h3 className="blog-sidebar-cta__heading">Sell Your Motorhome Faster with Australia's Growing Motorhome Marketplace</h3>
-                  <a href="/sell-my-motorhome/" className="blog-sidebar-cta__btn">
-                    List Your Motorhome Now <i className="bi bi-arrow-right" />
+                  <h3 className="blog-sidebar-cta__heading">Sell Your Campervan Faster with Australia's Growing Campervan Marketplace</h3>
+                  <a href="/sell-my-campervan/" className="blog-sidebar-cta__btn">
+                    List Your Campervan Now <i className="bi bi-arrow-right" />
                   </a>
                 </div>
               </div>
@@ -607,21 +607,21 @@ export default function BlogDetailsPage({
       {cats.length > 0 && (
         <section className="bds-cat-loc">
           <div className="container">
-            <h2 className="bds-cat-title">Find {catLabel} Motorhomes by Popular Location</h2>
+            <h2 className="bds-cat-title">Find {catLabel} Campervans by Popular Location</h2>
             <div className="bds-cat-loc__major">
               {CAT_MAJOR_CITIES.map((city) => (
                 <a key={city.name} href={`${catLink}${city.state}/${city.region}/`} className="bds-cat-city-card">
                   <div className="bds-cat-city-img-wrap">
                     <img src={city.img} alt={city.name} className="bds-cat-city-img" loading="lazy" />
                   </div>
-                  <span className="bds-cat-city-name">{catLabel} Motorhomes in {city.name} <i className="bi bi-chevron-right bds-cat-city-arrow" /></span>
+                  <span className="bds-cat-city-name">{catLabel} Campervans in {city.name} <i className="bi bi-chevron-right bds-cat-city-arrow" /></span>
                 </a>
               ))}
             </div>
             <div className="bds-cat-loc__minor">
               {CAT_MINOR_CITIES.map((city) => (
                 <a key={city.name} href={`${catLink}${city.state}/${city.region ? city.region + "/" : ""}`} className="bds-cat-minor-pill">
-                  {catLabel} Motorhomes in {city.name}
+                  {catLabel} Campervans in {city.name}
                 </a>
               ))}
             </div>
@@ -633,12 +633,12 @@ export default function BlogDetailsPage({
       {cats.length > 0 && (
         <section className="bds-cat-state">
           <div className="container">
-            <h2 className="bds-cat-title">Find {catLabel} Motorhomes by State</h2>
+            <h2 className="bds-cat-title">Find {catLabel} Campervans by State</h2>
             <div className="bds-cat-state__grid">
               {CAT_STATES.map((s) => (
                 <a key={s.name} href={`${catLink}${s.slug}/`} className="bds-cat-state-card">
                   <img src={s.img} alt={s.name} className="bds-cat-state-img" loading="lazy" />
-                  <span className="bds-cat-state-name">{catLabel} Motorhomes in {s.name}</span>
+                  <span className="bds-cat-state-name">{catLabel} Campervans in {s.name}</span>
                 </a>
               ))}
             </div>
@@ -652,15 +652,15 @@ export default function BlogDetailsPage({
       {/* ── Buy or Sell CTA ── */}
       <section className="bds-cta-section">
         <div className="bds-cta-card">
-          <h2 className="bds-cta-title">Ready to Buy or Sell a Motorhome?</h2>
+          <h2 className="bds-cta-title">Ready to Buy or Sell a Campervan?</h2>
           <p className="bds-cta-body">
             <strong>Looking to buy?</strong> Browse{" "}
-            <a href="/" className="bds-cta-link">motorhomes for sale</a>{" "}
-            from dealers and private sellers across Australia, with listings available by make, model, price, location and motorhome type.
+            <a href="/" className="bds-cta-link">campervans for sale</a>{" "}
+            from dealers and private sellers across Australia, with listings available by make, model, price, location and campervan type.
           </p>
           <p className="bds-cta-body">
-            <strong>Looking to sell?</strong> If you&apos;re upgrading to a newer motorhome or no longer need your current one,{" "}
-            <a href="/sell-my-motorhome/" className="bds-cta-link">sell your motorhome</a>{" "}
+            <strong>Looking to sell?</strong> If you&apos;re upgrading to a newer campervan or no longer need your current one,{" "}
+            <a href="/sell-my-campervan/" className="bds-cta-link">sell your campervan</a>{" "}
             by creating a listing on MotorhomesForSale.com.au. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
           </p>
         </div>

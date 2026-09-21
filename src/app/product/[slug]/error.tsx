@@ -63,7 +63,7 @@ export default function ProductError({ error, reset }: ErrorProps) {
         </div>
 
         <h2 style={{ fontSize: "22px", fontWeight: 700, color: "#212529", margin: "0 0 10px" }}>
-          Unable to load this motorhome
+          Unable to load this campervan
         </h2>
         <p style={{ fontSize: "15px", color: "#6c757d", margin: "0 0 24px", lineHeight: 1.6 }}>
           We couldn&apos;t load this listing. It may have been removed or there was a temporary error.
@@ -74,7 +74,7 @@ export default function ProductError({ error, reset }: ErrorProps) {
             onClick={() => reset()}
             style={{
               padding: "11px 24px",
-              background: "#007bff",
+              background: "#4b4a9b",
               color: "white",
               border: "none",
               borderRadius: "8px",
@@ -90,15 +90,15 @@ export default function ProductError({ error, reset }: ErrorProps) {
             style={{
               padding: "11px 24px",
               background: "white",
-              color: "#007bff",
-              border: "1px solid #007bff",
+              color: "#4b4a9b",
+              border: "1px solid #4b4a9b",
               borderRadius: "8px",
               fontSize: "14px",
               fontWeight: 600,
               textDecoration: "none",
             }}
           >
-            Browse All Motorhomes
+            Browse All Campervans
           </a>
         </div>
       </div>

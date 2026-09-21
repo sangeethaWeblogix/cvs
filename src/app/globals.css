@@ -97,13 +97,13 @@ img {
 }
 
 .btn:hover {
-  background: #0099da !important;
+  background: #3f3e82 !important;
   border-color: transparent !important;
   color: #fff;
 }
 
 .btn:focus-visible {
-  outline: 2px solid #0099da;
+  outline: 2px solid #3f3e82;
   outline-offset: 2px;
 }
 
@@ -438,7 +438,7 @@ small {
   margin-top: 0px;
   font-size: 20px;
   font-weight: bold;
-  color: #0099da;
+  color: #3f3e82;
 }
 
 .product-page .product-card .price ins {
@@ -531,8 +531,8 @@ small {
 }
 
 .checkbox-wrapper input[type="checkbox"]:checked {
-  background-color: #1aa8de;
-  border-color: #1aa8de;
+  background-color: #51508e;
+  border-color: #51508e;
 }
 
 .checkbox-wrapper input[type="checkbox"]:checked::after {

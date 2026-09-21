@@ -4,7 +4,7 @@ import Test from './SentryTestButton';
 
 export const metadata: Metadata = {
   title: {
-    default: "Motorhomes For Sale - Test Page",
+    default: "Campervans For Sale - Test Page",
     template: "%s ",
   },
   robots: "noindex, nofollow",

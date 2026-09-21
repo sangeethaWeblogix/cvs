@@ -31,12 +31,12 @@ export const STATES = [
 ];
 
 export const TYPES_NO_STATE = [
-  { label: "Off Road Motorhomes", href: "/listings/off-road-category/" },
-  { label: "Luxury Motorhomes",   href: "/listings/luxury-category/" },
-  { label: "Hybrid Motorhomes",   href: "/listings/hybrid-category/" },
-  { label: "Pop Top Motorhomes",  href: "/listings/pop-top-category/" },
-  { label: "Touring Motorhomes",  href: "/listings/touring-category/" },
-  { label: "Family Motorhomes",   href: "/listings/family-category/" },
+  { label: "Off Road Campervans", href: "/listings/off-road-category/" },
+  { label: "Luxury Campervans",   href: "/listings/luxury-category/" },
+  { label: "Hybrid Campervans",   href: "/listings/hybrid-category/" },
+  { label: "Pop Top Campervans",  href: "/listings/pop-top-category/" },
+  { label: "Touring Campervans",  href: "/listings/touring-category/" },
+  { label: "Family Campervans",   href: "/listings/family-category/" },
 ];
 
 export const FILTERS_NO_STATE = [

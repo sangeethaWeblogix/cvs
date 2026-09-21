@@ -80,24 +80,24 @@ export default function FaqSection({
           <div className="blog-faq-cta">
             <div className="blog-faq-cta__icon"><img src="/images/category.svg" alt="" width={36} height={36} /></div>
             <h3 className="blog-faq-cta__heading">
-              {combinedLabel ? `Ready to Find Your Dream ${combinedLabel} Motorhome?` : "Ready to Find Your Dream Motorhome?"}
+              {combinedLabel ? `Ready to Find Your Dream ${combinedLabel} Campervan?` : "Ready to Find Your Dream Campervan?"}
             </h3>
             <p className="blog-faq-cta__desc">
               {combinedLabel
-                ? `Explore thousands of ${combinedLabel.toLowerCase()} motorhomes for sale across Australia and start your journey in style.`
-                : "Explore thousands of motorhomes for sale across Australia and start your journey in style."}
+                ? `Explore thousands of ${combinedLabel.toLowerCase()} campervans for sale across Australia and start your journey in style.`
+                : "Explore thousands of campervans for sale across Australia and start your journey in style."}
             </p>
             {resolvedCats.length > 0 ? (
               <div className="blog-faq-cta__btns">
                 {resolvedCats.map(cat => (
                   <a key={cat.link} href={cat.link} className="blog-faq-cta__btn">
-                    Browse {cat.label} Motorhomes
+                    Browse {cat.label} Campervans
                   </a>
                 ))}
               </div>
             ) : (
               <a href="/listings/" className="blog-faq-cta__btn">
-                Browse Motorhomes
+                Browse Campervans
               </a>
             )}
           </div>

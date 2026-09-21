@@ -52,13 +52,13 @@ export async function generateMetadata({
     seo.meta_title ||
     data?.title ||
     data?.name ||
-    "Product - Motorhomes for Sale";
+    "Product - Campervans for Sale";
 
   const description =
     seo.metadescription ||
     seo.meta_description ||
     data?.short_description ||
-    "View motorhome details.";
+    "View campervan details.";
   const robots = "index, follow";
   const canonicalUrl = `https://www.motorhomesforsale.com.au/${slug}/`;
   console.log("generateMetadata", { title, description, robots, canonicalUrl });
@@ -137,7 +137,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
             </Typography>
 
             <Typography variant="body1" color="text.secondary" gutterBottom>
-              Your motorhome dealer will contact you as soon as possible.
+              Your campervan dealer will contact you as soon as possible.
             </Typography>
 
             <Link href="/" style={{ textDecoration: "none" }}>
@@ -145,10 +145,10 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 variant="contained"
                 sx={{
                   mt: 3,
-                  backgroundColor: "#0099da",
+                  backgroundColor: "#3f3e82",
                   color: "white",
                   "&:hover": {
-                    backgroundColor: "#007cb3",
+                    backgroundColor: "#323168",
                   },
                 }}
               >

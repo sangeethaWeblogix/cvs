@@ -88,18 +88,18 @@ useEffect(() => {
           <div className="col-lg-6">
             <div className="home-post_head">
               <h3>
-                <span>Find Your Ideal Motorhome</span>
+                <span>Find Your Ideal Campervan</span>
                 <br />– Post Your Requirements
               </h3>
               <p>
                 Tell us your preferred budget, location, layout and must-have
-                features, and we&apos;ll match you with the right motorhome
+                features, and we&apos;ll match you with the right campervan
                 for sale. Providing clear and realistic details helps us find
                 options that better suit your needs. See examples of what
-                other motorhome buyers are currently looking for.
+                other campervan buyers are currently looking for.
               </p>
               <div className="final_post_btn">
-                <a href="/motorhome-enquiry-form/" className="btn">
+                <a href="/campervan-enquiry-form/" className="btn">
                   Post Your Requirements
                 </a>
               </div>
@@ -113,9 +113,9 @@ useEffect(() => {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              <h3>Recent Motorhome Requests</h3>
+              <h3>Recent Campervan Requests</h3>
               <p className="sub-text">
-                See examples of what other motorhome buyers are looking for.
+                See examples of what other campervan buyers are looking for.
               </p>
               <div className="top_cta bg-white">
                 <Swiper

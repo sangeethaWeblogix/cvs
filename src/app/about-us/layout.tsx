@@ -5,11 +5,11 @@ import { ReactNode } from "react";
 
  export const metadata: Metadata = {
    title: {
-     default: "About Motorhome Marketplace - Your Trusted Motorhome Resource",
+     default: "About Campervan Marketplace - Your Trusted Campervan Resource",
      template: "%s ",
    },
    description:
-     "Motorhome Marketplace is your go-to platform for finding the perfect motorhome from the right manufacturer or dealer at the right price.",
+     "Campervan Marketplace is your go-to platform for finding the perfect campervan from the right manufacturer or dealer at the right price.",
    icons: { icon: "/favicon.ico" },
    robots: "index, follow",
    alternates: {

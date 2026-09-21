@@ -172,7 +172,7 @@ h1.page-title {
   display: block;
 }
 .product-page .other_items .product-card .price .metc2 .card-price {
-  color: #0066f0;
+  color: #464591;
   -webkit-border-radius: 3px 4px 4px 3px;
   -moz-border-radius: 3px 4px 4px 3px;
   background-color: #0000;
@@ -238,8 +238,8 @@ h1.page-title {
 }
 
 .product-page .other_items .product-card .btn.btn-primary {
-  background-color: #0099da;
-  border-color: #0099da;
+  background-color: #3f3e82;
+  border-color: #3f3e82;
   color: #ffffff;
       border-radius: 6px;
 }
@@ -454,7 +454,7 @@ height: auto;
 }
 
 .close-popup:hover {
-  color: #1aa8de;
+  color: #51508e;
 }
 
 .popup-content {
@@ -566,13 +566,13 @@ height: auto;
   letter-spacing: -0.2px;
 }
 .terms_text a {
-  color: #1aa8de;
+  color: #51508e;
 }
 .submit-btn button {
   display: inline-block;
   margin-top: 0;
-  background: #1aa8de;
-  border: 1px solid #1aa8de;
+  background: #51508e;
+  border: 1px solid #51508e;
   color: #fff;
   padding: 15px 20px;
   text-transform: uppercase;
@@ -709,7 +709,7 @@ height: auto;
 }
 
 .filter_sticky .clear_btn {
-  color: #0099da;
+  color: #3f3e82;
   cursor: pointer;
   font-size: 13px;
   font-weight: 500;

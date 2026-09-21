@@ -48,7 +48,7 @@ interface Props {
 }
 
 const PROMO_BANNERS = [
-  { src: "/images/sell-my-caravan.jpg?=12", href: "/sell-my-motorhome/", alt: "Sell My Motorhome" },
+  { src: "/images/sell-my-caravan.jpg?=12", href: "/sell-my-campervan/", alt: "Sell My Campervan" },
   { src: "/images/home.jpg?=5",            href: "/", alt: "Motohomes For Sale" },
   { src: "/images/dealer-advertising.jpg?=8", href: "/dealer-advertising/", alt: "Dealer Advertising" },
 ];

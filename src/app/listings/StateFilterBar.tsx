@@ -744,7 +744,7 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
                   </button>
 
                   <button className={`tag${currentFilters.make ? " active" : ""}`} onClick={handleMakeOpen}>
-                    Motorhome Make
+                    Campervan Make
                     {currentFilters.make && <span className="active_filter"><i className="bi bi-circle-fill" /></span>}
                   </button>
 
@@ -998,7 +998,7 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
                             <div className="cfs-radius-tooltip" style={{ left:`calc(${pct}% + ${18 - 0.36*pct}px)` }}>{tempSuburbRadius}km</div>
                             <div className="cfs-radius-track-wrap">
                               <input type="range" className="cfs-radius-slider" min={0} max={RADIUS_OPTIONS.length-1} step={1} value={idx}
-                                style={{ background:`linear-gradient(to right,#0088c6 0%,#0088c6 ${pct}%,#ddd ${pct}%,#ddd 100%)` }}
+                                style={{ background:`linear-gradient(to right,#383874 0%,#383874 ${pct}%,#ddd ${pct}%,#ddd 100%)` }}
                                 onChange={e => setTempSuburbRadius(RADIUS_OPTIONS[parseInt(e.target.value,10)])} aria-label="Search radius" />
                               {RADIUS_OPTIONS.map((km,i) => {
                                 const tp = (i/(RADIUS_OPTIONS.length-1))*100;
@@ -1032,10 +1032,10 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
 
               {/* Make & Model */}
               <div className="filter-item">
-                <h4>Motorhome Make &amp; Model</h4>
+                <h4>Campervan Make &amp; Model</h4>
                 <div style={{ display:"flex", gap:12, flexWrap:"wrap" }}>
                   <div style={{ flex:1, minWidth:130 }}>
-                    <label style={{ fontSize:13, color:"#555", display:"block", marginBottom:6 }}>Motorhome Make</label>
+                    <label style={{ fontSize:13, color:"#555", display:"block", marginBottom:6 }}>Campervan Make</label>
                     <select className="cfs-select-input form-select" value={tempMake ?? ""}
                       onChange={e => { setTempMake(e.target.value || null); setTempModel(null); }}>
                       <option value="">Any</option>
@@ -1364,7 +1364,7 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
                                   <div className="cfs-radius-tooltip" style={{ left:`calc(${pct}% + ${18 - 0.36*pct}px)` }}>{tempSuburbRadius}km</div>
                                   <div className="cfs-radius-track-wrap">
                                     <input type="range" className="cfs-radius-slider" min={0} max={RADIUS_OPTIONS.length-1} step={1} value={idx}
-                                      style={{ background:`linear-gradient(to right,#0088c6 0%,#0088c6 ${pct}%,#ddd ${pct}%,#ddd 100%)` }}
+                                      style={{ background:`linear-gradient(to right,#383874 0%,#383874 ${pct}%,#ddd ${pct}%,#ddd 100%)` }}
                                       onChange={e => setTempSuburbRadius(RADIUS_OPTIONS[parseInt(e.target.value,10)])} aria-label="Search radius" />
                                     {RADIUS_OPTIONS.map((km,i) => {
                                       const tp = (i/(RADIUS_OPTIONS.length-1))*100;
@@ -1462,10 +1462,10 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
             <div className="filter-header" style={{ position:"relative" }}>
               {makeSubView === "models" ? (
                 <>
-                  <button className="loc-back-btn" onClick={() => setMakeSubView("makes")}><i className="bi bi-chevron-left" /> Motorhome Make</button>
+                  <button className="loc-back-btn" onClick={() => setMakeSubView("makes")}><i className="bi bi-chevron-left" /> Campervan Make</button>
                   <h3 style={{ position:"absolute", left:"50%", transform:"translateX(-50%)", margin:0 }}>{tempMake === CUSTOM_BUILT_SLUG ? "Vehicle Make" : "Model"}</h3>
                 </>
-              ) : <h3>Motorhome Make &amp; Model</h3>}
+              ) : <h3>Campervan Make &amp; Model</h3>}
               {closeBtn}
             </div>
             <div className="filter-search-bar">
@@ -1477,7 +1477,7 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
               <div className="loc-search-wrap" style={{ marginBottom:0 }}>
                 <i className="bi bi-search loc-search-icon" />
                 <input className="loc-search-input" type="text"
-                  placeholder={makeSubView === "makes" ? "Search motorhome make" : (tempMake === CUSTOM_BUILT_SLUG ? "Search vehicle make" : "Search model")}
+                  placeholder={makeSubView === "makes" ? "Search campervan make" : (tempMake === CUSTOM_BUILT_SLUG ? "Search vehicle make" : "Search model")}
                   value={makeSubView === "makes" ? makeSearch : modelSearch}
                   onChange={e => makeSubView === "makes" ? setMakeSearch(e.target.value) : setModelSearch(e.target.value)}
                 />

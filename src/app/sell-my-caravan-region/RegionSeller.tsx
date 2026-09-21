@@ -16,8 +16,8 @@ export default function RegionSeller({ region }: RegionSellerProps) {
   const stateSlug = region.state.slug;
 
   const HOW_TO_STEPS = [
-    { num: 1, iconSet: "fa-regular", icon: "fa-file-lines",    title: "Create Your Listing",    desc: "Add your motorhome details, description, price and location in minutes." },
-    { num: 2, iconSet: "fa-regular", icon: "fa-image",         title: "Upload Photos",          desc: "Add clear photos of the inside, outside and features of your motorhome." },
+    { num: 1, iconSet: "fa-regular", icon: "fa-file-lines",    title: "Create Your Listing",    desc: "Add your campervan details, description, price and location in minutes." },
+    { num: 2, iconSet: "fa-regular", icon: "fa-image",         title: "Upload Photos",          desc: "Add clear photos of the inside, outside and features of your campervan." },
     { num: 3, iconSet: "fa-regular", icon: "fa-comment-dots",  title: "Reach Buyers",           desc: `Your listing is live across ${regionLabel} and ${stateLabel}. Buyers contact you directly.` },
     { num: 4, iconSet: "fa-regular", icon: "fa-handshake",     title: "Negotiate Directly",     desc: "Arrange inspections and negotiate price with buyers." },
     { num: 5, iconSet: "fa-regular", icon: "fa-circle-check",  title: "Complete The Sale",      desc: "Once sold, remove your listing or mark as sold. It's that simple." },
@@ -25,44 +25,44 @@ export default function RegionSeller({ region }: RegionSellerProps) {
 
   const MAIN_FAQS = [
     {
-      q: `How do I sell my motorhome in ${regionLabel}?`,
-      a: <p>You can sell your motorhome online by creating a private seller listing on MotorhomesForSale.com.au. Simply add your motorhome details, upload clear photos, set your asking price, and publish your ad so active buyers in {regionLabel} and across {stateLabel} can contact you directly.</p>,
+      q: `How do I sell my campervan in ${regionLabel}?`,
+      a: <p>You can sell your campervan online by creating a private seller listing on MotorhomesForSale.com.au. Simply add your campervan details, upload clear photos, set your asking price, and publish your ad so active buyers in {regionLabel} and across {stateLabel} can contact you directly.</p>,
     },
     {
-      q: `How much does it cost to sell my motorhome in ${regionLabel}?`,
+      q: `How much does it cost to sell my campervan in ${regionLabel}?`,
       a: <p>We charge a simple, flat one-time fee of just $49 (inc. GST). There are absolutely no commissions, no hidden upfront fees, and no recurring monthly subscriptions. You keep 100% of your sale price.</p>,
     },
     {
-      q: "How long does my motorhome listing stay live?",
-      a: <p>Your motorhome listing stays live until sold. You do not need to keep paying monthly fees to keep your ad active. Once your motorhome is sold, you can remove the listing from the website.</p>,
+      q: "How long does my campervan listing stay live?",
+      a: <p>Your campervan listing stays live until sold. You do not need to keep paying monthly fees to keep your ad active. Once your campervan is sold, you can remove the listing from the website.</p>,
     },
     {
-      q: "Can I edit my motorhome listing after publishing?",
-      a: <p>Yes. After your listing is published, you can update your motorhome details, change the asking price, add or replace photos and improve your description if needed.</p>,
+      q: "Can I edit my campervan listing after publishing?",
+      a: <p>Yes. After your listing is published, you can update your campervan details, change the asking price, add or replace photos and improve your description if needed.</p>,
     },
     {
       q: "How do buyers contact me?",
-      a: <p>Interested buyers can contact you directly through your motorhome listing. This allows you to answer questions, arrange inspections, negotiate the price and manage the sale privately.</p>,
+      a: <p>Interested buyers can contact you directly through your campervan listing. This allows you to answer questions, arrange inspections, negotiate the price and manage the sale privately.</p>,
     },
     {
-      q: "What photos should I upload when selling my motorhome?",
-      a: <p>Upload clear photos of the outside, inside, kitchen, beds, seating area, bathroom, tyres, drawbar and any included accessories. Good photos help buyers understand the condition of your motorhome and can increase enquiries.</p>,
+      q: "What photos should I upload when selling my campervan?",
+      a: <p>Upload clear photos of the outside, inside, kitchen, beds, seating area, bathroom, tyres, drawbar and any included accessories. Good photos help buyers understand the condition of your campervan and can increase enquiries.</p>,
     },
     {
-      q: "How should I price my motorhome?",
-      a: <p>Check similar motorhomes for sale in {regionLabel} before setting your price. Compare by make, model, year, condition, length,GVM, tare weight, sleeping capacity, features and location. A realistic asking price can help attract more genuine buyers.</p>,
+      q: "How should I price my campervan?",
+      a: <p>Check similar campervans for sale in {regionLabel} before setting your price. Compare by make, model, year, condition, length,GVM, tare weight, sleeping capacity, features and location. A realistic asking price can help attract more genuine buyers.</p>,
     },
     {
-      q: "Is it safe to sell my motorhome privately online?",
+      q: "Is it safe to sell my campervan privately online?",
       a: <p>Yes, but you should take normal precautions. Speak with buyers directly, meet in a safe location, confirm payment has cleared before handover and complete any required transfer paperwork for {stateLabel}.</p>,
     },
     {
-      q: "Do I pay commission when my motorhome sells?",
-      a: <p>No. MotorhomesForSale.com.au does not charge commission when your motorhome sells. You pay the one-time listing fee and keep 100% of the agreed sale price.</p>,
+      q: "Do I pay commission when my campervan sells?",
+      a: <p>No. MotorhomesForSale.com.au does not charge commission when your campervan sells. You pay the one-time listing fee and keep 100% of the agreed sale price.</p>,
     },
     {
-      q: "Can I remove my listing after my motorhome is sold?",
-      a: <p>Yes. Once your motorhome has sold, you can remove your listing so buyers know it is no longer available.</p>,
+      q: "Can I remove my listing after my campervan is sold?",
+      a: <p>Yes. Once your campervan has sold, you can remove your listing so buyers know it is no longer available.</p>,
     },
   ];
 
@@ -73,10 +73,10 @@ export default function RegionSeller({ region }: RegionSellerProps) {
       <section className="demo-hero">
         <div className="container">
           <h1 className="demo-hero__title">
-            Sell My Motorhome in {regionLabel}
+            Sell My Campervan in {regionLabel}
           </h1>
           <p className="demo-hero__subtitle">
-            The fastest, safest way to reach active motorhome buyers in {regionLabel}, {stateLabel}.
+            The fastest, safest way to reach active campervan buyers in {regionLabel}, {stateLabel}.
           </p>
 
           {/* Pricing card + CTA wrapper — one seamless unit */}
@@ -89,10 +89,10 @@ export default function RegionSeller({ region }: RegionSellerProps) {
                 <img src="/images/vic_map.svg" alt={regionLabel} />
               </div>
               <div className="demo-price-card__header">
-              <h3>Looking to sell your motorhome?</h3>
+              <h3>Looking to sell your campervan?</h3>
             </div>
               <p className="demo-price-card__desc">
-                 List your Motorhome on Australia's #1 motorhome marketplace and connect with thousands of buyers in {regionLabel}, {stateLabel}.
+                 List your Campervan on Australia's #1 campervan marketplace and connect with thousands of buyers in {regionLabel}, {stateLabel}.
               </p>
 
             </div>
@@ -128,7 +128,7 @@ export default function RegionSeller({ region }: RegionSellerProps) {
 
           {/* CTA — inside wrapper so it attaches seamlessly to card bottom */}
           <a className="demo-hero__cta" aria-disabled="true" tabIndex={-1} style={{ opacity: 0.5, cursor: "not-allowed", pointerEvents: "none" }}>
-            List Your Motorhome Now <i className="fa-solid fa-arrow-right" />
+            List Your Campervan Now <i className="fa-solid fa-arrow-right" />
           </a>
           </div>{/* end demo-price-wrapper */}
 
@@ -141,8 +141,8 @@ export default function RegionSeller({ region }: RegionSellerProps) {
           <div className="demo-features-grid">
             {[
               { img: "/images/chat2.png", title: "Direct Buyer Contact", desc: "Communicate directly with buyers, no middleman." },
-              { img: "/images/calendar.png", title: "Live Until Sold", desc: "Your listing stays live until your motorhome is sold." },
-              { img: "/images/caravan.png", title: "Motorhome-Only Marketplace", desc: "Reach engaged motorhome buyers actively looking to buy motorhomes." },
+              { img: "/images/calendar.png", title: "Live Until Sold", desc: "Your listing stays live until your campervan is sold." },
+              { img: "/images/caravan.png", title: "Campervan-Only Marketplace", desc: "Reach engaged campervan buyers actively looking to buy campervans." },
               { img: "/images/dollar.png", title: "Keep 100% of Your Sale", desc: "Pay only a one-time fee for maximum value. No hidden costs." },
             ].map((item, i) => (
               <div className="demo-feature-card" key={i}>
@@ -163,14 +163,14 @@ export default function RegionSeller({ region }: RegionSellerProps) {
 
           {/* Heading */}
           <div className="demo-reach-heading">
-            <h3>Reach Motorhome Buyers in {regionLabel}, {stateLabel}</h3>
+            <h3>Reach Campervan Buyers in {regionLabel}, {stateLabel}</h3>
           </div>
 
           <div className="demo-reach-row">
           {/* Device image */}
           <div className="demo-reach-device">
-            <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid d-none d-lg-block" alt="Motorhome For Sale Desktop" />
-            <img src="/images/your-caravan-mobile-2.jpg" className="img-fluid d-block d-lg-none" alt="Motorhome For Sale Mobile" />
+            <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid d-none d-lg-block" alt="Campervan For Sale Desktop" />
+            <img src="/images/your-caravan-mobile-2.jpg" className="img-fluid d-block d-lg-none" alt="Campervan For Sale Mobile" />
           </div>
 
           {/* Pricing + FAQ card */}
@@ -186,7 +186,7 @@ export default function RegionSeller({ region }: RegionSellerProps) {
               <p className="demo-reach-card__fee-label">One-Time Listing Fee</p>
               <ul className="demo-reach-card__list">
                 {[
-                  "1 Motorhome listed until sold",
+                  "1 Campervan listed until sold",
                   "Edit your listing anytime",
                   "No expiration or monthly fees",
                 ].map((item) => (
@@ -197,7 +197,7 @@ export default function RegionSeller({ region }: RegionSellerProps) {
                 ))}
               </ul>
               <a className="demo-reach-card__cta" aria-disabled="true" tabIndex={-1} style={{ opacity: 0.5, cursor: "not-allowed", pointerEvents: "none" }}>
-                List Your Motorhome Now <i className="fa-solid fa-arrow-right" />
+                List Your Campervan Now <i className="fa-solid fa-arrow-right" />
               </a>
             </div>
 
@@ -247,10 +247,10 @@ export default function RegionSeller({ region }: RegionSellerProps) {
                 <h3>Why sell on MotorhomesForSale.com.au?</h3>
               </div>
               <ul className="demo-guide-card__list">
-                <li>Australia's #1 marketplace for buying and selling motorhomes.</li>
-                <li>Targeted motorhome buyers across {regionLabel} and regional {stateLabel}.</li>
+                <li>Australia's #1 marketplace for buying and selling campervans.</li>
+                <li>Targeted campervan buyers across {regionLabel} and regional {stateLabel}.</li>
                 <li>Your listing stays live until sold with no hidden fees.</li>
-                <li>Fast, simple and secure way to sell your motorhome.</li>
+                <li>Fast, simple and secure way to sell your campervan.</li>
               </ul>
             </div>
 
@@ -269,10 +269,10 @@ export default function RegionSeller({ region }: RegionSellerProps) {
             <div className="demo-guide-card">
               <div className="demo-guide-card__header">
                 <span className="demo-guide-card__num">3</span>
-                <h3>How to price your motorhome</h3>
+                <h3>How to price your campervan</h3>
               </div>
               <ul className="demo-guide-card__list">
-                <li>Check similar motorhomes for sale in {regionLabel}.</li>
+                <li>Check similar campervans for sale in {regionLabel}.</li>
                 <li>Compare make, model, year, condition and inclusions.</li>
                 <li>List at a realistic price to attract more buyers.</li>
               </ul>
@@ -300,7 +300,7 @@ export default function RegionSeller({ region }: RegionSellerProps) {
           <div className="demo-faq-head">
             <span className="demo-faq-head__tag">FAQ</span>
             <h2>Frequently Asked Questions</h2>
-            <p>Everything you need to know about selling your motorhome in {regionLabel} on MotorhomesForSale.com.au</p>
+            <p>Everything you need to know about selling your campervan in {regionLabel} on MotorhomesForSale.com.au</p>
           </div>
           <div className="demo-faq-list">
             {MAIN_FAQS.map((faq, i) => (
@@ -331,19 +331,19 @@ export default function RegionSeller({ region }: RegionSellerProps) {
         <div className="container">
           <div className="row align-items-center g-4">
             <div className="col-md-6">
-              <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid demo-why-img" alt={`${regionLabel} motorhome buyers`} />
+              <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid demo-why-img" alt={`${regionLabel} campervan buyers`} />
             </div>
             <div className="col-md-6">
-              <h2>Why {regionLabel} Motorhome Buyers Visit MotorhomesForSale Every Month</h2>
+              <h2>Why {regionLabel} Campervan Buyers Visit MotorhomesForSale Every Month</h2>
               <p>
-                MotorhomesForSale.com.au helps motorhome sellers in {regionLabel} reach buyers searching for
-                used motorhomes, off road motorhomes, family motorhomes, pop tops, hybrids and touring
-                motorhomes across {regionLabel} and regional {stateLabel}.
+                MotorhomesForSale.com.au helps campervan sellers in {regionLabel} reach buyers searching for
+                used campervans, off road campervans, family campervans, pop tops, hybrids and touring
+                campervans across {regionLabel} and regional {stateLabel}.
               </p>
               <div className="demo-check-grid demo-check-grid--2col mt-3">
                 {[
                   "Thousands of active buyers", `Local reach across ${regionLabel}`,
-                  "Motorhome-only marketplace", "Simple listing process",
+                  "Campervan-only marketplace", "Simple listing process",
                   "High quality enquiries", "No commissions",
                   "Live until sold – no extra fees", "Friendly local support team",
                 ].map((t) => (
@@ -361,8 +361,8 @@ export default function RegionSeller({ region }: RegionSellerProps) {
       <section className="demo-steps-section">
         <div className="container">
 
-          <h2 className="demo-steps-title">How To Sell Your Motorhome Online</h2>
-          <p className="demo-steps-subtitle">List in minutes and reach thousands of active motorhome buyers in {regionLabel}.</p>
+          <h2 className="demo-steps-title">How To Sell Your Campervan Online</h2>
+          <p className="demo-steps-subtitle">List in minutes and reach thousands of active campervan buyers in {regionLabel}.</p>
 
           {/* Steps: each column has number circle + icon + content; connectors between columns */}
           <div className="demo-steps-wrapper">
@@ -390,14 +390,14 @@ export default function RegionSeller({ region }: RegionSellerProps) {
       <section className="demo-cta-strip">
         <div className="container text-center">
           <p>
-            Start selling your motorhome in {regionLabel} today for just{" "}
+            Start selling your campervan in {regionLabel} today for just{" "}
             <strong>$49 (Inc. GST)</strong> — live until sold.
           </p>
           <a className="btn white_btn" aria-disabled="true" tabIndex={-1} style={{ opacity: 0.5, cursor: "not-allowed", pointerEvents: "none" }}>
-            List Your Motorhome Now
+            List Your Campervan Now
           </a>
           <p className="demo-cta-strip__alt-link">
-            Not in {regionLabel}? Sell your motorhome across {stateLabel} <a href={`/sell-my-motorhome/${stateSlug}/`}>here</a>.
+            Not in {regionLabel}? Sell your campervan across {stateLabel} <a href={`/sell-my-campervan/${stateSlug}/`}>here</a>.
           </p>
         </div>
       </section>

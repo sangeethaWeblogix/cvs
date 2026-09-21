@@ -7,8 +7,8 @@ const schemaGraph = [
     "@type": "WebPage",
     "@id": "https://www.motorhomesforsale.com.au/dealer-advertising/#webpage",
     "url": "https://www.motorhomesforsale.com.au/dealer-advertising/",
-    "name": "Motorhome Dealer Advertising | Unlimited Listings $299/Month | MotorhomesForSale",
-    "description": "Advertise your motorhome dealership on MotorhomesForSale.com.au. Unlimited listings, zero lead fees, $299/month (inc. GST). Cancel anytime.",
+    "name": "Campervan Dealer Advertising | Unlimited Listings $299/Month | MotorhomesForSale",
+    "description": "Advertise your campervan dealership on MotorhomesForSale.com.au. Unlimited listings, zero lead fees, $299/month (inc. GST). Cancel anytime.",
     "isPartOf": { "@id": "https://www.motorhomesforsale.com.au/#website" },
     "breadcrumb": { "@id": "https://www.motorhomesforsale.com.au/dealer-advertising/#breadcrumb" },
   },
@@ -24,13 +24,13 @@ const schemaGraph = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Motorhome Dealer Advertising",
+    "name": "Campervan Dealer Advertising",
     "provider": {
       "@type": "Organization",
-      "name": "Motorhomes For Sale",
+      "name": "Campervans For Sale",
       "url": "https://www.motorhomesforsale.com.au/",
     },
-    "description": "Unlimited motorhome listings on MotorhomesForSale.com.au for $299/month (inc. GST). Zero lead fees, no lock-in contracts, automatic inventory sync.",
+    "description": "Unlimited campervan listings on MotorhomesForSale.com.au for $299/month (inc. GST). Zero lead fees, no lock-in contracts, automatic inventory sync.",
     "url": "https://www.motorhomesforsale.com.au/dealer-advertising/",
     "areaServed": { "@type": "Country", "name": "Australia" },
     "offers": {
@@ -54,12 +54,12 @@ const schemaGraph = [
         "name": "How much does the dealer subscription cost, and what's included?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The dealer subscription is $299 per month (including GST). This flat monthly fee allows your dealership to list unlimited motorhomes on MotorhomesForSale.com.au. There are no per-listing charges, and we never charge per lead or take success commissions – no matter how many inquiries or sales you get, $299/month covers it all.",
+          "text": "The dealer subscription is $299 per month (including GST). This flat monthly fee allows your dealership to list unlimited campervans on MotorhomesForSale.com.au. There are no per-listing charges, and we never charge per lead or take success commissions – no matter how many inquiries or sales you get, $299/month covers it all.",
         },
       },
       {
         "@type": "Question",
-        "name": "How are my motorhome listings added and kept up-to-date automatically?",
+        "name": "How are my campervan listings added and kept up-to-date automatically?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "We sync directly with your dealership's website. Your listings are pulled automatically and refreshed weekly to match your current inventory.",
@@ -67,10 +67,10 @@ const schemaGraph = [
       },
       {
         "@type": "Question",
-        "name": "What kind of audience will my motorhomes reach?",
+        "name": "What kind of audience will my campervans reach?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "MotorhomesForSale.com.au is a motorhome-only marketplace with a focused, nationwide audience of serious buyers.",
+          "text": "MotorhomesForSale.com.au is a campervan-only marketplace with a focused, nationwide audience of serious buyers.",
         },
       },
       {

@@ -83,7 +83,7 @@ export default function DealersAndManufacturers() {
                   </Link>
                 </div>
                 <Link className="quick_lnk" href={dealer.listings}>
-                  View Motorhomes Listings
+                  View Campervans Listings
                 </Link>
               </div>
             ))}

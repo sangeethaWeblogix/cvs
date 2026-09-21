@@ -142,17 +142,17 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
                   fontWeight: 500,
                   borderRadius: "8px",
                   cursor: "pointer",
-                  background: "#007bff",
+                  background: "#4b4a9b",
                   color: "white",
                   border: "none",
                   minWidth: "160px",
                   transition: "all 0.2s ease",
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.background = "#0056b3";
+                  e.currentTarget.style.background = "#323168";
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.background = "#007bff";
+                  e.currentTarget.style.background = "#4b4a9b";
                 }}
               >
                 <svg
@@ -195,7 +195,7 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
                 <a
                   href="/contact"
                   style={{
-                    color: "#007bff",
+                    color: "#4b4a9b",
                     textDecoration: "none",
                   }}
                 >

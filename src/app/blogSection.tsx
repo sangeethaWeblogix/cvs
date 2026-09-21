@@ -37,7 +37,7 @@ export default function HomeLatestBlogs({ posts: rawPosts }: Props) {
       <div className="container">
         <div className="title">
           <div className="tpof_tab">
-            <h2 className="hd-section-title">Latest Motorhomes for Sale Blogs & Advice</h2>
+            <h2 className="hd-section-title">Latest Campervans for Sale Blogs & Advice</h2>
             <div className="viewall_bttn">
               <a href="/blog/">
                 <i className="bi bi-chevron-right" />

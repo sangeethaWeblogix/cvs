@@ -76,13 +76,13 @@ import fetchListingsForHead, { buildListingsJsonLd, buildBreadcrumbs } from "@/u
     // Static pages whose metadata ends up after </head> due to streaming — inject directly
     const STATIC_META: Record<string, { title: string; description: string; canonical: string }> = {
       "/caravan-manufacturers/": {
-        title: "Top 10 Motorhome Manufacturers in Australia: Best Brands of 2024",
-        description: "See how top Australian motorhome manufacturers excel with the best in innovative designs, quality construction, cost efficiency, and expert craftsmanship.",
+        title: "Top 10 Campervan Manufacturers in Australia: Best Brands of 2024",
+        description: "See how top Australian campervan manufacturers excel with the best in innovative designs, quality construction, cost efficiency, and expert craftsmanship.",
         canonical: "https://www.motorhomesforsale.com.au/caravan-manufacturers/",
       },
       "/off-road-caravans-manufacturers/": {
-        title: "Top Off-Road Motorhome Manufacturers in Australia: Best Brands 2024",
-        description: "Discover Australia's leading off-road motorhome manufacturers. Compare top brands known for rugged build quality, innovative design, and outback-ready performance.",
+        title: "Top Off-Road Campervan Manufacturers in Australia: Best Brands 2024",
+        description: "Discover Australia's leading off-road campervan manufacturers. Compare top brands known for rugged build quality, innovative design, and outback-ready performance.",
         canonical: "https://www.motorhomesforsale.com.au/off-road-caravans-manufacturers/",
       },
     };
@@ -123,7 +123,7 @@ import fetchListingsForHead, { buildListingsJsonLd, buildBreadcrumbs } from "@/u
       if (xRobots === "noindex") {
         slugRobots = "noindex";
         slugCanonical = `https://www.motorhomesforsale.com.au/listings/${slugParts.join("/")}/`;
-        slugDescription = "Browse new and used motorhomes for sale across Australia. Compare prices, layouts, sleeping capacity and key specifications from dealers and private sellers.";
+        slugDescription = "Browse new and used campervans for sale across Australia. Compare prices, layouts, sleeping capacity and key specifications from dealers and private sellers.";
       } else {
         // try {
           // All SEO from metaFromSlug — pure computation, no API call
@@ -137,7 +137,7 @@ import fetchListingsForHead, { buildListingsJsonLd, buildBreadcrumbs } from "@/u
           if (meta.title && typeof meta.title === "object" && "absolute" in meta.title) {
             slugTitle = (meta.title as { absolute: string }).absolute;
           }
-          slugDescription = "Browse new and used motorhomes for sale across Australia. Compare prices, layouts, sleeping capacity and key specifications from dealers and private sellers.";
+          slugDescription = "Browse new and used campervans for sale across Australia. Compare prices, layouts, sleeping capacity and key specifications from dealers and private sellers.";
         // } catch {
         //   const parts = slugParts
         //     .map((p: string) =>
@@ -147,8 +147,8 @@ import fetchListingsForHead, { buildListingsJsonLd, buildBreadcrumbs } from "@/u
         //     )
         //     .filter(Boolean);
         //   slugTitle = parts.length
-        //     ? `${parts.join(" ")} Motorhomes for Sale in Australia`
-        //     : "Motorhomes for Sale in Australia";
+        //     ? `${parts.join(" ")} Campervans for Sale in Australia`
+        //     : "Campervans for Sale in Australia";
         //   slugCanonical = `https://www.motorhomesforsale.com.au/listings/${slugParts.join("/")}/`;
         //   slugDescription = "Browse caravans for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.";
         //   slugRobots = "index, follow";
@@ -204,8 +204,8 @@ import fetchListingsForHead, { buildListingsJsonLd, buildBreadcrumbs } from "@/u
                       "@type": "WebSite",
                       "@id": "https://www.motorhomesforsale.com.au/#website",
                       "url": "https://www.motorhomesforsale.com.au/",
-                      "name": "Motorhomes For Sale",
-                      "alternateName": "Motorhomes For Sale by Marketplace Network",
+                      "name": "Campervans For Sale",
+                      "alternateName": "Campervans For Sale by Marketplace Network",
                     },
                     {
                       "@type": "Organization",
@@ -217,7 +217,7 @@ import fetchListingsForHead, { buildListingsJsonLd, buildBreadcrumbs } from "@/u
                       "logo": {
                         "@type": "ImageObject",
                         "url": "https://www.motorhomesforsale.com.au/images/mfs-logo-black.svg",
-                        "caption": "Motorhomes For Sale by Marketplace Network",
+                        "caption": "Campervans For Sale by Marketplace Network",
                       },
                       "contactPoint": {
                         "@type": "ContactPoint",
@@ -231,10 +231,10 @@ import fetchListingsForHead, { buildListingsJsonLd, buildBreadcrumbs } from "@/u
                       "@type": "ContactPage",
                       "@id": "https://www.motorhomesforsale.com.au/contact/#webpage",
                       "url": "https://www.motorhomesforsale.com.au/contact/",
-                      "name": "Contact Us | Get in Touch with Motorhomes For Sale",
+                      "name": "Contact Us | Get in Touch with Campervans For Sale",
                       "isPartOf": { "@id": "https://www.motorhomesforsale.com.au/#website" },
                       "about": { "@id": "https://www.motorhomesforsale.com.au/#organization" },
-                      "description": "Have a question about buying, selling, or dealer advertising solutions? Fill out our online contact form to get in touch with the Motorhomes For Sale customer support team.",
+                      "description": "Have a question about buying, selling, or dealer advertising solutions? Fill out our online contact form to get in touch with the Campervans For Sale customer support team.",
                       "breadcrumb": { "@id": "https://www.motorhomesforsale.com.au/contact/#breadcrumb" },
                     },
                     {
@@ -326,7 +326,7 @@ import fetchListingsForHead, { buildListingsJsonLd, buildBreadcrumbs } from "@/u
           </Suspense>
           <main className="product-page style-5 flex-1">
             {/* <NextTopLoader
-          color="#0099da"
+          color="#3f3e82"
           height={3}
           showSpinner={false}
         /> */}

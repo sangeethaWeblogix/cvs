@@ -4,7 +4,7 @@
 .back_to_search {
     padding-bottom: 25px;
     font-size: 14px;
-    color: #0d6efd;
+    color: #4f4ea2;
     font-weight: 500;
 }
 .product-page .product-info .title {
@@ -180,7 +180,7 @@
   border: 0;
 }
 .contactSeller__container .price_section .price-shape span {
-  color: #0099da !important;
+  color: #3f3e82 !important;
   font-size: 30px;
   font-weight: 700;
 }
@@ -195,8 +195,8 @@
 .contact_dealer button {
   border-radius: 30px;
   display: inline-block;
-  background-color: #0099da;
-  border: 1px solid #0099da;
+  background-color: #3f3e82;
+  border: 1px solid #3f3e82;
   color: #fff;
   text-align: center;
   padding: 15px 50px;
@@ -271,8 +271,8 @@
 }
 
 .product-page .product-details .nav-pills .nav-link.active {
-  color: #0099da;
-  border-color: #0099da;
+  color: #3f3e82;
+  border-color: #3f3e82;
 }
 .product-page .product-details .additional-info ul {
   border: 1px solid #0002;
@@ -403,7 +403,7 @@
   align-items: center;
   gap: 20px;
   padding: 16px 20px;
-  /* border: 1px solid #e5e7eb; */
+  /* border: 1px solid #d9d9dd; */
   border-radius: 12px;
   /* box-shadow: 0 4px 15px #0000000d; */
   /* background: #fff; */
@@ -419,7 +419,7 @@
 .price-card__sale {
   font-size: 28px;
   font-weight: 800;
-  color: #0099da; /* orange like screenshot */
+  color: #3f3e82; /* orange like screenshot */
   line-height: 1.1;
 }
 
@@ -432,7 +432,7 @@
 .price-card__divider {
   width: 1px;
   height: 48px;
-  background: #e5e7eb;
+  background: #d9d9dd;
 }
 
 .price-card__save {
@@ -443,7 +443,7 @@
 }
 
 .price-card__saveLabel {
-  color: #0066f0;
+  color: #464591;
   font-size: 16px;
   font-weight: 400;
 }
@@ -451,7 +451,7 @@
 .price-card__saveValue {
   font-size: 22px;
   font-weight: 800;
-  color: #0066f0; /* blue */
+  color: #464591; /* blue */
 }
 
 .price-card__cta {
@@ -461,7 +461,7 @@
   padding: 14px 18px;
   border: none;
   border-radius: 9999px;
-  background: #0099da;
+  background: #3f3e82;
   color: #fff;
   font-weight: 700;
   cursor: pointer;
@@ -510,8 +510,8 @@
     color: #fff;
     text-transform: capitalize;
     letter-spacing: 0;
-    background: #0099da;
-    border: 1px solid #0099da;
+    background: #3f3e82;
+    border: 1px solid #3f3e82;
     border-radius: 20px;
     width: 100%;
     margin-top: 0;
@@ -527,7 +527,7 @@
 }
 
 .terms_text a {
-  color: #0099da;
+  color: #3f3e82;
 }
 
 .related-products h3 {
@@ -611,8 +611,8 @@
 }
 
 .checklist li .btn-secondary {
-    color: #0088c6;
-    background: #e3f4fb;
+    color: #383874;
+    background: #dbdaea;
     border-radius: 20px;
     padding: 5px 15px;
     font-weight: 500;
@@ -640,8 +640,8 @@
 }
 
 .num{
-  background:#bfe6f5;
-  color:#0088c6;
+  background:#c0c0da;
+  color:#383874;
   width:34px;
   height:34px;
   border-radius:50%;
@@ -698,8 +698,8 @@
 /* BUTTONS */
 
 .btn-secondary{
-  background:#e3f4fb;
-  color:#0088c6;
+  background:#dbdaea;
+  color:#383874;
   padding:8px 14px;
   border-radius:20px;
   text-decoration:none;
@@ -720,8 +720,8 @@
 }
 
 .btn-primary{
-  background:#0099da;
-  border-color: #0099da;
+  background:#3f3e82;
+  border-color: #3f3e82;
   color:#fff;
   padding:14px 65px;
   border-radius:30px;
@@ -874,7 +874,7 @@
   }
 
   .save-value {
-    color: #0070f3;
+    color: #474693;
     font-weight: bold;
     font-size: 25px;
   }
@@ -1048,7 +1048,7 @@
   }
 
   .current-price {
-    color: #0099da;
+    color: #3f3e82;
     font-size: 25px;
     font-weight: bold;
   }
@@ -1067,7 +1067,7 @@
   }
 
   .save-label {
-    color: #0070f3;
+    color: #474693;
 }
 
 .popup-box .title, .subtitle {
@@ -1075,7 +1075,7 @@ text-align: left;
 }
 
   .save-value {
-    color: #0070f3;
+    color: #474693;
     font-weight: bold;
     font-size: 25px;
   }

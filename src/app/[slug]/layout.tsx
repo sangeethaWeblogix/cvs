@@ -23,11 +23,11 @@ export async function generateMetadata({
   const seo = data?.seo ?? {};
   const post = data?.data?.blog_detail || {};
 
-  const title = seo.metatitle || post.title || "Motorhomes for Sale Blog";
+  const title = seo.metatitle || post.title || "Campervans for Sale Blog";
   const description =
     seo.metadescription ||
     post.short_description ||
-    "Read more on Motorhomes for Sale.";
+    "Read more on Campervans for Sale.";
   const canonical = `https://www.motorhomesforsale.com.au/${slug}/`;
 
   return {
@@ -87,11 +87,11 @@ export default async function Layout({
   const faqs: { heading: string; content: string }[] = data?.data?.blog_detail?.faq ?? [];
 
   const canonical = `https://www.motorhomesforsale.com.au/${slug}/`;
-  const title = seo.metatitle || post.title || "Motorhomes for Sale Blog";
+  const title = seo.metatitle || post.title || "Campervans for Sale Blog";
   const description =
     seo.metadescription ||
     post.short_description ||
-    "Read more on Motorhomes for Sale.";
+    "Read more on Campervans for Sale.";
 
   const bannerImage =
     post.banner_image ||
@@ -107,7 +107,7 @@ export default async function Layout({
       description: description,
       image: bannerImage,
       author: { "@type": "Person", name: "Tom" },
-      publisher: { "@type": "Organization", name: "Motorhomes for Sale" },
+      publisher: { "@type": "Organization", name: "Campervans for Sale" },
       datePublished: safeIso(post.date),
       dateModified: safeIso(post.date),
     },

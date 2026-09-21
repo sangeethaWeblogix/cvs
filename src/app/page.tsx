@@ -16,35 +16,35 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: {
-    default: "Motorhomes For Sale – New & Used Motorhome Marketplace in Australia",
+    default: "Campervans For Sale – New & Used Campervan Marketplace in Australia",
     template: "%s ",
   },
   description:
-    "Browse new and used motorhomes for sale across Australia. Compare prices, layouts and key specifications from trusted dealers and private sellers.",
+    "Browse new and used campervans for sale across Australia. Compare prices, layouts and key specifications from trusted dealers and private sellers.",
   icons: { icon: "/favicon.ico" },
   robots: "index, follow",
   alternates: {
     canonical: "https://www.motorhomesforsale.com.au",
   },
   openGraph: {
-    title: "Motorhomes For Sale – New & Used Motorhome Marketplace in Australia",
-    description: "Browse new and used motorhomes for sale across Australia. Compare prices, layouts and key specifications from trusted dealers and private sellers.",
+    title: "Campervans For Sale – New & Used Campervan Marketplace in Australia",
+    description: "Browse new and used campervans for sale across Australia. Compare prices, layouts and key specifications from trusted dealers and private sellers.",
     url: "https://www.motorhomesforsale.com.au",
-    siteName: "Motorhomes for Sale",
+    siteName: "Campervans for Sale",
     images: [
       {
         url: "https://www.motorhomesforsale.com.au/images/mfs-logo.png",
         width: 800,
         height: 600,
-        alt: "Motorhomes for Sale Australia",
+        alt: "Campervans for Sale Australia",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Motorhomes For Sale – New & Used Motorhome Marketplace in Australia",
-    description: "Browse new and used motorhomes for sale across Australia. Compare prices, layouts and key specifications from trusted dealers and private sellers.",
+    title: "Campervans For Sale – New & Used Campervan Marketplace in Australia",
+    description: "Browse new and used campervans for sale across Australia. Compare prices, layouts and key specifications from trusted dealers and private sellers.",
   },
 };
 
@@ -57,8 +57,8 @@ const homeJsonLd = {
       "@type": "WebSite",
       "@id": `${BASE_URL}/#website`,
       "url": BASE_URL,
-      "name": "Motorhomes For Sale",
-      "description": "Australia's Marketplace for New & Used Motorhomes",
+      "name": "Campervans For Sale",
+      "description": "Australia's Marketplace for New & Used Campervans",
       "inLanguage": "en-AU",
       "potentialAction": {
         "@type": "SearchAction",
@@ -72,7 +72,7 @@ const homeJsonLd = {
     {
       "@type": "Organization",
       "@id": `${BASE_URL}/#organization`,
-      "name": "Motorhomes For Sale",
+      "name": "Campervans For Sale",
       "url": BASE_URL,
       "logo": {
         "@type": "ImageObject",

@@ -52,7 +52,7 @@ export default function ThankYouClient() {
             gutterBottom
             sx={{ fontFamily: "inherit" }}
           >
-            Your motorhome dealer will contact you as soon as possible.
+            Your campervan dealer will contact you as soon as possible.
           </Typography>
 
           <Link href="/" style={{ textDecoration: "none" }}>
@@ -61,9 +61,9 @@ export default function ThankYouClient() {
               sx={{
                 mt: 3,
                 fontFamily: "inherit",
-                backgroundColor: "#1aa8de",
+                backgroundColor: "#51508e",
                 color: "white",
-                "&:hover": { backgroundColor: "#0088c6" },
+                "&:hover": { backgroundColor: "#383874" },
               }}
             >
               Go Back

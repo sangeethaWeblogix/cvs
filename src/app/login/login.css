@@ -1,6 +1,6 @@
 
 :root {
-  --primary-color: #0099da;
+  --primary-color: #3f3e82;
   --secondary-color: #000000;
   --success-color: #22c55e;
   --error-color: #ef4444;
@@ -95,7 +95,7 @@
 }
 
 .social-button:hover {
-  background: #e5e7eb;
+  background: #d9d9dd;
   transform: translateY(-2px);
 }
 
@@ -112,7 +112,7 @@
   top: 50%;
   width: 45%;
   height: 1px;
-  background: #e5e7eb;
+  background: #d9d9dd;
 }
 
 .divider::before {
@@ -130,7 +130,7 @@
 .form-control {
   width: 100%;
   padding: 12px 15px 12px 45px;
-  border: 2px solid #e5e7eb;
+  border: 2px solid #d9d9dd;
   border-radius: 8px;
   font-size: 1em;
   transition: all 0.3s ease;
@@ -162,7 +162,7 @@
 
 .password-strength {
   height: 4px;
-  background: #e5e7eb;
+  background: #d9d9dd;
   margin-top: 8px;
   border-radius: 2px;
   overflow: hidden;
@@ -183,7 +183,7 @@
 .submit-btn {
   width: 100%;
   padding: 14px;
-  background: #0099da;
+  background: #3f3e82;
   color: white;
   border: none;
   border-radius: 8px;
@@ -245,7 +245,7 @@
   height: 50px;
   text-align: center;
   font-size: 1.2em;
-  border: 2px solid #e5e7eb;
+  border: 2px solid #d9d9dd;
   border-radius: 8px;
 }
 
@@ -359,7 +359,7 @@
 .custom-checkbox {
   width: 20px;
   height: 20px;
-  border: 2px solid #e5e7eb;
+  border: 2px solid #d9d9dd;
   border-radius: 4px;
   display: inline-flex;
   align-items: center;
@@ -522,10 +522,10 @@
 
 /* two distinct colors */
 .private .login-icon {
-  background: #1aa8de;
+  background: #51508e;
 }
 .dealer .login-icon {
-  background: #1aa8de;
+  background: #51508e;
 }
 
 /* small arrow on the right */

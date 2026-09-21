@@ -81,7 +81,7 @@ export function generateTitleFromFilters(
   // Keyword search: treat search term as the primary noun
   if (parsed.search) {
     const kw = titleCase(parsed.search);
-    const noun = /caravans?$/i.test(kw) ? kw : `${kw} Motorhomes`;
+    const noun = /caravans?$/i.test(kw) ? kw : `${kw} Campervans`;
     return `${noun} for Sale${locationSuffix}`;
   }
 
@@ -97,7 +97,7 @@ export function generateTitleFromFilters(
   if (parsed.model) parts.push(titleCase(parsed.model));
   if (parsed.category) parts.push(titleCase(parsed.category));
 
-  const baseNoun = parts.length > 0 ? `${parts.join(" ")} Motorhomes` : "Motorhomes";
+  const baseNoun = parts.length > 0 ? `${parts.join(" ")} Campervans` : "Campervans";
   const band = getBandText(parsed);
   const bandPart = band ? ` ${band}` : "";
 
@@ -153,7 +153,7 @@ export async function metaFromSlug(
 
   const title = generateTitleFromFilters(parsed);
   const description =
-    "Browse new and used motorhomes for sale across Australia. Compare prices, layouts, sleeping capacity and key specifications from dealers and private sellers.";
+    "Browse new and used campervans for sale across Australia. Compare prices, layouts, sleeping capacity and key specifications from dealers and private sellers.";
 
   return {
     title: { absolute: title },
@@ -169,7 +169,7 @@ export async function metaFromSlug(
           url: "https://www.motorhomesforsale.com.au/images/mfs-logo.png",
           width: 800,
           height: 600,
-          alt: "Motorhomes for Sale Australia",
+          alt: "Campervans for Sale Australia",
         },
       ],
     },

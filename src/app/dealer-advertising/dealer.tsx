@@ -34,7 +34,7 @@ const DealerLandingPage = () => {
 
                 <p>
                   A dealer-first marketplace built to generate consistent
-                  enquiries from high-intent motorhome buyers.
+                  enquiries from high-intent campervan buyers.
                 </p>
 
                 <a
@@ -61,13 +61,13 @@ const DealerLandingPage = () => {
                   <div className="feel_cfs">
                     <h2>
                       Lead Generation Machine{" "}
-                      <span>Built for Your Motorhome Dealership</span>
+                      <span>Built for Your Campervan Dealership</span>
                     </h2>
 
                     <p className="mb-3">
                       Your stock deserves visibility without per-lead fees. MotorhomesForSale.com.au
                       connects your dealership with buyers actively searching
-                      for their next motorhome—so your inventory gets seen by the
+                      for their next campervan—so your inventory gets seen by the
                       right audience.
                     </p>
 
@@ -83,12 +83,12 @@ const DealerLandingPage = () => {
                             {
                               img: "/images/seo_keyword.svg",
                               title: "Ranking for 300+ High-Intent Keywords",
-                              desc: "Get discovered by buyers actively searching for motorhomes.",
+                              desc: "Get discovered by buyers actively searching for campervans.",
                             },
                             {
                               img: "/images/visiter.svg",
                               title: "1000's of Daily Visitors & Growing",
-                              desc: "Reach a highly engaged, motorhome-buyer-specific audience every day",
+                              desc: "Reach a highly engaged, campervan-buyer-specific audience every day",
                             },
                             {
                               img: "/images/inbox.svg",
@@ -158,7 +158,7 @@ const DealerLandingPage = () => {
             <div className="col-12">
               <div className="comparison">
                 <h2 className="text-center">
-                  <span>Why Motorhome Dealers </span> Choose MotorhomesForSale
+                  <span>Why Campervan Dealers </span> Choose MotorhomesForSale
                 </h2>
 
                 <div className="table-responsive">
@@ -174,9 +174,9 @@ const DealerLandingPage = () => {
                       {[
                         "We list your entire stock automatically",
                         "Listings are updated automatically based on your website stock data",
-                        "Motorhome buyer/seller-only audience",
-                        "Built for motorhome dealers—not classified clutter",
-                        "Unlimited motorhome listings",
+                        "Campervan buyer/seller-only audience",
+                        "Built for campervan dealers—not classified clutter",
+                        "Unlimited campervan listings",
                         "No per-lead fees",
                         "Best-value monthly subscription fees by a country mile",
                       ].map((text, i) => (
@@ -220,7 +220,7 @@ const DealerLandingPage = () => {
           {/* Reach Caravan Buyers Section */}
           <div className="col-lg-12">
             <div className="heading-box">
-              <h2>Reach motorhome buyers across Australia</h2>
+              <h2>Reach campervan buyers across Australia</h2>
             </div>
           </div>
 
@@ -229,12 +229,12 @@ const DealerLandingPage = () => {
               <img
                 src="/images/your-caravan-desktop-seller-2.jpg"
                 className="img-fluid d-none d-lg-block desktop-img"
-                alt="Motorhome For Sale Desktop"
+                alt="Campervan For Sale Desktop"
               />
               <img
                 src="/images/your-caravan-mobile-2.jpg"
                 className="img-fluid d-block d-lg-none mobile-img"
-                alt="Motorhome For Sale Mobile"
+                alt="Campervan For Sale Mobile"
               />
             </div>
 
@@ -292,7 +292,7 @@ const DealerLandingPage = () => {
                 <div className="card-body">
                   <p>
                     The dealer subscription is $299 per month (including GST). This flat
-                    monthly fee allows your dealership to list unlimited motorhomes on
+                    monthly fee allows your dealership to list unlimited campervans on
                     MotorhomesForSale.com.au. There are no per-listing charges, and we never
                     charge per lead or take success commissions – no matter how many
                     inquiries or sales you get, $299/month covers it all.
@@ -309,7 +309,7 @@ const DealerLandingPage = () => {
                     className="btn btn-link btn-block text-left py-2"
                     onClick={() => toggleFaq(2)}
                   >
-                    How are my motorhome listings added and kept up-to-date automatically?
+                    How are my campervan listings added and kept up-to-date automatically?
                     <span className="accordion-icon">
                       <i className={`fa-solid fa-angle-down ${activeFaq === 2 ? "d-none" : ""}`}></i>
                       <i className={`fa-solid fa-angle-up ${activeFaq === 2 ? "" : "d-none"}`}></i>
@@ -337,7 +337,7 @@ const DealerLandingPage = () => {
                     className="btn btn-link btn-block text-left py-2"
                     onClick={() => toggleFaq(3)}
                   >
-                    What kind of audience will my motorhomes reach?
+                    What kind of audience will my campervans reach?
                     <span className="accordion-icon">
                       <i className={`fa-solid fa-angle-down ${activeFaq === 3 ? "d-none" : ""}`}></i>
                       <i className={`fa-solid fa-angle-up ${activeFaq === 3 ? "" : "d-none"}`}></i>
@@ -349,7 +349,7 @@ const DealerLandingPage = () => {
               <div className={`collapse ${activeFaq === 3 ? "show" : ""}`}>
                 <div className="card-body">
                   <p>
-                    MotorhomesForSale.com.au is a motorhome-only marketplace with a focused,
+                    MotorhomesForSale.com.au is a campervan-only marketplace with a focused,
                     nationwide audience of serious buyers.
                   </p>
                 </div>

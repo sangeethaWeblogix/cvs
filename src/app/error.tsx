@@ -68,7 +68,7 @@ export default function RootError({ error, reset }: ErrorProps) {
           Something went wrong
         </h2>
         <p style={{ fontSize: "15px", color: "#6c757d", margin: "0 0 24px", lineHeight: 1.6 }}>
-          This page couldn&apos;t load. Please try again or go back to browsing motorhomes.
+          This page couldn&apos;t load. Please try again or go back to browsing campervans.
         </p>
 
         <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
@@ -76,7 +76,7 @@ export default function RootError({ error, reset }: ErrorProps) {
             onClick={() => reset()}
             style={{
               padding: "11px 24px",
-              background: "#007bff",
+              background: "#4b4a9b",
               color: "white",
               border: "none",
               borderRadius: "8px",
@@ -92,21 +92,21 @@ export default function RootError({ error, reset }: ErrorProps) {
             style={{
               padding: "11px 24px",
               background: "white",
-              color: "#007bff",
-              border: "1px solid #007bff",
+              color: "#4b4a9b",
+              border: "1px solid #4b4a9b",
               borderRadius: "8px",
               fontSize: "14px",
               fontWeight: 600,
               textDecoration: "none",
             }}
           >
-            Browse Motorhomes
+            Browse Campervans
           </a>
         </div>
 
         <p style={{ marginTop: "24px", fontSize: "13px", color: "#adb5bd" }}>
           If this keeps happening,{" "}
-          <Link href="/contact" style={{ color: "#007bff", textDecoration: "none" }}>
+          <Link href="/contact" style={{ color: "#4b4a9b", textDecoration: "none" }}>
             contact support
           </Link>
         </p>

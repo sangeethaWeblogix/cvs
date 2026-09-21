@@ -22,7 +22,7 @@
 .viewall_bttn a {
     font-size: 26px;
     font-weight: 600;
-    color: #1aa8de;
+    color: #51508e;
     text-transform: uppercase;
     display: inline-block;
     padding: 0px 0px;
@@ -210,7 +210,7 @@
 
 .box2 {
     text-align: left;
-    background-color: #1aa8de;
+    background-color: #51508e;
     -webkit-clip-path: polygon(0 0%, 7% 0, 70% 0, 80% 0%, 70% 100%, 0 100%);
 }
 
@@ -241,7 +241,7 @@
     border: 2px solid;
     padding: 12px 70px !important;
     box-shadow: none;
-    background: #1aa8de !important;
+    background: #51508e !important;
     color: #fff;
 }
 
@@ -309,7 +309,7 @@
 }
 
 .back_bottom a.button:hover {
-    background: #1aa8de;
+    background: #51508e;
     color: #fff;
 
 }
@@ -350,15 +350,15 @@
 
 @media (hover: hover) {
     .pagination\:number a:hover {
-        background: #1aa8de;
+        background: #51508e;
     }
 }
 
 .pagination\:number a:active {
-    background: #1aa8de;
+    background: #51508e;
 }
 
 .pagination\:active a {
-    background: #1aa8de;
+    background: #51508e;
     position: relative;
 }

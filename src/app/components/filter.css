@@ -52,7 +52,7 @@
   height: 18px;
   border-radius: 50%;
   background: #fff;
-  border: 2px solid #0088c6;
+  border: 2px solid #383874;
   box-shadow: 0 1px 4px rgba(0,0,0,0.2);
   cursor: pointer;
 }
@@ -61,7 +61,7 @@
   height: 18px;
   border-radius: 50%;
   background: #fff;
-  border: 2px solid #0088c6;
+  border: 2px solid #383874;
   box-shadow: 0 1px 4px rgba(0,0,0,0.2);
   cursor: pointer;
 }
@@ -84,8 +84,8 @@
     transform: translate(-50%, -50%);
 }
 .cfs-radius-tick.active {
-    border-color: #0088c6;
-    background: #0088c6;
+    border-color: #383874;
+    background: #383874;
 }
 .cfs-radius-tick.current {
     opacity: 0;
@@ -127,8 +127,8 @@
 }
 .filter-modal .location-suggestions .suggestion-item:hover,
 .filter-modal .location-suggestions .suggestion-item.selected {
-  background: #e3f4fb;
-  color: #0099da;
+  background: #dbdaea;
+  color: #3f3e82;
 }
 .filter-modal .location-suggestions .suggestion-skeleton {
   padding: 11px 16px;
@@ -145,8 +145,8 @@
   border-bottom: none;
 }
 .filter-modal .location-suggestions li:hover {
-  background: #e3f4fb;
-  color: #0099da;
+  background: #dbdaea;
+  color: #3f3e82;
 }
 /* For selected filter chip */
 /* Selected filter pill */
@@ -219,13 +219,13 @@
 
 .suggestion-item:hover {
   background-color: #ffffff;
-  color: #0099da; /* hover color */
+  color: #3f3e82; /* hover color */
 }
 
 .suggestion-item.selected {
   background-color: #ffffff; /* your selected bg color */
   font-weight: 500;
-  color: #0099da;
+  color: #3f3e82;
 }
 
 
@@ -282,7 +282,7 @@ input.loc-search-input:focus {
 }
 .loc-state-item:last-child { border-bottom: none; }
 .loc-state-item:hover { background: #fafafa; }
-.loc-state-item.selected { background: #e3f4fb; }
+.loc-state-item.selected { background: #dbdaea; }
 
 .search-bar button.loc-arrow-btn {
     background: transparent;
@@ -304,8 +304,8 @@ input.loc-search-input:focus {
   background: #fff;
 }
 .loc-checkbox.checked {
-  border-color: #0099da;
-  background: #0099da;
+  border-color: #3f3e82;
+  background: #3f3e82;
 }
 
 .loc-state-name {
@@ -338,12 +338,12 @@ input.loc-search-input:focus {
   padding: 0;
   color: #555;
 }
-.loc-arrow-btn:hover { border-color: #0099da; color: #0099da; }
+.loc-arrow-btn:hover { border-color: #3f3e82; color: #3f3e82; }
 .loc-arrow-btn svg { display: block; }
 
 .search-bar button.loc-region-pill,
 .loc-region-pill {
-  background: #0099da;
+  background: #3f3e82;
   color: #fff;
   border: none;
   border-radius: 20px;
@@ -358,12 +358,12 @@ input.loc-search-input:focus {
   align-items: center;
   gap: 4px;
 }
-.loc-region-pill:hover { background: #007cb3; }
+.loc-region-pill:hover { background: #323168; }
 
 .search-bar button.loc-back-btn {
   background: none;
   border: none;
-  color: #0099da;
+  color: #3f3e82;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -372,7 +372,7 @@ input.loc-search-input:focus {
   align-items: center;
   gap: 4px;
 }
-.search-bar button.loc-back-btn:hover { color: #007cb3; }
+.search-bar button.loc-back-btn:hover { color: #323168; }
 
 .loc-region-heading {
   font-size: 15px;
@@ -423,9 +423,9 @@ input.loc-search-input:focus {
   transition: all 0.2s ease;
 }
 .cfs-links-link:hover {
-  background: #0088c6;
+  background: #383874;
   color: #fff;
-  border-color: #0088c6;
+  border-color: #383874;
 }
 .cfs-links-loading {
   text-align: center;

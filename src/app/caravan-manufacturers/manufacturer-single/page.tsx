@@ -8,9 +8,9 @@ import "./comman.css";
 import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const metaTitle = "Everest Caravans | Custom Built Full Off Road Motorhomes";
+  const metaTitle = "Everest Caravans | Custom Built Full Off Road Campervans";
   const metaDescription =
-    "Custom-built full off-road, extreme off road motorhomes @ Everest Caravans with a 10 year structural warranty. Explore rugged durability &amp; premium features.";
+    "Custom-built full off-road, extreme off road campervans @ Everest Caravans with a 10 year structural warranty. Explore rugged durability &amp; premium features.";
 
   const robots = "index, follow";
 

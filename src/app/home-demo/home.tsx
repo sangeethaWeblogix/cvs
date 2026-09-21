@@ -127,7 +127,7 @@ export default function HomePage({
       <section className="hd-banner">
         <div className="container">
           <h1 className="hd-banner__title">
-            Motorhomes for Sale <span className="hd-banner__title--orange">Across Australia</span>
+            Campervans for Sale <span className="hd-banner__title--orange">Across Australia</span>
           </h1>
           <div className="hd-banner__divider">
             <span className="hd-banner__divider-line" />
@@ -135,7 +135,7 @@ export default function HomePage({
             <span className="hd-banner__divider-line" />
           </div>
           <p className="hd-banner__subtitle">
-            Browse thousands of new and used motorhomes for sale across Australia from trusted dealers and private sellers. Compare prices, layouts, features and specifications to find the right motorhome for your next adventure.
+            Browse thousands of new and used campervans for sale across Australia from trusted dealers and private sellers. Compare prices, layouts, features and specifications to find the right campervan for your next adventure.
           </p>
           <div className="hd-banner__trust">
             <div className="hd-banner__trust-item">
@@ -144,7 +144,7 @@ export default function HomePage({
               </div>
               <div className="hd-banner__trust-text">
                 <strong>Thousands of Listings</strong>
-                <span>New &amp; used motorhomes across Australia</span>
+                <span>New &amp; used campervans across Australia</span>
               </div>
             </div>
             <div className="hd-banner__trust-item">
@@ -153,7 +153,7 @@ export default function HomePage({
               </div>
               <div className="hd-banner__trust-text">
                 <strong>Australia Wide</strong>
-                <span>Find motorhomes from every state &amp; territory</span>
+                <span>Find campervans from every state &amp; territory</span>
               </div>
             </div>
             <div className="hd-banner__trust-item">
@@ -170,7 +170,7 @@ export default function HomePage({
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
-            Browse Motorhomes for Sale
+            Browse Campervans for Sale
           </a>
           <div className="hd-banner__bottom">
             <div className="hd-banner__bottom-item">
@@ -187,7 +187,7 @@ export default function HomePage({
             </div>
             <div className="hd-banner__bottom-item">
               <img src="/images/icon4.png" alt="" className="hd-banner__bottom-icon" />
-              <div><strong>Coast to Country</strong><span>Motorhomes Australia wide</span></div>
+              <div><strong>Coast to Country</strong><span>Campervans Australia wide</span></div>
             </div>
           </div>
         </div>
@@ -237,7 +237,7 @@ export default function HomePage({
 
       {/* ── New Caravans for Sale ── */}
       <HomeListingSlider
-        title="New Motorhomes for Sale"
+        title="New Campervans for Sale"
         viewAllHref="/listings/new-condition/"
         items={featured.new}
         badgeVariant="new"
@@ -248,12 +248,12 @@ export default function HomePage({
         <div className="container">
           <div className="sell-banner">
             <div className="sell-content">
-              <h3>List Your Motorhome For Sale Today</h3>
-              <p className="subtitle">Reach thousands of motorhome buyers daily.</p>
-              <p className="desc">List your motorhome on MotorhomesForSale.com.au — Australia&apos;s trusted marketplace to buy and sell motorhomes.</p>
+              <h3>List Your Campervan For Sale Today</h3>
+              <p className="subtitle">Reach thousands of campervan buyers daily.</p>
+              <p className="desc">List your campervan on MotorhomesForSale.com.au — Australia&apos;s trusted marketplace to buy and sell campervans.</p>
               <div className="btns_two">
                 <a href="/dealer-advertising/" className="btn primary-btn">Dealer Sign Up</a>
-                <a href="/sell-my-motorhome/" className="btn secondary-btn">Private Seller - Click Here</a>
+                <a href="/sell-my-campervan/" className="btn secondary-btn">Private Seller - Click Here</a>
               </div>
             </div>
           </div>
@@ -262,7 +262,7 @@ export default function HomePage({
 
       {/* ── Used Caravans for Sale ── */}
       <HomeListingSlider
-        title="Used Motorhomes for Sale"
+        title="Used Campervans for Sale"
         viewAllHref="/listings/used-condition/"
         items={featured.used}
         badgeVariant="used"

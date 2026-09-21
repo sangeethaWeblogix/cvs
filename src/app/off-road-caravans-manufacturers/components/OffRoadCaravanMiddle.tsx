@@ -16,7 +16,7 @@ export default function OffRoadCaravanMiddle() {
                 <Image
                   className="hidden-xs"
                   src="/images/Best-Off-Road-Caravan-Manufacturers-You-Havent-Heard-Of.jpg"
-                  alt="Best Off Road Motorhome Manufacturers"
+                  alt="Best Off Road Campervan Manufacturers"
                   width={800}
                   height={250}
                   style={{ width: "100%", height: "auto" }}
@@ -24,28 +24,28 @@ export default function OffRoadCaravanMiddle() {
                 <Image
                   className="hidden-lg hidden-md hidden-sm br-m-8"
                   src="/images/Best-Off-Road-Caravan-Manufacturers-You-Havent-Heard-Of-Mob.jpg"
-                  alt="Best Off Road Motorhome Manufacturers"
+                  alt="Best Off Road Campervan Manufacturers"
                   width={400}
                   height={250}
                   style={{ width: "100%", height: "auto" }}
                 />
               </div>
               <h2 className="divide-orange pb-20">
-                Explore the Full Range from Top-Quality Off-Road Motorhome
+                Explore the Full Range from Top-Quality Off-Road Campervan
                 Manufacturers
               </h2>
               <p>
-                We understand that buying a motorhome is a significant investment,
+                We understand that buying a campervan is a significant investment,
                 and we offer resources to help make the process easier and help
                 you finding some of the
                 <Link href="https://www.motorhomesforsale.com.au/best-caravans-full-off-road-capabilities-australia/">
-                  best off-road motorhomes in Australia
+                  best off-road campervans in Australia
                 </Link>
                 . We are here to make a difference and to genuinely help both
                 the consumer and the manufacturer.
               </p>
               <p>
-                We have showcased below the best off-road motorhome manufacturers
+                We have showcased below the best off-road campervan manufacturers
                 and brands that don&apos;t participate in all the big events and
                 spend big on advertising. So, all the spend goes towards
                 building good quality off road vans.
@@ -58,43 +58,43 @@ export default function OffRoadCaravanMiddle() {
               </h3>
               <div className="key_features">
                 <h4>
-                  Key Reasons Why Orbit Caravans is a Leading Off-Road Motorhome
+                  Key Reasons Why Orbit Caravans is a Leading Off-Road Campervan
                   Manufacturer with TIG-Welded Aluminum Frames
                 </h4>
                 <ul>
                   <li>
                     Manufacturing Costs: Significantly lower than any other off
-                    road motorhome manufacturers that build TIG welded aluminium
-                    frame motorhomes.
+                    road campervan manufacturers that build TIG welded aluminium
+                    frame campervans.
                   </li>
                   <li>
                     Advertising: No expensive celebrity endorsements, TV
                     commercials, or heavy online spending. limited presence at
-                    motorhome shows and limited dealers.
+                    campervan shows and limited dealers.
                   </li>
                   <li>
                     Build Focus: Resources are efficiently managed and dedicated
                     to high-quality van construction.
                   </li>
                   <li>
-                    Australian Owned & Operated: Australian Motorhome
+                    Australian Owned & Operated: Australian Campervan
                     Manufacturer.
                   </li>
                   <li>
                     Expert Staff: All workers with extensive experience from the
-                    motorhome industry.
+                    campervan industry.
                   </li>
                   <li>
-                    Owner : Run by a skilled off-road motorhome manufacturer who
+                    Owner : Run by a skilled off-road campervan manufacturer who
                     is very customer centric.
                   </li>
                   <li>
                     Technology: Integrates the latest advancements in technology
-                    and design to enhance the performance of every motorhome.
+                    and design to enhance the performance of every campervan.
                   </li>
                   <li>
                     What to Expect: Best value for money , best performance and
-                    quality in the TIG welded aluminium frame motorhome range in
+                    quality in the TIG welded aluminium frame campervan range in
                     Australia.
                   </li>
                 </ul>
@@ -110,10 +110,10 @@ export default function OffRoadCaravanMiddle() {
                  </Link> */}
               </div>
               <p>
-                Orbit Caravans, a best off road motorhome manufacturer,
-                specializes in TIG welded aluminium frame motorhomes that are
+                Orbit Caravans, a best off road campervan manufacturer,
+                specializes in TIG welded aluminium frame campervans that are
                 built to last and withstand the toughest conditions. The
-                craftsmanship and engineering that goes into their motorhomes is
+                craftsmanship and engineering that goes into their campervans is
                 evident in every detail so they are the top choice for off-road
                 enthusiasts who demand durability and comfort.
               </p>
@@ -131,7 +131,7 @@ export default function OffRoadCaravanMiddle() {
               <p>
                 If you want the ultimate in full off-road capability the Eclipse
                 X is the top of the range. This luxury premium full off-road
-                motorhome is built to the highest standard and has all the
+                campervan is built to the highest standard and has all the
                 essentials for rough terrain. The Eclipse X has a strong chassis
                 and suspension system to tackle the toughest landscapes. It has
                 solar power, lithium battery and large water tanks so you can go
@@ -150,7 +150,7 @@ export default function OffRoadCaravanMiddle() {
               <p>
                 In short, Orbit Caravans are built to be durable and comfortable
                 so if you love off-road adventures choose the Discovery X, Space
-                V or Eclipse X and you can be sure you are getting a motorhome
+                V or Eclipse X and you can be sure you are getting a campervan
                 that will perform in any condition and be your home away from
                 home.
               </p>
@@ -161,7 +161,7 @@ export default function OffRoadCaravanMiddle() {
                   height={250}
                   style={{ width: "100%", height: "auto" }}
                   src="/images/Orbit-tig-welded-aluminium-frame-off-road-caravan-manufacturer.jpg"
-                  alt="Orbit Caravans - tig welded aluminium frame off road motorhome manufacturer"
+                  alt="Orbit Caravans - tig welded aluminium frame off road campervan manufacturer"
                 />
                 <Image
                   width={800}
@@ -169,7 +169,7 @@ export default function OffRoadCaravanMiddle() {
                   style={{ width: "100%", height: "auto" }}
                   className="hidden-lg hidden-md hidden-sm br-m-8"
                   src="/images/tig-welded-aluminium-frame-off-road-caravan-manufacturer-Orbit.jpg"
-                  alt="Orbit Caravans - tig welded aluminium frame off road motorhome manufacturer"
+                  alt="Orbit Caravans - tig welded aluminium frame off road campervan manufacturer"
                 />
               </div>
               <Link
@@ -208,17 +208,17 @@ export default function OffRoadCaravanMiddle() {
               <div className="key_features">
                 <h4>
                   Key Reasons Why Grand City Caravans is Widely Regarded as a
-                  Top of the Range Luxury Off Road Motorhome Manufacturer
+                  Top of the Range Luxury Off Road Campervan Manufacturer
                 </h4>
                 <ul>
                   <li>
                     Manufacturing Costs: Significantly lower than major off-road
-                    motorhome manufacturers.
+                    campervan manufacturers.
                   </li>
                   <li>
                     Advertising: No expensive celebrity endorsements, TV
                     commercials, or heavy online spending. limited presence at
-                    motorhome shows.
+                    campervan shows.
                   </li>
                   <li>
                     Build Focus: All resources are well managed and dedicated to
@@ -227,11 +227,11 @@ export default function OffRoadCaravanMiddle() {
                   <li>Australian Owned & Operated: Proudly Australian.</li>
                   <li>
                     Expert Staff: All workers with extensive experience from the
-                    motorhome industry.
+                    campervan industry.
                   </li>
                   <li>
                     Owner: Run by 2 brothers, with the entire family bringing
-                    over 20 years of experience as an off-road motorhome
+                    over 20 years of experience as an off-road campervan
                     manufacturer.
                   </li>
                   <li>
@@ -255,15 +255,15 @@ export default function OffRoadCaravanMiddle() {
                  </Link> */}
               </div>
               <p>
-                Grand City Caravans is a renowned luxury off-road motorhome
+                Grand City Caravans is a renowned luxury off-road campervan
                 manufacturer, known for using 3D technology to design and build
-                motorhomes that let you go and perform anywhere. Their off-road
+                campervans that let you go and perform anywhere. Their off-road
                 range is built to withstand the toughest conditions so you can
                 be sure you&apos;re in safe hands as an adventurer.
               </p>
               <p>
                 One of their standouts is the Tracker, a 15&apos;6” off-road
-                motorhome that&apos;s one of the best in Australia for its size.
+                campervan that&apos;s one of the best in Australia for its size.
                 With a 6” chassis and Cruisemaster XT Freestyle Coil Suspension
                 and 16” all-terrain tyres, it&apos;s super stable and handles
                 like a dream on uneven ground. 3D design has made the Tracker
@@ -284,11 +284,11 @@ export default function OffRoadCaravanMiddle() {
                 without sacrificing off-road ability.
               </p>
               <p>
-                And the Royale at 19&apos;6” is a custom couples&apos; motorhome
+                And the Royale at 19&apos;6” is a custom couples&apos; campervan
                 on an FP Chassis. Like the others it has the precision and
                 durability of 3D design so you can be luxurious and tough in
                 extreme conditions. That&apos;s why Grand City Caravans is the
-                go-to choice among off-road motorhome manufacturers for those
+                go-to choice among off-road campervan manufacturers for those
                 seeking quality and reliability.
               </p>
 
@@ -299,7 +299,7 @@ export default function OffRoadCaravanMiddle() {
                   height={250}
                   style={{ width: "100%", height: "auto" }}
                   src="/images/Grand-City-luxury-off-road-caravan-manufacturer.jpg"
-                  alt="Grand City Caravans - luxury off road motorhome manufacturer"
+                  alt="Grand City Caravans - luxury off road campervan manufacturer"
                 />
 
                 <Image
@@ -308,7 +308,7 @@ export default function OffRoadCaravanMiddle() {
                   height={250}
                   style={{ width: "100%", height: "auto" }}
                   src="/images/luxury-off-road-caravan-manufacturer-Grand-City.jpg"
-                  alt="Grand City Caravans - luxury off road motorhome manufacturer"
+                  alt="Grand City Caravans - luxury off road campervan manufacturer"
                 />
               </div>
 
@@ -324,17 +324,17 @@ export default function OffRoadCaravanMiddle() {
               <div className="key_features">
                 <h4>
                   Key Reasons Why Everest is best suited as a Custom & Extreme
-                  Off Road Motorhome Manufacturer
+                  Off Road Campervan Manufacturer
                 </h4>
                 <ul>
                   <li>
                     Manufacturing Costs: Operates from a little factory in
                     Campbellfield, Melbourne but builds better quality vans than
-                    other off road motorhome manufacturers.
+                    other off road campervan manufacturers.
                   </li>
                   <li>
                     Advertising: Avoids costly celebrity endorsements, TV ads,
-                    No Dealers, Sells Direct. Zero participation in motorhome
+                    No Dealers, Sells Direct. Zero participation in campervan
                     shows.
                   </li>
                   <li>
@@ -344,19 +344,19 @@ export default function OffRoadCaravanMiddle() {
                   <li>Australian Owned & Operated: Proudly Australian.</li>
                   <li>
                     Expert Staff: All workers with extensive experience from the
-                    motorhome industry.
+                    campervan industry.
                   </li>
                   <li>
                     Owner: Built this business from scratch and has over 15
-                    years of experience as an off road motorhome manufacturer.
+                    years of experience as an off road campervan manufacturer.
                   </li>
                   <li>
                     Strengths : Unmatched superior quality and one of the few
-                    off road motorhome manufacturers that offers a 10 year
+                    off road campervan manufacturers that offers a 10 year
                     structural warranty.
                   </li>
                   <li>
-                    What to Expect: If you&apos;re seeking the perfect motorhome
+                    What to Expect: If you&apos;re seeking the perfect campervan
                     with off-road capabilities, whether full off-road or extreme
                     off-road, Everest is your destination.
                   </li>
@@ -374,21 +374,21 @@ export default function OffRoadCaravanMiddle() {
               </div>
               <p>
                 Everest Caravans is fast becoming the best extreme off-road
-                motorhome manufacturer in the industry, known for custom-built
-                motorhomes with a 10-year structural warranty. This commitment to
+                campervan manufacturer in the industry, known for custom-built
+                campervans with a 10-year structural warranty. This commitment to
                 quality and durability is evident throughout their entire range
                 of models, Nitro Extreme, Falcon, Kombat Performance, Summitt,
                 Calibra, S.C.O.T.A, Storm, Ice Glider, Blizzard, Vantage and
                 Warrior. Each of these models is designed to tackle the toughest
                 terrain, so if you want the ultimate off-road experience then
-                these are the motorhomes for you.
+                these are the campervans for you.
               </p>
               <p>
                 The strength of Everest Caravans is in the structure, each
-                motorhome has a 9 inch chassis, 6 foot deck and 3 inch riser.
+                campervan has a 9 inch chassis, 6 foot deck and 3 inch riser.
                 These are all made from RHS Australian Steel, the strongest and
                 most durable steel in the world. The 6 inch extended A-frame and
-                the Supergal Australian RHS Steel Chassis gives these motorhomes a
+                the Supergal Australian RHS Steel Chassis gives these campervans a
                 solid base to withstand the toughest conditions.
               </p>
               <p>
@@ -402,7 +402,7 @@ export default function OffRoadCaravanMiddle() {
               </p>
               <p>
                 With their focus on quality, innovation, and durability, Everest
-                Caravans is a top choice among extreme off-road motorhome
+                Caravans is a top choice among extreme off-road campervan
                 manufacturers for those who want the best in off-road
                 caravanning.
               </p>
@@ -413,7 +413,7 @@ export default function OffRoadCaravanMiddle() {
                   height={250}
                   style={{ width: "100%", height: "auto" }}
                   src="/images/Everest-extreme-off-road-caravan-manufacturer.jpg"
-                  alt="Everest Caravans - extreme off road motorhome manufacturer"
+                  alt="Everest Caravans - extreme off road campervan manufacturer"
                 />
                 <Image
                   className="hidden-lg hidden-md hidden-sm br-m-8"
@@ -421,7 +421,7 @@ export default function OffRoadCaravanMiddle() {
                   height={250}
                   style={{ width: "100%", height: "auto" }}
                   src="/images/extreme-off-road-caravan-manufacturer-Everest.jpg"
-                  alt="Everest Caravans - extreme off road motorhome manufacturer"
+                  alt="Everest Caravans - extreme off road campervan manufacturer"
                 />
               </div>
               <h3>
@@ -433,37 +433,37 @@ export default function OffRoadCaravanMiddle() {
               <div className="key_features">
                 <h4>
                   Key Reasons Why Red Centre Caravans is a Leading Extreme Off
-                  Road Motorhome Manufacturer
+                  Road Campervan Manufacturer
                 </h4>
                 <ul>
                   <li>
                     Manufacturing Costs: Significantly lower than major extreme
-                    off road motorhome manufacturers.
+                    off road campervan manufacturers.
                   </li>
                   <li>
                     Advertising: No celebrity endorsements, TV commercials, or
-                    heavy online spending; minimal presence at motorhome shows.
+                    heavy online spending; minimal presence at campervan shows.
                   </li>
                   <li>
                     Build Focus: Resources are efficiently managed and dedicated
-                    to top-quality motorhome construction.
+                    to top-quality campervan construction.
                   </li>
                   <li>
-                    Australian Owned & Operated: Australian Motorhome
+                    Australian Owned & Operated: Australian Campervan
                     Manufacturer.
                   </li>
                   <li>
                     Expert Staff: All team members have extensive experience in
-                    the motorhome industry.
+                    the campervan industry.
                   </li>
                   <li>
-                    Owner: With 20 years of experience in building motorhomes, has
-                    significantly grown as a leading extreme off road motorhome
+                    Owner: With 20 years of experience in building campervans, has
+                    significantly grown as a leading extreme off road campervan
                     manufacturer over the years.
                   </li>
                   <li>
                     What to Expect: Exceptional build quality and performance in
-                    the extreme off-road motorhome range.
+                    the extreme off-road campervan range.
                   </li>
                 </ul>
                 {/* <Link
@@ -479,7 +479,7 @@ export default function OffRoadCaravanMiddle() {
               </div>
               <p>
                 Red Centre Caravans is becoming a prominent extreme off-road
-                motorhome manufacturer, known for building motorhomes designed to
+                campervan manufacturer, known for building campervans designed to
                 withstand the toughest Australian conditions. In their range the
                 Kimberley Plus stands out for its ruggedness and features. This
                 model has a 4” main chassis with a 6” drawbar extension and 4”
@@ -500,10 +500,10 @@ export default function OffRoadCaravanMiddle() {
                 the roughest terrain.
               </p>
               <p>
-                Red Centre Caravans offers motorhomes with off-road features for
+                Red Centre Caravans offers campervans with off-road features for
                 adventurers who need reliability and performance in extreme
                 conditions. Whether its the Kimberley Plus or one of the
-                Tanami&apos;s you can trust your motorhome to take on
+                Tanami&apos;s you can trust your campervan to take on
                 Australia&apos;s toughest conditions.
               </p>
               <div className="advertisement">
@@ -513,7 +513,7 @@ export default function OffRoadCaravanMiddle() {
                   height={250}
                   style={{ width: "100%", height: "auto" }}
                   src="/images/Red-Center-leading-extreme-off-road-caravan-manufacturer.jpg"
-                  alt="Red Center Caravans - leading extreme off road motorhome manufacturer"
+                  alt="Red Center Caravans - leading extreme off road campervan manufacturer"
                 />
                 <Image
                   width={800}
@@ -521,7 +521,7 @@ export default function OffRoadCaravanMiddle() {
                   style={{ width: "100%", height: "auto" }}
                   className="hidden-lg hidden-md hidden-sm br-m-8"
                   src="/images/leading-extreme-off-road-caravan-manufacturer-Red-Centre.jpg"
-                  alt="Red Center Caravans - leading extreme off road motorhome manufacturer"
+                  alt="Red Center Caravans - leading extreme off road campervan manufacturer"
                 />
               </div>
               <h3>
@@ -532,18 +532,18 @@ export default function OffRoadCaravanMiddle() {
               </h3>
               <div className="key_features">
                 <h4>
-                  Key Reasons Why Coronet RV is the Best Off-road Motorhome
-                  Manufacturer for Family Friendly Motorhomes
+                  Key Reasons Why Coronet RV is the Best Off-road Campervan
+                  Manufacturer for Family Friendly Campervans
                 </h4>
                 <ul>
                   <li>
                     Manufacturing Costs: Significantly lower than major off road
-                    motorhome manufacturers.
+                    campervan manufacturers.
                   </li>
                   <li>
                     Advertising: Relies on word-of-mouth rather than big
                     celebrities, TV ads, or extensive online campaigns. Limited
-                    presence at motorhome shows.
+                    presence at campervan shows.
                   </li>
                   <li>
                     Dealership: Operates through a single main dealership
@@ -551,24 +551,24 @@ export default function OffRoadCaravanMiddle() {
                   </li>
                   <li>
                     Build Focus: All resources are dedicated to constructing
-                    your motorhome.
+                    your campervan.
                   </li>
                   <li>
                     Owner: Operated by a seasoned expert with extensive
-                    experience as an off road motorhome manufacturer since 1959.
+                    experience as an off road campervan manufacturer since 1959.
                   </li>
                   <li>
-                    Australian Owned & Operated: Australian Motorhome
+                    Australian Owned & Operated: Australian Campervan
                     Manufacturer.
                   </li>
                   <li>
-                    Strength: Specializes in motorhomes designed for off-road use,
+                    Strength: Specializes in campervans designed for off-road use,
                     offering exceptional family-friendly layouts and multiple
                     options.
                   </li>
                   <li>
                     What to Expect: Budget-friendly and affordable high-quality
-                    semi-off-road and full off-road motorhomes.
+                    semi-off-road and full off-road campervans.
                   </li>
                 </ul>
                 {/* <Link
@@ -583,16 +583,16 @@ export default function OffRoadCaravanMiddle() {
                  </Link> */}
               </div>
               <p>
-                Coronet RV is an established off road motorhome manufacturer and
-                is well known for their family friendly motorhomes. With over 50
+                Coronet RV is an established off road campervan manufacturer and
+                is well known for their family friendly campervans. With over 50
                 different internal layouts to choose from Coronet RV can cater
                 to all family needs with traditional, contemporary and modern
                 designs. Their focus on innovation and quality means each
-                motorhome is functional, stylish and comfortable.
+                campervan is functional, stylish and comfortable.
               </p>
               <p>
                 One of Coronet RV&apos;s standout models is the ULTIMATE range
-                and the 19 ft 6 customizable couples motorhome is one of them.
+                and the 19 ft 6 customizable couples campervan is one of them.
                 This model is luxury and versatility personified, couples can
                 customize their space to their liking. The spacious interior is
                 comfortable and convenient making it perfect for extended trips
@@ -611,14 +611,14 @@ export default function OffRoadCaravanMiddle() {
                 Meranti frame and an Alucom finish that&apos;s tough and looks
                 good. Equipped with advanced electronics and bush camping
                 amenities the PTR and FTR series are perfect for those who like
-                to semi off road. These motorhomes have features designed to
+                to semi off road. These campervans have features designed to
                 enhance the camping experience, so are great for families who
                 want adventure and comfort.
               </p>
               <p>
-                In summary, Coronet RV stands out among off-road motorhome
-                manufacturers for its family-friendly motorhomes that cater to
-                all. Whether it&apos;s a luxury couples motorhome or a tough
+                In summary, Coronet RV stands out among off-road campervan
+                manufacturers for its family-friendly campervans that cater to
+                all. Whether it&apos;s a luxury couples campervan or a tough
                 family model Coronet RV has got it covered.
               </p>
               <div className="advertisement">
@@ -628,7 +628,7 @@ export default function OffRoadCaravanMiddle() {
                   height={250}
                   style={{ width: "100%", height: "auto" }}
                   src="/images/Coronet-RV-family-friendy-off-road-caravan-manufacturer.jpg"
-                  alt="Coronet RV - family friendy off road motorhome manufacturer"
+                  alt="Coronet RV - family friendy off road campervan manufacturer"
                 />
                 <Image
                   className="hidden-lg hidden-md hidden-sm br-m-8"
@@ -636,14 +636,14 @@ export default function OffRoadCaravanMiddle() {
                   height={250}
                   style={{ width: "100%", height: "auto" }}
                   src="/images/family-friendy-off-road-caravan-manufacturer-Coronet-RV.jpg"
-                  alt="Coronet RV - family friendy off road motorhome manufacturer"
+                  alt="Coronet RV - family friendy off road campervan manufacturer"
                 />
               </div>
               <h3>6. Masterpiece Caravans</h3>
               <div className="key_features">
                 <h4>
                   Key Reasons Why Masterpiece Caravans is the Ultimate Off Road
-                  Motorhome Manufacturer
+                  Campervan Manufacturer
                 </h4>
                 <ul>
                   <li>
@@ -657,7 +657,7 @@ export default function OffRoadCaravanMiddle() {
                   </li>
                   <li>
                     Strengths: Renowned for crafting some of Australia&apos;s
-                    most premium motorhomes.
+                    most premium campervans.
                   </li>
                   <li>
                     Australian Owned & Operated: Proudly based in Australia,
@@ -665,7 +665,7 @@ export default function OffRoadCaravanMiddle() {
                   </li>
                   <li>
                     Owner: Led by a seasoned expert with extensive knowledge in
-                    building top-tier motorhomes as a leading off road motorhome
+                    building top-tier campervans as a leading off road campervan
                     manufacturer.
                   </li>
                   <li>
@@ -674,10 +674,10 @@ export default function OffRoadCaravanMiddle() {
                   </li>
                   <li>
                     Technology: Incorporates the latest advancements in
-                    technology and design to optimize motorhome performance.
+                    technology and design to optimize campervan performance.
                   </li>
                   <li>
-                    What to Expect: Experience the highest quality motorhomes
+                    What to Expect: Experience the highest quality campervans
                     Australia has to offer.
                   </li>
                 </ul>
@@ -693,7 +693,7 @@ export default function OffRoadCaravanMiddle() {
                  </Link> */}
               </div>
               <p>
-                Masterpiece Caravans, a best off-road motorhome manufacturer, has
+                Masterpiece Caravans, a best off-road campervan manufacturer, has
                 changed the game with its R-Tech construction. This is a game
                 changing process that uses framing materials that are 30%
                 lighter than traditional materials, that&apos;s a big win for
@@ -703,7 +703,7 @@ export default function OffRoadCaravanMiddle() {
               </p>
               <p>
                 In the Masterpiece Caravans range are the Optimum, Optimum CRZR
-                and Performance models, each is the ultimate off-road motorhome.
+                and Performance models, each is the ultimate off-road campervan.
                 The Optimum series is famous for its solid construction and
                 luxurious interiors, it&apos;s the ultimate off-road experience.
                 These models can tackle the toughest terrain while delivering
@@ -720,7 +720,7 @@ export default function OffRoadCaravanMiddle() {
               <p>
                 Masterpiece Caravans attention to detail and innovative
                 construction is evident in every aspect. The R-Tech process not
-                only makes their motorhomes perform better but also makes them
+                only makes their campervans perform better but also makes them
                 last longer. Whether you&apos;re tackling extreme off-road or
                 looking for a comfortable living space in a compact design
                 Masterpiece Caravans have models that meet the highest standards
@@ -734,7 +734,7 @@ export default function OffRoadCaravanMiddle() {
                   height={250}
                   style={{ width: "100%", height: "auto" }}
                   src="/images/Masterpiece-extreme-off-road-caravan-manufacturer.jpg"
-                  alt="Masterpiece Caravans - extreme off road motorhome manufacturer"
+                  alt="Masterpiece Caravans - extreme off road campervan manufacturer"
                 />
                 <Image
                   className="hidden-lg hidden-md hidden-sm br-m-8"
@@ -742,14 +742,14 @@ export default function OffRoadCaravanMiddle() {
                   height={250}
                   style={{ width: "100%", height: "auto" }}
                   src="/images/extreme-off-road-caravan-manufacturer-Masterpiece.jpg"
-                  alt="Masterpiece Caravans - extreme off road motorhome manufacturer"
+                  alt="Masterpiece Caravans - extreme off road campervan manufacturer"
                 />
               </div>
               <h3>7. Apache Caravans</h3>
               <div className="key_features">
                 <h4>
                   Key Reasons Why Apache Caravans is a Trendsetter Among Hybrid
-                  Off-Road Motorhome Manufacturers
+                  Off-Road Campervan Manufacturers
                 </h4>
                 <ul>
                   <li>
@@ -838,7 +838,7 @@ export default function OffRoadCaravanMiddle() {
                 <Image
                   className="hidden-xs"
                   src="/images/Apache-hybrid-off-road-caravan-manufacturer.jpg"
-                  alt="Apache Caravans - hybrid off road motorhome manufacturer"
+                  alt="Apache Caravans - hybrid off road campervan manufacturer"
                   width={800}
                   height={250}
                   style={{ width: "100%", height: "auto" }}
@@ -846,7 +846,7 @@ export default function OffRoadCaravanMiddle() {
                 <Image
                   className="hidden-lg hidden-md hidden-sm br-m-8"
                   src="/images/hybrid-off-road-caravan-manufacturer-Apache.jpg"
-                  alt="Apache Caravans - hybrid off road motorhome manufacturer"
+                  alt="Apache Caravans - hybrid off road campervan manufacturer"
                   width={800}
                   height={250}
                   style={{ width: "100%", height: "auto" }}
@@ -856,33 +856,33 @@ export default function OffRoadCaravanMiddle() {
               <div className="key_features">
                 <h4>
                   Key Reasons Why Villa Caravans is the best Semi Off Road
-                  Motorhome Manufacturer
+                  Campervan Manufacturer
                 </h4>
                 <ul>
                   <li>
                     Manufacturing Costs: Significantly lower than those of major
-                    semi off road motorhome manufacturers.
+                    semi off road campervan manufacturers.
                   </li>
                   <li>
                     Advertising: No celebrity endorsements, TV commercials, or
-                    heavy online spending. Limited presence at motorhome shows and
+                    heavy online spending. Limited presence at campervan shows and
                     only 2 dealers.
                   </li>
                   <li>
                     Build Focus: Resources are effectively managed and dedicated
-                    to high-quality motorhome construction.
+                    to high-quality campervan construction.
                   </li>
                   <li>
-                    Australian Owned & Operated: Australian Motorhome
+                    Australian Owned & Operated: Australian Campervan
                     Manufacturer.
                   </li>
                   <li>
                     Expert Staff: All team members have extensive experience in
-                    the motorhome industry.
+                    the campervan industry.
                   </li>
                   <li>
-                    Owner: Third generation motorhome manufacturer with the entire
-                    family in the motorhome manufacturing industry.
+                    Owner: Third generation campervan manufacturer with the entire
+                    family in the campervan manufacturing industry.
                   </li>
                   <li>
                     What to Expect: Superior build and quality in the semi off
@@ -901,10 +901,10 @@ export default function OffRoadCaravanMiddle() {
                  </Link> */}
               </div>
               <p>
-                Villa Caravans is a well-known name among semi off-road motorhome
-                manufacturers, building unique motorhomes that combine luxury with
+                Villa Caravans is a well-known name among semi off-road campervan
+                manufacturers, building unique campervans that combine luxury with
                 ruggedness. They use top of the line materials inside and out to
-                make sure every motorhome they build is built to last and can
+                make sure every campervan they build is built to last and can
                 handle the challenges of semi off road travel.
               </p>
               <p>
@@ -922,22 +922,22 @@ export default function OffRoadCaravanMiddle() {
                 It&apos;s full of features to make long trips more enjoyable and
                 easier. Built to withstand the rough and tough conditions of
                 Australia, the Escape lets you get amongst the country and its
-                remote areas. This is what Villa Caravans means by motorhomes that
+                remote areas. This is what Villa Caravans means by campervans that
                 are luxurious and tough enough for semi off road travel.
               </p>
               <p>
                 The Escape SE and Escape are the proof of Villa Caravans&apos;
                 ability to combine luxury with toughness. If you want a quality,
-                reliable motorhome that can handle semi off road and has all the
+                reliable campervan that can handle semi off road and has all the
                 comforts of home, Villa Caravans is a leading choice among semi
-                off-road motorhome manufacturers for tackling dirt roads and long
+                off-road campervan manufacturers for tackling dirt roads and long
                 touring trips.
               </p>
               <div className="advertisement">
                 <Image
                   className="hidden-xs"
                   src="/images/Villa-best-semi-off-road-caravan-manufacturer.jpg"
-                  alt="Villa Caravans - best semi off road motorhome manufacturer"
+                  alt="Villa Caravans - best semi off road campervan manufacturer"
                   width={800}
                   height={250}
                   style={{ width: "100%", height: "auto" }}
@@ -945,7 +945,7 @@ export default function OffRoadCaravanMiddle() {
                 <Image
                   className="hidden-lg hidden-md hidden-sm br-m-8"
                   src="/images/best-semi-off-road-caravan-manufacturer-Villa.jpg"
-                  alt="Villa Caravans - best semi off road motorhome manufacturer"
+                  alt="Villa Caravans - best semi off road campervan manufacturer"
                   width={800}
                   height={250}
                   style={{ width: "100%", height: "auto" }}
@@ -987,7 +987,7 @@ export default function OffRoadCaravanMiddle() {
               <div className="key_features">
                 <h4>
                   Key Reasons Why X Series RV is the Ultimate Hybrid Off Road
-                  Motorhome Manufacturer
+                  Campervan Manufacturer
                 </h4>
                 <ul>
                   <li>
@@ -1001,7 +1001,7 @@ export default function OffRoadCaravanMiddle() {
                   </li>
                   <li>
                     Ideal for Couples & Singles : X Element is a lightweight,
-                    cozy motorhome with kitchen and bathroom for smaller groups.
+                    cozy campervan with kitchen and bathroom for smaller groups.
                   </li>
                   <li>
                     Rugged Off-Road Capability : Built tough to handle rough
@@ -1012,7 +1012,7 @@ export default function OffRoadCaravanMiddle() {
                     with home-like comforts.
                   </li>
                   <li>
-                    What to Expect : Durable, well-designed motorhomes ready for
+                    What to Expect : Durable, well-designed campervans ready for
                     any adventure.
                   </li>
                 </ul>
@@ -1028,8 +1028,8 @@ export default function OffRoadCaravanMiddle() {
                  </Link> */}
               </div>
               <p>
-                X Series RV is a specialist off-road motorhome manufacturer
-                focused on creating adventure-ready motorhomes built for
+                X Series RV is a specialist off-road campervan manufacturer
+                focused on creating adventure-ready campervans built for
                 Australia&apos;s toughest conditions. Their range includes
                 off-road pods, hybrids, and toy haulers designed for
                 everyone—from solo travellers to families wanting to bring
@@ -1037,7 +1037,7 @@ export default function OffRoadCaravanMiddle() {
               </p>
               <p>
                 A standout in their lineup is the X Commander, a 22ft hard roof
-                hybrid motorhome perfect for larger families. It offers luxury
+                hybrid campervan perfect for larger families. It offers luxury
                 camping with multiple bunk options, an island-style bed,
                 separate ensuite with shower and toilet, and even a washing
                 machine—combining comfort and off-road capability in one rugged
@@ -1045,16 +1045,16 @@ export default function OffRoadCaravanMiddle() {
               </p>
               <p>
                 For couples or singles seeking a cozy, lightweight option, the X
-                Element is an ideal choice. This full motorhome features a compact
+                Element is an ideal choice. This full campervan features a compact
                 design with all the essentials, including a fully equipped
                 kitchen and bathroom, delivering flexibility and comfort
                 wherever you roam.
               </p>
               <p>
                 With a focus on durability and premium features, X Series RV
-                builds motorhomes that handle rough terrains without compromising
+                builds campervans that handle rough terrains without compromising
                 on home-like comforts. That&apos;s why X Series is trusted by
-                outdoor enthusiasts as a top off-road motorhome manufacturer ready
+                outdoor enthusiasts as a top off-road campervan manufacturer ready
                 to take you on extraordinary adventures.
               </p>
               <div className="advertisement">
@@ -1064,7 +1064,7 @@ export default function OffRoadCaravanMiddle() {
                   height={250}
                   style={{ width: "100%", height: "auto" }}
                   src="/images/X-Series-RV-Hybrid-Off-Road-Caravan-Manufacturer-for-the-Wild-at-Heart.jpg"
-                  alt="X Series RV Hybrid Off-Road Motorhome Manufacturer for the Wild at Heart"
+                  alt="X Series RV Hybrid Off-Road Campervan Manufacturer for the Wild at Heart"
                 />
                 <Image
                   className="hidden-lg hidden-md hidden-sm br-m-8"
@@ -1072,7 +1072,7 @@ export default function OffRoadCaravanMiddle() {
                   height={250}
                   style={{ width: "100%", height: "auto" }}
                   src="/images/X-Series-RV-Hybrid-Off-Road-Caravan-Manufacturer-for-the-Wild-at-Heart-Mob.jpg"
-                  alt="X Series RV Hybrid Off-Road Motorhome Manufacturer for the Wild at Heart"
+                  alt="X Series RV Hybrid Off-Road Campervan Manufacturer for the Wild at Heart"
                 />
               </div>
               <h3>
@@ -1136,9 +1136,9 @@ export default function OffRoadCaravanMiddle() {
               </div>
               <p>
                 Titanium Caravans is redefining what it means to own an off-road
-                motorhome in Australia. Proudly Australian-owned and operated,
+                campervan in Australia. Proudly Australian-owned and operated,
                 this family-run business has carved a name as a leader in
-                premium off-road and hybrid motorhomes. Every motorhome is built
+                premium off-road and hybrid campervans. Every campervan is built
                 tough, thoughtfully equipped, and proudly manufactured using
                 locally sourced materials and in-house craftsmanship.
               </p>
@@ -1172,7 +1172,7 @@ export default function OffRoadCaravanMiddle() {
                   height={250}
                   style={{ width: "100%", height: "auto" }}
                   src="/images/Titanium-Caravans-Off-Road-Caravan-Manufacturer.jpg"
-                  alt="Titanium Caravans - Off Road Motorhome Manufacturer"
+                  alt="Titanium Caravans - Off Road Campervan Manufacturer"
                 />
                 <Image
                   className="hidden-lg hidden-md hidden-sm br-m-8"
@@ -1180,7 +1180,7 @@ export default function OffRoadCaravanMiddle() {
                   height={250}
                   style={{ width: "100%", height: "auto" }}
                   src="/images/Titanium-Caravans-Off-Road-Caravan-Manufacturer - Mobile.jpg"
-                  alt="Titanium Caravans - Off Road Motorhome Manufacturer"
+                  alt="Titanium Caravans - Off Road Campervan Manufacturer"
                 />
               </div>
             </div>
