@@ -2,9 +2,9 @@
 // Shared server-side fetch used by both the root layout (SSR) and the
 // /api/banners/ route handler (kept for any external/CDN callers).
 const PLACEMENTS = ["listings", "home"];
-// "cfs" (caravansforsale.com.au) returns a sister site's banners — this site
-// is motorhomesforsale.com.au, whose campaigns are registered under "mfs".
-const SITE = "mfs";
+// "cfs" (caravansforsale.com.au) and "mfs" (motorhomesforsale.com.au) return
+// sister sites' banners — this site's campaigns are registered under "cvfs".
+const SITE = "cvfs";
 
 export type Banner = {
   id: number;

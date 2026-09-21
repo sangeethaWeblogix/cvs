@@ -38,4 +38,50 @@ export async function fetchRequirements(): Promise<Requirement[]> {
   }
 }
 
+export type HomeEnquiryPayload = {
+  name: string;
+  email: string;
+  phone: string;
+  postcode: string;
+  condition: string;
+  budget: string;
+  requirements: string;
+};
+
+export type HomeEnquiryResponse = {
+  success?: boolean;
+  message?: string;
+  data?: unknown;
+};
+
+// POST counterpart to fetchRequirements' get-home-enquiries-list — submits
+// the /campervan-enquiry-form/ page's form. Routed through /api/home-enquiry/
+// (not straight to API_BASE) because this is called from a client component,
+// where MFS_API_KEY (no NEXT_PUBLIC_ prefix) is never bundled to the browser —
+// the internal route runs server-side and attaches the real key instead.
+export async function createHomeEnquiry(
+  payload: HomeEnquiryPayload
+): Promise<HomeEnquiryResponse> {
+  const res = await fetch(`/api/home-enquiry/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+    cache: "no-store",
+  });
+
+  const raw = await res.text();
+  let json: HomeEnquiryResponse;
+  try {
+    json = raw ? JSON.parse(raw) : {};
+  } catch {
+    json = { message: raw || "Invalid JSON from server" };
+  }
+
+  if (!res.ok) {
+    throw new Error(json.message || "Enquiry submission failed");
+  }
+
+  return json;
+}
+
  

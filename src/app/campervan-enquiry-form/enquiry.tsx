@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import React, { useState } from "react";
+import { createHomeEnquiry } from "@/api/postRquirements/api";
 
 type FormState = {
   "your-name": string;
@@ -111,51 +112,32 @@ export default function ContactSection() {
     try {
       setLoading(true);
 
-      const form = new FormData();
-      form.append("_wpcf7", "3290");
-      form.append("_wpcf7_version", "5.9.3");
-      form.append("_wpcf7_locale", "en_US");
-      form.append("_wpcf7_unit_tag", "wpcf7-f3290-p45-o1");
-      form.append("_wpcf7_container_post", "45");
-      form.append("your-name", formData["your-name"]);
-      form.append("your-email", formData["your-email"]);
-      form.append("your-phone", formData["your-phone"]);
-      form.append("you-postcode", formData["you-postcode"]);
-      // form.append("caravan-type", formData["caravan-type"]);
-      form.append("condition", formData.condition);
-      form.append("budget", formData.budget);
-      form.append("your-message", formData["your-message"]);
-      Object.entries(formData).forEach(([key, value]) =>
-        form.append(key, value)
-      );
+      await createHomeEnquiry({
+        name: formData["your-name"],
+        email: formData["your-email"],
+        phone: formData["your-phone"],
+        postcode: formData["you-postcode"],
+        condition: formData.condition,
+        budget: formData.budget,
+        requirements: formData["your-message"],
+      });
 
-      const res = await fetch(
-        "https://admin.motorhomesforsale.com.au/wp-json/contact-form-7/v1/contact-forms/71/feedback",
-        { method: "POST", body: form }
-      );
-
-      const data = await res.json();
-
-      if (data.status === "mail_sent") {
-        setMessage("✅ Message sent successfully!");
-        // clear form + errors
-        setFormData({
-          "your-name": "",
-          "your-email": "",
-          "your-phone": "",
-          "you-postcode": "",
-          "your-message": "",
-          // "caravan-type": "",
-          condition: "",
-          budget: "",
-        });
-        setErrors({});
-      } else {
-        setMessage("❌ Error: " + (data.message || "Failed to send message."));
-      }
+      setMessage("✅ Message sent successfully!");
+      // clear form + errors
+      setFormData({
+        "your-name": "",
+        "your-email": "",
+        "your-phone": "",
+        "you-postcode": "",
+        "your-message": "",
+        // "caravan-type": "",
+        condition: "",
+        budget: "",
+      });
+      setErrors({});
     } catch (err) {
       console.error(err);
-      setMessage("❌ Something went wrong.");
+      setMessage("❌ Error: " + (err instanceof Error ? err.message : "Failed to send message."));
     } finally {
       setLoading(false);
     }

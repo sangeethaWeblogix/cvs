@@ -99,6 +99,11 @@ function buildAttributesOthersPaths() {
 async function main() {
   const urls = new Set();
 
+  // The bare, unfiltered catalog page — none of the API_TYPES/attribute
+  // combinations above ever produce this path since it has zero filters,
+  // so it must be added explicitly or it's silently treated as non-indexed.
+  urls.add(`${SITE_URL}/listings/`);
+
   const results = await Promise.all(API_TYPES.map((t) => fetchType(t)));
   results.forEach((paths) => {
     for (const p of paths) urls.add(`${SITE_URL}/listings/${p}`);
