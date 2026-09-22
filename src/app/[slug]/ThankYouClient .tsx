@@ -41,7 +41,7 @@ export default function ThankYouClient() {
               href="/"
               style={{ color: "#000", textDecoration: "none" }}
             >
-              motorhomesforsale.com.au
+              campervansforsale.au
             </Link>
             .
           </Typography>

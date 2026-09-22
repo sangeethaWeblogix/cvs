@@ -209,7 +209,7 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
   useEffect(() => {
     const controller = new AbortController();
     const params = buildMakeCountParams(currentFilters);
-    if (currentFilters.make) params.set("motorhome_make", currentFilters.make);
+    if (currentFilters.make) params.set("campervan_make", currentFilters.make);
     params.set("group_by", "vehicle_make");
     fetch(obfuscateUrl(`/api/d2/?${params.toString()}`), { signal: controller.signal })
       .then(r => parseObfuscatedResponse(r))
@@ -232,7 +232,7 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
     if (!currentFilters.make) { setStateCounts([]); return; }
     const controller = new AbortController();
     const params = new URLSearchParams();
-    params.set("motorhome_make", currentFilters.make);
+    params.set("campervan_make", currentFilters.make);
     if (currentFilters.category)          params.set("category", currentFilters.category);
     if (currentFilters.condition)         params.set("condition", currentFilters.condition);
     if (currentFilters.from_price)        params.set("from_price", String(currentFilters.from_price));
@@ -262,13 +262,13 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
 
   // Model breakdown for the selected make — group_by=make never nests a
   // model breakdown (params-count only returns it when scoped to one make
-  // via group_by=model&motorhome_make=<slug>), so it's fetched on demand
+  // via group_by=model&campervan_make=<slug>), so it's fetched on demand
   // whenever the selected make changes.
   useEffect(() => {
     if (!tempMake) { setModelCounts([]); setCustomBuiltVehicleMakes([]); return; }
     const isCustomBuilt = tempMake === CUSTOM_BUILT_SLUG;
     const controller = new AbortController();
-    const params = new URLSearchParams({ motorhome_make: tempMake, group_by: isCustomBuilt ? "vehicle_make" : "model" });
+    const params = new URLSearchParams({ campervan_make: tempMake, group_by: isCustomBuilt ? "vehicle_make" : "model" });
     fetch(obfuscateUrl(`/api/d2/?${params.toString()}`), { signal: controller.signal })
       .then(r => parseObfuscatedResponse(r))
       .then(json => {
@@ -328,7 +328,7 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
 
     const controller = new AbortController();
     const params = buildMakeCountParams(currentFilters);
-    if (currentFilters.make) params.set("motorhome_make", currentFilters.make);
+    if (currentFilters.make) params.set("campervan_make", currentFilters.make);
     params.set("state", key);
     params.set("group_by", "region");
     fetch(obfuscateUrl(`/api/d2/?${params.toString()}`), { signal: controller.signal })

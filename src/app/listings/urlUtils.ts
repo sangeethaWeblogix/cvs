@@ -13,7 +13,7 @@ export function buildApiUrl(base: string, filters: FilterState, seed: number, lo
   params.set("seed", String(seed));
   if (filters.state)              params.set("state",              filters.state);
   if (filters.category)           params.set("category",          filters.category);
-  if (filters.make)               params.set("motorhome_make",     filters.make);
+  if (filters.make)               params.set("campervan_make",     filters.make);
   if (filters.model)              params.set("model",              filters.model);
   if (filters.engine_make)        params.set("vehicle_make",       filters.engine_make);
   if (filters.region)             params.set("region",             filters.region);

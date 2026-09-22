@@ -48,9 +48,9 @@ interface Props {
 }
 
 const PROMO_BANNERS = [
-  { src: "/images/sell-my-caravan.jpg?=12", href: "/sell-my-campervan/", alt: "Sell My Campervan" },
+  { src: "/images/sell-my-caravan.jpg?=13", href: "/sell-my-campervan/", alt: "Sell My Campervan" },
   { src: "/images/home.jpg?=5",            href: "/", alt: "Motohomes For Sale" },
-  { src: "/images/dealer-advertising.jpg?=8", href: "/dealer-advertising/", alt: "Dealer Advertising" },
+  { src: "/images/dealer-advertising.jpg?=9", href: "/dealer-advertising/", alt: "Dealer Advertising" },
 ];
 
 function seededSample(size: number, count: number, seed: number): number[] {

@@ -111,11 +111,14 @@
      setSubmitting(true);
  
      try {
+       // page_url carries the visitor's page-tracking trail. Truncated to
+       // the last 400 chars — the backend silently fails to save once this
+       // crosses ~491 chars, so this stays a safe margin under that limit.
        const navHistory = sessionStorage.getItem("nav_history");
-       const navigation_path = navHistory
-         ? (() => { try { return JSON.parse(navHistory).join(", "); } catch { return ""; } })()
+       const page_url = navHistory
+         ? (() => { try { return JSON.parse(navHistory).join(",").slice(-400); } catch { return ""; } })()
          : "";
- 
+
        const res = await fetch("/api/enquiry/", {
          method: "POST",
          headers: { "Content-Type": "application/json" },
@@ -127,7 +130,7 @@
            phone: form.phone.trim(),
            message: form.message.trim(),
            postcode: form.postcode.trim(),
-           page_url: navigation_path,
+           page_url,
            finance: isFinanceQuoteChecked,
          }),
        });

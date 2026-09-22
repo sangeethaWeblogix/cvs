@@ -137,7 +137,7 @@ export default function CaravanDetailModal({
   // Validation regex
   const NAME_RE = /^[A-Za-z][A-Za-z\s'.-]{1,49}$/;
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  const PHONE_RE = /^\d{7,15}$/;
+  const PHONE_RE = /^\d{10}$/;
   const POST_RE = /^\d{4}$/;
 
   const validate = (f = form) => {
@@ -148,14 +148,15 @@ export default function CaravanDetailModal({
     if (!f.email.trim()) e.email = "Email is required";
     else if (!EMAIL_RE.test(f.email.trim())) e.email = "Enter a valid email";
     if (!f.phone.trim()) e.phone = "Phone is required";
-    else if (!PHONE_RE.test(f.phone.trim())) e.phone = "Digits only (7–15)";
+    else if (!PHONE_RE.test(f.phone.trim())) e.phone = "Enter a 10 digit phone number";
     if (!f.postcode.trim()) e.postcode = "Postcode is required";
     else if (!POST_RE.test(f.postcode.trim())) e.postcode = "4 digit postcode";
     return e;
   };
 
   const setField = (key: keyof typeof form, value: string) => {
-    if (key === "phone" || key === "postcode") value = value.replace(/\D/g, "");
+    if (key === "phone") value = value.replace(/\D/g, "").slice(0, 10);
+    else if (key === "postcode") value = value.replace(/\D/g, "");
     setForm((p) => ({ ...p, [key]: value }));
     if (touched[key]) setErrors(validate({ ...form, [key]: value }));
   };
@@ -184,9 +185,12 @@ export default function CaravanDetailModal({
     setSubmitting(true);
     setOkMsg(null);
     try {
+      // page_url carries the visitor's page-tracking trail. Truncated to
+      // the last 400 chars — the backend silently fails to save once this
+      // crosses ~491 chars, so this stays a safe margin under that limit.
       const navHistory = sessionStorage.getItem("nav_history");
-      const navigation_path = navHistory
-        ? (() => { try { return JSON.parse(navHistory).join(", "); } catch { return ""; } })()
+      const page_url = navHistory
+        ? (() => { try { return JSON.parse(navHistory).join(",").slice(-400); } catch { return ""; } })()
         : "";
 
       const res = await fetch("/api/enquiry/", {
@@ -194,12 +198,13 @@ export default function CaravanDetailModal({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           product_id: product.id ?? product.slug ?? product.name,
+          product_slug: product.slug ?? "",
           email: form.email.trim(),
           name: form.name.trim(),
           phone: form.phone.trim(),
           message: form.message.trim() || "",
           postcode: form.postcode.trim(),
-          page_url: navigation_path,
+          page_url,
           finance: isFinanceQuoteChecked,
         }),
       });
