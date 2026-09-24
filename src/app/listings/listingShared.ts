@@ -61,7 +61,11 @@ export function buildFeaturedOrder(products: Listing[], premiumsRaw: Listing[], 
   const premiums   = premiumsRaw.map((p) => ({ ...p, is_premium: true }));
   const exclusives = exclusivesRaw.map((p) => ({ ...p, is_exclusive: true }));
   const heroFeatured = products.slice(0, 2);
-  const hero = [...heroFeatured, ...exclusives.slice(0, 1), ...premiums.slice(0, 2)];
+  // No real matches for this filter — use every exclusive to fill the page
+  // instead of the usual single spotlight pick, so an empty-result page
+  // isn't left showing just one card.
+  const exclusivePicks = products.length === 0 ? exclusives : exclusives.slice(0, 1);
+  const hero = [...heroFeatured, ...exclusivePicks, ...premiums.slice(0, 2)];
   const heroIds = new Set(hero.map((p) => p.id));
   const rest = products.filter((p) => !heroIds.has(p.id));
   return [...hero, ...rest];
