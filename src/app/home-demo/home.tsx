@@ -227,8 +227,8 @@ export default function HomePage({
             <a href="/listings/" target="_blank" rel="noopener noreferrer" className="hd-banner-ad__inner">
               <span className="hd-banner-ad__label">Advertisement</span>
               <picture>
-                <source media="(max-width: 767px)" srcSet="/images/1157x598-mfs.jpg" />
-                <img src="/images/2000x517-mfs.jpg" alt="Motohomes For Sale" className="hd-banner-ad__img" />
+                <source media="(max-width: 767px)" srcSet="/images/1157x598-cvs.jpg" />
+                <img src="/images/2000x517-cvs.jpg" alt="Campervans For Sale" className="hd-banner-ad__img" />
               </picture>
             </a>
           )}
