@@ -1,9 +1,14 @@
+import { readObfuscatedBody } from "@/lib/obfuscation";
+
 const API_KEY = process.env.MFS_API_KEY;
 const API_BASE = process.env.NEXT_PUBLIC_MFS_API_BASE;
 
+// StateListingGrid's card-click tracker sends an obfuscated body (matching
+// /api/d4's impression tracker) — plain req.json() throws on that payload,
+// silently failing every call via the catch below.
 export async function POST(req: Request) {
   try {
-    const { slug } = await req.json();
+    const { slug } = await readObfuscatedBody<{ slug?: string }>(req);
     if (!slug) return Response.json({ success: false });
 
     // Forward the real visitor's IP/User-Agent — otherwise the backend logs

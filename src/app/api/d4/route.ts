@@ -16,9 +16,17 @@ export async function POST(req: Request) {
     const { slug } = await readObfuscatedBody<{ slug?: string }>(req);
     if (!slug) return NextResponse.json({ success: false });
 
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
+      || req.headers.get("x-real-ip")
+      || "";
+    const userAgent = req.headers.get("user-agent") || "";
+
     await fetch(`${API_BASE}/impression?slug=${encodeURIComponent(slug)}`, {
+      method: "POST",
       headers: {
         ...(API_KEY && { "X-Secret-Key": API_KEY }),
+        ...(ip && { "X-Forwarded-For": ip, "X-Real-IP": ip }),
+        ...(userAgent && { "User-Agent": userAgent }),
       },
     });
 

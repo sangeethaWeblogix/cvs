@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
+import { readObfuscatedBody } from "@/lib/obfuscation";
 const API_KEY = process.env.MFS_API_KEY;
 const API_BASE = process.env.NEXT_PUBLIC_MFS_API_BASE;
 
+// The product detail page's view tracker sends an obfuscated body — plain
+// req.json() throws on that payload, silently failing every call below.
 export async function POST(req: Request) {
   try {
-    const { slug } = await req.json();
+    const { slug } = await readObfuscatedBody<{ slug?: string }>(req);
     if (!slug) return NextResponse.json({ success: false });
 
     // Forward the real visitor's IP/User-Agent — otherwise the backend logs
