@@ -63,7 +63,7 @@ const DealerLandingPage = () => {
                     </h2>
 
                     <p className="mb-3">
-                      Your stock deserves visibility without per-lead fees. CampervansForSale.au
+                      Your stock deserves visibility without per-lead fees, Marketplace Network
                       connects your dealership with buyers actively searching
                       for their next campervan—so your inventory gets seen by the
                       right audience.
@@ -156,7 +156,7 @@ const DealerLandingPage = () => {
             <div className="col-12">
               <div className="comparison">
                 <h2 className="text-center">
-                  <span>Why Campervan Dealers </span> Choose CampervansForSale
+                  <span>Why Campervan Dealers </span> Choose Marketplace Network
                 </h2>
 
                 <div className="table-responsive">
@@ -164,7 +164,7 @@ const DealerLandingPage = () => {
                     <thead>
                       <tr>
                         <th className="text-start">Comparison Table</th>
-                        <th>CampervansForSale</th>
+                        <th>CampervansForSale.au</th>
                         <th>Other Marketplaces</th>
                       </tr>
                     </thead>
