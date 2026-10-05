@@ -164,7 +164,7 @@ const DealerLandingPage = () => {
                     <thead>
                       <tr>
                         <th className="text-start">Comparison Table</th>
-                        <th>CampervansForSale.au</th>
+                        <th>CampervansForSale<wbr />.com.au</th>
                         <th>Other Marketplaces</th>
                       </tr>
                     </thead>
