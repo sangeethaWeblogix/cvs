@@ -2,6 +2,7 @@
  import { parseSlugToFilters, type Filters } from "@/app/components/urlBuilder";
  import { buildSlugFromFilters } from "@/app/components/slugBuilter";
  import { isAllowedSingleBand } from "@/utils/seo/band-utils";
+ import { getRegionsByState } from "@/app/sell-my-caravan-region/regions-data";
  const API_KEY = process.env.MFS_API_KEY;
 
  // Only the API base from .env drives every backend call in this file — no
@@ -59,12 +60,11 @@
    const stateEntry = states.find((s: any) => s.slug === stateSlug);
    if (!stateEntry) return false;
    if (!regionSlug) return true;
-   // Regions are NOT nested under the state entry (that field is always
-   // empty) — a separate scoped query is required to list them.
-   const regionData = await fetchParamsCount(`group_by=region&state=${encodeURIComponent(stateSlug)}`);
-   if (!regionData) return true;
-   const regions = regionData?.data ?? [];
-   return regions.some((r: any) => r.slug === regionSlug);
+   // A region is valid if it's a real region of this state, regardless of
+   // whether it currently has live listings — the pool/exclusive-products
+   // check further down already fills a zero-match page with spotlight
+   // vans instead of needing a hard 410 here for a real place name.
+   return getRegionsByState(stateSlug).some((r) => r.pageSlug === regionSlug);
  }
 
  async function isValidSuburb(suburb: string, pincode: string | undefined, apiKey: string | undefined): Promise<boolean> {
