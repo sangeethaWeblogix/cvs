@@ -182,7 +182,6 @@ export function buildAllRegionsForState(state: string) {
   const stateSlug = toStateSlug(state);
   return getRegionsByState(stateSlug).map((r) => ({
     name: r.label,
-    slug: r.pageSlug,
     href: `/listings/${r.state.slug}-state/${r.pageSlug}-region/`,
   }));
 }
