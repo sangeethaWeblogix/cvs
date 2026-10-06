@@ -75,6 +75,7 @@ export default function StateBrowseSection({ state, region, category, initialDat
   const hasCategory = !!category;
 
   const categoryOnly            = !hasState && hasCategory;
+  const stateOnlyMode           = hasState && !hasRegion && !hasCategory;
   const stateRegionMode         = hasState && hasRegion && !hasCategory;
   const categoryStateMode       = hasState && hasCategory && !hasRegion;
   const categoryStateRegionMode = hasState && hasCategory && hasRegion;
@@ -116,6 +117,17 @@ export default function StateBrowseSection({ state, region, category, initialDat
     return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryOnly, category]);
+
+  // State only (no region/category) — filter the static full region list
+  // down to regions that currently have live listings.
+  useEffect(() => {
+    if (!stateOnlyMode || (initialData && isInitialFilters)) return;
+    let cancelled = false;
+    const scope = { state: state! };
+    fetchGroupCounts("region", scope).then((d) => { if (!cancelled) setRegionCounts(d); });
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stateOnlyMode, state]);
 
   // State + region (no category) — Popular Make/Category + Price/GVM/Sleep.
   useEffect(() => {
@@ -439,7 +451,11 @@ export default function StateBrowseSection({ state, region, category, initialDat
     );
   }
 
-  const regions = hasState ? buildAllRegionsForState(state!) : STATES;
+  const regions = hasState
+    ? buildAllRegionsForState(state!).filter(
+        (r) => regionCounts === null || (regionCounts.find((rc) => rc.slug === r.slug)?.count ?? 0) > 0
+      )
+    : STATES;
   // const types   = hasState ? buildTypesForState(state!) : TYPES_NO_STATE;
   const filters = hasState ? buildFiltersForState(state!) : FILTERS_NO_STATE;
 

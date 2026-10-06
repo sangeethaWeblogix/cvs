@@ -142,8 +142,13 @@ export async function fetchBrowseSectionData(
     };
   }
 
-  // Default mode (no state/category, or state-only) — the pills rendered
-  // here are static (STATES/TYPES_NO_STATE/FILTERS_NO_STATE) or come from
-  // getRegionsByState, none of which need count data at all.
+  if (hasState && !hasRegion && !hasCategory) {
+    const scope = { state: state! };
+    const regionCounts = await fetchGroupCountsServer("region", scope);
+    return { regionCounts };
+  }
+
+  // Default mode (no state/category) — the pills rendered here are static
+  // (STATES/TYPES_NO_STATE/FILTERS_NO_STATE), which need no count data.
   return {};
 }
