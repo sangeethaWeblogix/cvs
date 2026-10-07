@@ -1092,6 +1092,37 @@ input.loc-search-input:focus { box-shadow: 0 0 0 1.5px #7e7e7e !important; }
 .lsd-page .pagination-icons button:hover { background: #dbdaea; }
 .lsd-page .pagination-icons button:disabled { opacity: 0.5; cursor: not-allowed; color: #212529; }
 
+/* ── Explore Other Travel Options ── */
+.lsd-explore-section {
+  padding: 0 0 40px;
+}
+.lsd-explore-inner {
+  padding: 0 30px;
+}
+.lsd-explore-title {
+  color: #000;
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.lsd-explore-body {
+  color: #000;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.75;
+}
+.lsd-explore-link {
+  color: #1153a6;
+  font-weight: 500;
+  text-decoration: none;
+}
+.lsd-explore-link:hover { text-decoration: underline; }
+@media (max-width: 767px) {
+  .lsd-explore-section { padding: 12px 0 24px; }
+  .lsd-explore-inner { padding: 0 20px; }
+  .lsd-explore-title { font-size: 1.2rem; }
+}
+
 /* ── Listings Sell CTA ── */
 .lsd-sell-cta {
   padding: 15px 0px 48px;

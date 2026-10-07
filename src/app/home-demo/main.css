@@ -3069,12 +3069,20 @@ main .section-head .category_icon li img {
 }
 
 .hbg-link {
-  color: #373759;
+  color: #1153a6;
+  font-weight: 500;
   text-decoration: underline;
 }
 
 .hbg-link:hover {
   color: #3f3e82;
+}
+
+/* ── Explore Other Travel Options (plain text, no card) ── */
+.hbg-explore-section {
+  padding: 0 0 40px;
+  background: #fff;
+  
 }
 
 /* ── Sell CTA Card (light) ── */

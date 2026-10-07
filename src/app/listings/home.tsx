@@ -9,6 +9,7 @@ import StateFilterBar, { FilterState } from "./StateFilterBar";
 import StateListingGrid, { SeoV2, Listing, buildFeaturedOrder } from "./StateListingGrid";
 import { normalizeListing } from "./listingShared";
 import StateBrowseSection from "./StateBrowseSection";
+import ExploreOtherTravelOptions from "./ExploreOtherTravelOptions";
 import type { BrowseSectionData } from "./browseSectionShared";
 import StateContent from "./StateContent";
 import { buildApiUrl, buildListingsSlug, buildFilterBreadcrumbs, parseDemoFilters } from "./urlUtils";
@@ -737,6 +738,7 @@ export default function StateHome({
               </div>
             </div>
           </div>
+          <ExploreOtherTravelOptions state={filters.state} region={filters.region} />
         </div>
       );
     }
@@ -777,6 +779,7 @@ export default function StateHome({
             </div>
           </div>
         </div>
+        <ExploreOtherTravelOptions state={filters.state} region={filters.region} />
       </div>
     );
     // No server data at all — minimal white overlay (mobile flash prevention).
@@ -883,6 +886,7 @@ export default function StateHome({
             </div>
           </div>
         </div>
+        <ExploreOtherTravelOptions state={filters.state} region={filters.region} />
       </div>
     );
   }
@@ -948,6 +952,7 @@ export default function StateHome({
           </div>
         </div>
       </div>
+      <ExploreOtherTravelOptions state={filters.state} region={filters.region} />
     </div>
   );
 }

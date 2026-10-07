@@ -377,6 +377,21 @@ export default function ProductDetailDemo({ data, similarData }: Props) {
     detailRows.push({ label: "Location", value: [locationCity, locationState].filter(Boolean).join(", "), url: "", links });
   }
 
+  /* Explore Other Travel Options — sister-marketplace links scoped to this
+     product's own state/region, same slug pieces as the Location detail row. */
+  const exploreCityName  = locationCity ? locationCity.replace(/\b\w/g, c => c.toUpperCase()) : "";
+  const exploreStateSlug = (attributes.find(a => String(a?.label ?? "").toLowerCase() === "location")?.url?.trim())
+    || (locationState ? `${slugify(locationState)}-state` : "");
+  const exploreRegionSlug = product.region?.slug ?? (locationCity ? slugify(locationCity) : "");
+  const explorePath = exploreStateSlug
+    ? `/listings/${exploreStateSlug}/${locationCity ? `${exploreRegionSlug}-region/` : ""}`
+    : "";
+  const exploreHeading = exploreCityName
+    ? `Explore Other Travel Options in ${exploreCityName}`
+    : locationState
+      ? `Explore Other Travel Options in ${locationState}`
+      : "Explore Other Travel Options";
+
   const half2     = Math.ceil(detailRows.length / 2);
   const leftRows  = detailRows.slice(0, half2);
   const rightRows = detailRows.slice(half2);
@@ -856,6 +871,22 @@ const priceUpperIdx = !isPOA ? PRICE_STEPS.findIndex(s => s >= displayPrice) : -
           </div>
           <a href="/" className="pdd-banner__cta">FIND DEALS NOW</a>
         </div>
+
+        {/* ── Explore Other Travel Options ── */}
+        {explorePath && (
+          <section className="pdd-explore-section">
+            <h2 className="pdd-explore-title">{exploreHeading}</h2>
+            <p className="pdd-explore-body">
+              Need more space than a campervan? Browse{" "}
+              <a href={`https://www.motorhomesforsale.com.au${explorePath}`} className="pdd-explore-link" target="_blank" rel="noopener noreferrer">motorhomes for sale</a>
+              , or take a look at{" "}
+              <a href={`https://www.caravansforsale.com.au${explorePath}`} className="pdd-explore-link" target="_blank" rel="noopener noreferrer">caravans for sale</a>
+              {" "}if you prefer to tow. You can also compare{" "}
+              <a href={`https://www.campingtrailersforsale.com.au${explorePath}`} className="pdd-explore-link" target="_blank" rel="noopener noreferrer">camper trailers for sale</a>
+              {" "}for your next camping trip. You&apos;ll find these on our other marketplaces.
+            </p>
+          </section>
+        )}
 
       </div>
     </div>
