@@ -1729,6 +1729,31 @@
   text-decoration: none;
 }
 
+/* ── Sell something else (cross-marketplace links) ── */
+.sell-cross-section {
+  padding: 0px 0 40px;
+ text-align: center;
+}
+.sell-cross-title {
+  color: #000;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+.sell-cross-body {
+  color: #000;
+  font-size: 16px;
+  line-height: 1.75;
+  margin: 0 auto;
+  max-width: 720px;
+}
+.sell-cross-link {
+  color: #3f3e82;
+  font-weight: 500;
+  text-decoration: underline;
+}
+.sell-cross-link:hover { color: #3f3e82; }
+
 /* ── Bottom CTA strip ── */
 .demo-cta-strip {
   background: #ffffff;

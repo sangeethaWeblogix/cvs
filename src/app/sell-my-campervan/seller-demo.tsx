@@ -4,6 +4,7 @@
  import "@fortawesome/fontawesome-free/css/regular.min.css";
  import React, { useState } from "react";
  import { getRegionBySlug } from "../sell-my-caravan-region/regions-data";
+ import SellSomethingElse from "./SellSomethingElse";
 
  const STATE_LINKS = [
    { label: "Victoria",              img: "/images/vic_map.svg", href: "/sell-my-campervan/victoria/" },
@@ -477,7 +478,9 @@
            </a>
          </div>
        </section>
- 
+
+       <SellSomethingElse />
+
      </div>
    );
  }

@@ -4,6 +4,7 @@ import "@fortawesome/fontawesome-free/css/solid.min.css";
 import "@fortawesome/fontawesome-free/css/regular.min.css";
 import React, { useState } from "react";
 import { RegionInfo } from "./regions-data";
+import SellSomethingElse from "../sell-my-campervan/SellSomethingElse";
 
 interface RegionSellerProps {
   region: RegionInfo;
@@ -401,6 +402,8 @@ export default function RegionSeller({ region }: RegionSellerProps) {
           </p>
         </div>
       </section>
+
+      <SellSomethingElse state={stateSlug} region={region.pageSlug} />
 
     </div>
   );

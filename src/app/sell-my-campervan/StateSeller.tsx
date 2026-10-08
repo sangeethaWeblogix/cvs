@@ -5,6 +5,7 @@ import "@fortawesome/fontawesome-free/css/regular.min.css";
 import React, { useState } from "react";
 import { StateData } from "../sell-my-caravan-region/states-data";
 import { getRegionsByState } from "../sell-my-caravan-region/regions-data";
+import SellSomethingElse from "./SellSomethingElse";
 
 interface StateSellerProps {
   state: StateData;
@@ -431,6 +432,8 @@ export default function StateSeller({ state }: StateSellerProps) {
           </p>
         </div>
       </section>
+
+      <SellSomethingElse state={state.slug} />
 
     </div>
   );
