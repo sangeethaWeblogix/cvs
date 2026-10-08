@@ -88,121 +88,37 @@ const SELL_DATA = [
   },
 ];
 
-export default function FooterNav() {
+export default function FooterSellAccordion() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div>
-      {/* Nav row — panel is NOT inside this ul so it never breaks the flex row */}
-      <ul className="footer_menu footer_xs">
-        <li>
-          <a href="/listings/">For Sale</a>
-        </li>
-        <li>
-          <button
-            className="sell-footer-btn"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            aria-controls="sell-links-panel"
-          >
-            Sell
-            <svg
-              className={`sell-chevron${open ? " sell-chevron--open" : ""}`}
-              xmlns="http://www.w3.org/2000/svg"
-              width="10"
-              height="10"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </button>
-        </li>
-        <li>
-          <a href="/blog/">Blog</a>
-        </li>
-        <li>
-          <a href="/terms-conditions/" rel="nofollow">Terms &amp; Conditions</a>
-        </li>
-        <li>
-          <a href="/privacy-policy/" rel="nofollow">Privacy Policy</a>
-        </li>
-        <li>
-          <a href="/privacy-collection-statement/" rel="nofollow">
-            Privacy Collection Statement
-          </a>
-        </li>
-        <li>
-          <a href="/buyer-safety-guide/" rel="nofollow">Buy Safely</a>
-        </li>
-        <li>
-          <a href="/cookie-policy/" rel="nofollow">Cookie Policy</a>
-        </li>
-        <li>
-          <a href="/about-us/">About</a>
-        </li>
-        <li>
-          <a href="/contact/">Contact Us</a>
-        </li>
-      </ul>
+    <div className="foot-sell-accordion" id="foot-sell-accordion">
+      <button
+        id="foot-sell-accordion-toggle"
+        className="foot-sell-accordion__toggle"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls="foot-sell-accordion-panel"
+      >
+        <span>
+          <span className="foot-sell-accordion__title">Sell My Campervan by Location</span>
+          <span className="foot-sell-accordion__sub">Browse selling pages by state, city and region</span>
+        </span>
+        <svg
+          className={`foot-sell-accordion__icon${open ? " foot-sell-accordion__icon--open" : ""}`}
+          xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+        >
+          <line x1="12" y1="5" x2="12" y2="19" />
+          <line x1="5" y1="12" x2="19" y2="12" />
+        </svg>
+      </button>
 
-      {/* Panel sits outside the <ul> — opens below the nav row without pushing any links */}
       {open && (
-        <div className="sell-panel" id="sell-links-panel">
-          {/* Header */}
-          <div className="sell-panel__header">
-            <a href="/sell-my-campervan/" className="sell-panel__main-link">
-              Sell My Campervan
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                style={{ marginLeft: 5, verticalAlign: "middle" }}
-              >
-                <line x1="7" y1="17" x2="17" y2="7" />
-                <polyline points="7 7 17 7 17 17" />
-              </svg>
-            </a>
-            <button
-              className="sell-panel__close"
-              onClick={() => setOpen(false)}
-              aria-label="Close sell links"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-          </div>
-
-          {/* State + region grid */}
+        <div className="sell-panel" id="foot-sell-accordion-panel">
           <div className="sell-panel__grid">
             {SELL_DATA.map((s) => (
               <div key={s.stateSlug} className="sell-panel__col">
-                <a
-                  href={`/sell-my-campervan/${s.stateSlug}/`}
-                  className="sell-panel__state-title"
-                >
+                <a href={`/sell-my-campervan/${s.stateSlug}/`} className="sell-panel__state-title">
                   Sell My Campervan in {s.state}
                 </a>
                 <ul className="sell-panel__region-list">
