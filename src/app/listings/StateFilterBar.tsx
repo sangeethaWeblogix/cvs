@@ -1238,7 +1238,8 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
                 </div>
               </div>
 
-              {/* Keyword */}
+              {/* Keyword — temporarily hidden, re-enable by uncommenting */}
+              {/*
               <div className="filter-item">
                 <h4>Search by Keyword</h4>
                 <div style={{ position:"relative" }}>
@@ -1286,6 +1287,7 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
                   )}
                 </div>
               </div>
+              */}
 
             </div>
             <div className="filter-footer">
