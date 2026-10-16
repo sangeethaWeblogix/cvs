@@ -2,7 +2,6 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
 import StateHero from "./StateHero";
@@ -13,7 +12,7 @@ import StateBrowseSection from "./StateBrowseSection";
 import ExploreOtherTravelOptions from "./ExploreOtherTravelOptions";
 import type { BrowseSectionData } from "./browseSectionShared";
 import StateContent from "./StateContent";
-import { buildApiUrl, buildListingsSlug, buildFilterBreadcrumbs, parseDemoFilters } from "./urlUtils";
+import { buildApiUrl, buildListingsSlug, buildFilterBreadcrumbs } from "./urlUtils";
 import type { InitialParamsCount } from "./fetchInitialParamsCount";
 // import { useBanners } from "@/components/BannerHandler";
 // import { useBannerTracking } from "@/hooks/useBannerTracking";
@@ -79,7 +78,6 @@ export default function StateHome({
   initialNewSeo,
   initialUsedSeo,
 }: Props) {
-  const router = useRouter();
   const [filters, setFilters] = useState<FilterState>(initialFilters);
   const [page, setPage] = useState(1);
   const [maxPages, setMaxPages] = useState(initialPool?.maxPages ?? 1);
@@ -306,30 +304,18 @@ export default function StateHome({
   }, []);
 
   useEffect(() => {
+    // Browser back/forward landing back on this page after a real Next.js
+    // navigation away (e.g. to a product page) can restore a stale
+    // pre-filter render even though the address bar shows the right
+    // filtered URL — Next's router cache and this page's own manually
+    // pushState'd filter URLs (see pushFiltersToUrl) don't always agree on
+    // what was "current". A hard reload is the only fully reliable fix:
+    // it throws away all client state and re-renders fresh from the
+    // server for whatever URL the browser has landed on. Filter clicks
+    // never fire this (pushState doesn't trigger popstate), so normal
+    // filtering stays instant — only an actual Back/Forward press reloads.
     const handlePopState = () => {
-      const cid = new URLSearchParams(window.location.search).get("clickid");
-      if (cid) {
-        const saved = readPage(cid);
-        setClickid(cid);
-        setPage(saved && saved > 0 ? saved : 1);
-      } else {
-        setClickid(null);
-        setPage(1);
-      }
-      setMaxPages(1);
-
-      // Browser back/forward changes the URL without going through
-      // handleFilterChange/pushFiltersToUrl, so `filters` state was never
-      // re-synced — the page kept showing whatever filters were active
-      // right before the user navigated away (e.g. to a product page),
-      // even though the address bar now shows a different filter combo.
-      const slugParts = window.location.pathname
-        .replace(/^\/listings\/?/, "")
-        .split("/")
-        .filter(Boolean);
-      const query: Record<string, string> = {};
-      new URLSearchParams(window.location.search).forEach((v, k) => { query[k] = v; });
-      setFilters(parseDemoFilters(slugParts, query));
+      window.location.reload();
     };
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
@@ -578,12 +564,12 @@ export default function StateHome({
   }, [filters, seed, page, isIndexed]);
 
   const pushFiltersToUrl = (f: FilterState) => {
-    // router.push (not raw history.pushState) so Next's App Router tracks this
-    // URL change itself — otherwise its client-side router cache can get out
-    // of sync with the real history stack: navigating to a product page and
-    // then hitting Back would restore a stale pre-filter render even though
-    // the address bar correctly showed the filtered URL.
-    router.push(buildListingsSlug(f), { scroll: false });
+    // Raw history.pushState, not router.push — router.push also kicks off
+    // Next's own server-side navigation fetch for the new URL, racing with
+    // this page's own client-side pool fetch and visibly double-loading the
+    // grid. The back-button desync this used to cause (see handlePopState)
+    // is fixed there instead, by hard-reloading just that one return trip.
+    window.history.pushState({}, "", buildListingsSlug(f));
   };
 
   const handleFilterChange = (f: FilterState) => {
