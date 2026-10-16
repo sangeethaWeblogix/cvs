@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
 import StateHero from "./StateHero";
@@ -13,7 +14,6 @@ import ExploreOtherTravelOptions from "./ExploreOtherTravelOptions";
 import type { BrowseSectionData } from "./browseSectionShared";
 import StateContent from "./StateContent";
 import { buildApiUrl, buildListingsSlug, buildFilterBreadcrumbs, parseDemoFilters } from "./urlUtils";
-import { seededShuffle } from "./seededShuffle";
 import type { InitialParamsCount } from "./fetchInitialParamsCount";
 // import { useBanners } from "@/components/BannerHandler";
 // import { useBannerTracking } from "@/hooks/useBannerTracking";
@@ -79,6 +79,7 @@ export default function StateHome({
   initialNewSeo,
   initialUsedSeo,
 }: Props) {
+  const router = useRouter();
   const [filters, setFilters] = useState<FilterState>(initialFilters);
   const [page, setPage] = useState(1);
   const [maxPages, setMaxPages] = useState(initialPool?.maxPages ?? 1);
@@ -226,21 +227,36 @@ export default function StateHome({
     // Seed priority (highest → lowest):
     //   1. window.__SHUFFLE_SEED__  — injected by Cloudflare Worker into pre-rendered HTML
     //   2. ?shuffle_seed=N URL param — used by generate-priority-pages.js to produce variants
-    //   3. random — fresh seed on every page mount so non-indexed (live API) pages
-    //      show different products on each refresh. sessionStorage is intentionally
-    //      NOT used here: persisting the seed across reloads caused the same variant
-    //      slot to be hit every time, making products appear frozen.
+    //   3. a seed saved for this exact URL, but ONLY on a browser back/forward
+    //      return — so clicking into a product then hitting Back shows the same
+    //      product order instead of a freshly-reshuffled one.
+    //   4. random — fresh seed on every other visit so non-indexed (live API)
+    //      pages show different products on each refresh. Reusing the saved
+    //      seed for every reload (not just back/forward) was tried before and
+    //      reverted: it made products appear frozen on a normal revisit.
     try {
       const workerSeed = (window as unknown as Record<string, unknown>)["__SHUFFLE_SEED__"];
       const urlSeed = new URLSearchParams(window.location.search).get("shuffle_seed");
+      const seedKey = `lsd_seed:${window.location.pathname}`;
+      const navEntry = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
+      const isBackForward = navEntry?.type === "back_forward";
+
+      let resolvedSeed: number | null = null;
       if (typeof workerSeed === "number" && workerSeed >= 1) {
-        setSeed(workerSeed);
+        resolvedSeed = workerSeed;
       } else if (urlSeed && /^\d+$/.test(urlSeed)) {
         const n = parseInt(urlSeed, 10);
-        if (n >= 1) setSeed(n);
-      } else {
-        setSeed(Math.floor(Math.random() * SEED_MAX) + 1);
+        if (n >= 1) resolvedSeed = n;
+      } else if (isBackForward) {
+        const saved = sessionStorage.getItem(seedKey);
+        if (saved && /^\d+$/.test(saved)) resolvedSeed = parseInt(saved, 10);
       }
+
+      if (resolvedSeed === null) {
+        resolvedSeed = Math.floor(Math.random() * SEED_MAX) + 1;
+      }
+      setSeed(resolvedSeed);
+      try { sessionStorage.setItem(seedKey, String(resolvedSeed)); } catch {}
     } catch {
       setSeed(Math.floor(Math.random() * SEED_MAX) + 1);
     }
@@ -254,8 +270,8 @@ export default function StateHome({
     // Note: this used to also force a live client re-fetch on plain SSR/Vercel
     // responses (no KV preload) to avoid "frozen" products under ISR caching.
     // That's no longer needed — the listings page is force-dynamic now and
-    // fetchInitialPool applies its own fresh per-request shuffle server-side
-    // (see displaySeed in fetchInitialPool.ts), so the SSR pool is never stale.
+    // fetchInitialPool hits the live API fresh on every request, so the SSR
+    // pool is never stale.
 
     try {
       const win = window as unknown as Record<string, unknown>;
@@ -497,19 +513,16 @@ export default function StateHome({
 
         if (isIndexed && !hasFlatProducts) {
           // Indexed pages show Featured/New/Used as separate grids — the pool
-          // endpoint already segments products into these buckets.
-          // seededShuffle reorders each bucket using the client's random seed so
-          // different products appear on each refresh even when the pool-listings
-          // KV cache serves the same JSON for every seed value.
-          const featuredItems = buildFeaturedOrder(seededShuffle(featuredRaw, seed), premiumsRaw, exclusivesRaw);
-          const newItems = seededShuffle(newRaw, seed + 1000);
-          const usedItems = seededShuffle(usedRaw, seed + 2000);
+          // endpoint already segments and orders products into these buckets
+          // (the `seed` param sent with the request is the backend's own
+          // ordering seed), so they're used as returned, no client reshuffle.
+          const featuredItems = buildFeaturedOrder(featuredRaw, premiumsRaw, exclusivesRaw);
 
-          setPool({ featured: featuredItems, new: newItems, used: usedItems });
+          setPool({ featured: featuredItems, new: newRaw, used: usedRaw });
         } else {
           // Non-indexed pages get one combined grid instead of a split.
           const combined = buildFeaturedOrder(
-            seededShuffle([...featuredRaw, ...newRaw, ...usedRaw], seed),
+            [...featuredRaw, ...newRaw, ...usedRaw],
             premiumsRaw,
             exclusivesRaw
           );
@@ -565,7 +578,12 @@ export default function StateHome({
   }, [filters, seed, page, isIndexed]);
 
   const pushFiltersToUrl = (f: FilterState) => {
-    window.history.pushState({}, "", buildListingsSlug(f));
+    // router.push (not raw history.pushState) so Next's App Router tracks this
+    // URL change itself — otherwise its client-side router cache can get out
+    // of sync with the real history stack: navigating to a product page and
+    // then hitting Back would restore a stale pre-filter render even though
+    // the address bar correctly showed the filtered URL.
+    router.push(buildListingsSlug(f), { scroll: false });
   };
 
   const handleFilterChange = (f: FilterState) => {

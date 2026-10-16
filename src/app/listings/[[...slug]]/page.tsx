@@ -9,13 +9,11 @@ import { fetchInitialPool, fetchConditionSeo } from "../fetchInitialPool";
 import { fetchInitialParamsCount } from "../fetchInitialParamsCount";
 import "../../globals.css";
 
-// Rendered fresh on every request (no ISR cache) — the shuffled product order
-// and the make/state counts must be live per visit, and none of it should
-// require a client-visible follow-up fetch (see fetchInitialPool's displaySeed
-// and fetchInitialParamsCount for how each piece is produced server-side).
+// Rendered fresh on every request (no ISR cache) — the backend-ordered
+// product pool and the make/state counts must be live per visit, and none
+// of it should require a client-visible follow-up fetch (see
+// fetchInitialParamsCount for how that piece is produced server-side).
 export const dynamic = "force-dynamic";
-
-const SEED_MAX = 15;
 
 // Cache the indexed-URL set for the lifetime of this server instance
 // (same approach as /api/d3/route.ts — read once, never re-read).
@@ -73,18 +71,14 @@ export default async function LocationStateDemoPage({
   // shuffle_seed is injected by the HTML cache warmer (e.g. ?shuffle_seed=3) so
   // each KV HTML variant gets a genuinely different product pool from WordPress.
   // 0 for a normal live request — the API call itself goes through the
-  // CF-cached path; freshness for those requests comes from displaySeed below.
+  // CF-cached path, which the backend's own `seed` param orders for us.
   const shuffleSeed = typeof query.shuffle_seed === "string"
     ? (parseInt(query.shuffle_seed, 10) || 0)
     : 0;
 
-  // Local-only re-shuffle seed, fresh per request — reproduces the "different
-  // order every visit" behavior that used to require a client-side re-fetch.
-  const displaySeed = Math.floor(Math.random() * SEED_MAX) + 1;
-
   const [browseData, initialPool, initialParamsCount, newSeo, usedSeo] = await Promise.all([
     fetchBrowseSectionData(initialFilters),
-    fetchInitialPool(initialFilters, isIndexed, shuffleSeed, displaySeed),
+    fetchInitialPool(initialFilters, isIndexed, shuffleSeed),
     fetchInitialParamsCount(),
     isIndexed ? fetchConditionSeo(initialFilters, "New", shuffleSeed) : Promise.resolve(null),
     isIndexed ? fetchConditionSeo(initialFilters, "Used", shuffleSeed) : Promise.resolve(null),
