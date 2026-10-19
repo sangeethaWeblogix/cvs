@@ -448,6 +448,12 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
     : states
   ).slice().sort((a, b) => a.name.localeCompare(b.name));
 
+  // Moves the applied make/model to the top of its list (only when not searching).
+  const pinToTop = <T extends { slug: string }>(list: T[], slug?: string): T[] => {
+    const i = slug ? list.findIndex(x => x.slug === slug) : -1;
+    return i > 0 ? [list[i], ...list.slice(0, i), ...list.slice(i + 1)] : list;
+  };
+
   const makeSource  = makeCounts.length > 0 ? makeCounts : makes.map(m => ({ name: m.name, slug: m.slug, count: 0 }));
   const filteredMakes = makeSearch
     ? (() => {
@@ -460,7 +466,7 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
             return rank(an) - rank(bn);
           });
       })()
-    : makeSource.slice().sort((a, b) => a.name.localeCompare(b.name));
+    : pinToTop(makeSource.slice().sort((a, b) => a.name.localeCompare(b.name)), currentFilters.make);
   const modelSource = modelCounts;
   const filteredModels = modelSearch
     ? (() => {
@@ -473,7 +479,7 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
             return rank(an) - rank(bn);
           });
       })()
-    : modelSource.slice().sort((a, b) => a.name.localeCompare(b.name));
+    : pinToTop(modelSource.slice().sort((a, b) => a.name.localeCompare(b.name)), tempMake === currentFilters.make ? currentFilters.model : undefined);
 
   const filteredVehicleMakes = engineMakeSearch
     ? (() => {
@@ -542,11 +548,12 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
   const handleSleepClear  = () => { setTempSleepFrom(null); setTempSleepTo(null); updateFiltersAndURL({ from_sleep: undefined, to_sleep: undefined }); setOpenModal(null); };
 
   /* ── Make ── */
-  const handleMakeOpen = () => {
+  // Chips open straight into the model list of the applied make; the Make button opens the make list.
+  const handleMakeOpen = (view: "makes" | "models" = "makes") => {
     setTempMake(currentFilters.make ?? null);
     setTempModel(currentFilters.model ?? null);
     setTempEngineMake(currentFilters.engine_make ?? null);
-    setMakeSearch(""); setModelSearch(""); setMakeSubView("makes"); setOpenModal("make");
+    setMakeSearch(""); setModelSearch(""); setMakeSubView(view === "models" && currentFilters.make ? "models" : "makes"); setOpenModal("make");
   };
   const handleMakeSearch = () => {
     const isCustomBuilt = tempMake === CUSTOM_BUILT_SLUG;
@@ -743,7 +750,7 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
                     {currentFilters.condition && <span className="active_filter"><i className="bi bi-circle-fill" /></span>}
                   </button>
 
-                  <button className={`tag${currentFilters.make ? " active" : ""}`} onClick={handleMakeOpen}>
+                  <button className={`tag${currentFilters.make ? " active" : ""}`} onClick={() => handleMakeOpen()}>
                     Campervan Make
                     {currentFilters.make && <span className="active_filter"><i className="bi bi-circle-fill" /></span>}
                   </button>
@@ -785,7 +792,7 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
           <div className="active-chips-row">
             {currentFilters.make && (
               <span className={`active-chip${removingChip === "make" ? " chip-removing" : ""}`}>
-                <span className="chip-label" onClick={handleMakeOpen}>
+                <span className="chip-label" onClick={() => handleMakeOpen("models")}>
                   {toTitleCase(
                     makeCounts.find(m => m.slug === currentFilters.make)?.name ??
                       makes.find(m => m.slug === currentFilters.make)?.name ??
@@ -797,7 +804,7 @@ export default function StateFilterBar({ currentFilters, onFilterChange, onClear
             )}
             {currentFilters.model && (
               <span className={`active-chip${removingChip === "model" ? " chip-removing" : ""}`}>
-                <span className="chip-label" onClick={handleMakeOpen}>
+                <span className="chip-label" onClick={() => handleMakeOpen("models")}>
                   {toTitleCase(
                     lastModelName ??
                       modelCounts.find(m => m.slug === currentFilters.model)?.name ??
