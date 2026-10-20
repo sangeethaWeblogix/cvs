@@ -169,7 +169,7 @@
              {[
                { img: "/images/chat2.png", title: "Direct Buyer Contact", desc: "Connect directly with genuine buyers. No middleman." },
                { img: "/images/calendar.png", title: "Live Until Sold", desc: "Your listing stays online and visible until your campervan is sold." },
-               { img: "/images/caravan.png", title: "Campervan-Only Marketplace", desc: "Reach a targeted audience actively looking to buy campervans." },
+               { img: "/images/campervan.png", title: "Campervan-Only Marketplace", desc: "Reach a targeted audience actively looking to buy campervans." },
                { img: "/images/dollar.png", title: "Keep 100% of Your Sale", desc: "Pay only $49 Inc GST per listing. No commissions or hidden costs." },
              ].map((item, i) => (
                <div className="demo-feature-card" key={i}>
@@ -221,7 +221,7 @@
              {CITY_LINKS.map((c) => (
                <div key={c.label} className="demo-city-item">
                  <span className="demo-city-icon">
-                   <img src="/images/caravan.png" alt="" />
+                   <img src="/images/campervan.png" alt="" />
                  </span>
                        <h3 className="demo-city-label">
 
@@ -243,8 +243,8 @@
            <div className="demo-reach-row">
            {/* Device image */}
            <div className="demo-reach-device">
-             <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid d-none d-lg-block" alt="Campervan For Sale Desktop" />
-             <img src="/images/your-caravan-mobile-2.jpg" className="img-fluid d-block d-lg-none" alt="Campervan For Sale Mobile" />
+             <img src="/images/your-campervan-desktop-seller-2.jpg" className="img-fluid d-none d-lg-block" alt="Campervan For Sale Desktop" />
+             <img src="/images/your-campervan-mobile-2.jpg" className="img-fluid d-block d-lg-none" alt="Campervan For Sale Mobile" />
            </div>
  
            {/* Pricing + FAQ card */}
@@ -407,7 +407,7 @@
          <div className="container">
            <div className="row align-items-center g-4">
              <div className="col-md-6">
-               <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid demo-why-img" alt="Campervan buyers" />
+               <img src="/images/your-campervan-desktop-seller-2.jpg" className="img-fluid demo-why-img" alt="Campervan buyers" />
              </div>
              <div className="col-md-6">
                <h2>Why Thousands of Campervan Buyers Visit our website Every Month</h2>

@@ -225,12 +225,12 @@ const DealerLandingPage = () => {
           <div className="row">
             <div className="col-lg-7 images-box">
               <img
-                src="/images/your-caravan-desktop-seller-2.jpg"
+                src="/images/your-campervan-desktop-seller-2.jpg"
                 className="img-fluid d-none d-lg-block desktop-img"
                 alt="Campervan For Sale Desktop"
               />
               <img
-                src="/images/your-caravan-mobile-2.jpg"
+                src="/images/your-campervan-mobile-2.jpg"
                 className="img-fluid d-block d-lg-none mobile-img"
                 alt="Campervan For Sale Mobile"
               />

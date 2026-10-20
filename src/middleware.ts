@@ -250,7 +250,7 @@
              filters.acustom_fromyears || filters.acustom_toyears
            );
            if (hasOtherFilter) {
-             const rewriteUrl = new URL(`/api/listings-410/${slugParts.join('/')}`, request.url);
+             const rewriteUrl = new URL(`/api/listings-410/${slugParts.join('/')}/`, request.url);
              url.searchParams.forEach((v, k) => rewriteUrl.searchParams.set(k, v));
              return NextResponse.rewrite(rewriteUrl);
            }
@@ -423,7 +423,7 @@
              // Don't 410 from middleware — ISR/page component handles empty state
              robotsHeader = "noindex, nofollow";
            } else {
-             const rewriteUrl = new URL(`/api/listings-410/${slugParts.join('/')}${url.search}`, request.url);
+             const rewriteUrl = new URL(`/api/listings-410/${slugParts.join('/')}/${url.search}`, request.url);
              return NextResponse.rewrite(rewriteUrl);
            }
          } else {
@@ -458,7 +458,7 @@
              robotsHeader = "noindex, nofollow";
              // Don't render410 — let ISR serve cached HTML
            } else {
-             const rewriteUrl410 = new URL(`/api/listings-410/${slugParts.join('/')}${url.search}`, request.url);
+             const rewriteUrl410 = new URL(`/api/listings-410/${slugParts.join('/')}/${url.search}`, request.url);
              return NextResponse.rewrite(rewriteUrl410);
            }
          } catch {
