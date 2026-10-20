@@ -158,16 +158,6 @@ export default function ContactSection() {
                         Exclusive Offers From Select Quality Campervan
                         Manufacturers
                       </h4>
-                      {/* <Image
-                        className="hidden-xs"
-                        src="/images/Blog_bottom_banner.webp"
-                        alt=""
-                        unoptimized
-                        width={0}
-                        height={0}
-                        sizes="100vw"
-                        style={{ width: "auto", height: "auto" }}
-                      /> */}
                     </div>
                     
                     <p className="required_txt">

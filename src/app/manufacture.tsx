@@ -12,7 +12,6 @@ import '../app/home/main.css'
 
 const data = [
   {
-    img: "/images/australian-offroad.png",
     alt: "Australian Off Road Logo",
     title: "Australian Off Road",
     desc: "Explore AOR campervans in Australia with our detailed review, covering top models, features and pricing to help you plan your next rugged adventure.",
@@ -21,7 +20,6 @@ const data = [
     link: "/aor-caravans-australia-reviews-prices-models/",
   },
   {
-    img: "/images/vibe_caravans.png",
     alt: "Vibe Campervans Logo",
     title: "Vibe Campervans",
     desc: "Read our VIBE Campervans Australia review covering top models, off-grid features and pricing from $92,990 for adventure seekers and travellers.",
@@ -30,7 +28,6 @@ const data = [
     link: "/vibe-caravans-australia-review-prices-models/",
   },
   {
-    img: "/images/Ezytrail.png",
     alt: "Ezytrail Logo",
     title: "Ezytrail Campervans",
     desc: "Read our Ezytrail Campervans review from Aussie owners. Discover towing performance, comfort and durability to decide if an Ezytrail suits you.",
@@ -39,7 +36,6 @@ const data = [
     link: "/ezytrail-caravans-reviews-2025/",
   },
   {
-    img: "/images/Avan.png",
     alt: "Avan Logo",
     title: "Avan Campervans",
     desc: "Explore our Avan Campervans review with 2025 models, key features and prices to help you choose the right campervan for your travels in Australia.",
@@ -57,7 +53,6 @@ const data = [
     link: "/blue-sky-caravans-review-australia/",
   },
   {
-    img: "/images/Crusader-Caravans.png",
     alt: "Crusader Campervans Logo",
     title: "Crusader Campervans",
     desc: "Read our Crusader Campervans review covering key features, model options and pricing to help you choose the perfect campervan for your adventures.",
@@ -66,7 +61,6 @@ const data = [
     link: "/crusader-caravans-review-features-compare-prices/",
   },
   {
-    img: "/images/JB-caravans.png",
     alt: "JB Campervans Logo",
     title: "JB Campervans",
     desc: "Explore our JB Campervans review with 2025 models, prices and features. From off-road touring to luxury travel, find the perfect campervan for you.",
@@ -84,7 +78,6 @@ const data = [
     link: "/mdc-caravans-australia-reviews-features/",
   },
   {
-    img: "/images/Ausflex-caravans.png",
     alt: "Ausflex Campervans Logo",
     title: "Ausflex Campervans",
     desc: "Read our Ausflex Campervans review of Australian-made models since 1972. Explore pricing, build quality and off-road capability for travellers.",
@@ -93,7 +86,6 @@ const data = [
     link: "/ausflex-caravans-australia-review-price/",
   },
   {
-    img: "/images/Latitude.png",
     alt: "Latitude RV Campervans Logo",
     title: "Latitude RV Campervans",
     desc: "Explore our Latitude RV campervans review, featuring rugged builds, luxury touches, pricing and comparisons to help every Australian adventurer.",
@@ -102,7 +94,6 @@ const data = [
     link: "/latitude-rv-caravans-models-reviews-prices-features/",
   },
   {
-    img: "/images/Adria.png",
     alt: "Adria Campervans Logo",
     title: "Adria Campervans",
     desc: "Read our Adria Campervans review comparing models, features and pricing to show why Adria remains a trusted choice for Australian travellers.",
@@ -111,7 +102,6 @@ const data = [
     link: "/adria-caravans-review-australia/",
   },
   {
-    img: "/images/Fantasy-Caravans.png",
     alt: "Fantasy Campervans Logo",
     title: "Fantasy Campervans",
     desc: "Explore our Fantasy Campervans review covering Australian-made family models, build quality, off-road features and holiday-ready durability.",
@@ -120,7 +110,6 @@ const data = [
     link: "/fantasy-caravans-review-models-prices/",
   },
   {
-    img: "/images/Red-Centre-Caravans.png",
     alt: "Red Centre Campervans Logo",
     title: "Red Centre Campervans",
     desc: "Read our Red Centre Campervans review, exploring models, features and Australian-built quality to help you choose your next adventure van.",
@@ -129,7 +118,6 @@ const data = [
     link: "/red-centre-caravans-review-australia/",
   },
   {
-    img: "/images/Jayco.png",
     alt: "Jayco Campervans Logo",
     title: "Jayco Campervans",
     desc: "Read our Red Centre Campervans review, exploring models, features and Australian-built quality to help you choose your next adventure van.",
@@ -138,7 +126,6 @@ const data = [
     link: "/jayco-journey-outback-review/",
   },
   {
-    img: "/images/urban-caravans.png",
     alt: "Urban Campervans Logo",
     title: "Urban Campervans",
     desc: "Discover our Urban Campervans review with model comparisons, features and pricing to help you choose a durable off-road-ready campervan.",
@@ -147,7 +134,6 @@ const data = [
     link: "/Urban-caravans-australia-review-prices-models/",
   },
   {
-    img: "/images/Vision_Logo.png",
     alt: "Vision RV Campervans Logo",
     title: "Vision RV Campervans",
     desc: "Explore our Vision RV Campervans review, comparing models, key features and off-road performance to help you choose the ideal tough campervan.",
@@ -156,7 +142,6 @@ const data = [
     link: "/vision-rv-caravans-review-australia/",
   },
   {
-    img: "/images/Trakmaster.png",
     alt: "Trakmaster Logo",
     title: "Trakmaster",
     desc: "Read our Trakmaster Pilbara Extreme review, exploring off-road strength, features and why this campervan is built for serious adventure.",
@@ -165,7 +150,6 @@ const data = [
     link: "/trakmaster-pilbara-extreme-review/",
   },
   {
-    img: "/images/Austrack-Campers.png",
     alt: "Austrack Campers Logo",
     title: "Austrack Campers",
     desc: "Explore our Austrack Gibb 14 review, covering key features, performance and build quality to help you decide if it suits your travel needs.",
