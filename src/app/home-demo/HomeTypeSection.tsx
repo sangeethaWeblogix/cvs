@@ -53,16 +53,17 @@ export default function HomeTypeSection({ typeCounts }: Props) {
 
         <div className="htype-grid">
           {TYPES.map((t) => (
-            <a key={t.slug} href={`/listings/${t.slug}/`} className="htype-card">
+            // Not a link — the backend has no category filter (every
+            // /listings/{x}-category/ URL 410s), so these are display-only.
+            <div key={t.slug} className="htype-card">
               <h3 className="htype-card__name">
                 {t.label.replace(" for Sale", "")}<br />for Sale
               </h3>
               <p className="htype-card__desc">{t.desc}</p>
               <span className="htype-card__count">
-                {(typeCounts?.[t.category] ?? 0).toLocaleString("en-US")} listings{" "}
-                <i className="bi bi-chevron-right" />
+                {(typeCounts?.[t.category] ?? 0).toLocaleString("en-US")} listings
               </span>
-            </a>
+            </div>
           ))}
         </div>
       </div>

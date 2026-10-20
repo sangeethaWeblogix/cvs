@@ -283,10 +283,12 @@ export default function BlogDetailsPage({
     .filter(Boolean)
     .map(c => ({
       label: c.replace(/-/g, " ").replace(/\b\w/g, (ch: string) => ch.toUpperCase()),
-      link: `/listings/${c.toLowerCase()}-category/`,
     }));
   const catLabel = cats[0]?.label ?? "";
-  const catLink  = cats[0]?.link ?? "/listings/";
+  // Always the plain listings base — the backend has no category filter
+  // (every /listings/{x}-category/ URL 410s), so catLabel is display text
+  // only here, never part of the link itself.
+  const catLink  = "/listings/";
 
   const blogContentRef = useRef<HTMLDivElement | null>(null);
 

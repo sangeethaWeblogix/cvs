@@ -323,7 +323,10 @@ export default function ProductDetailDemo({ data, similarData }: Props) {
     const L = label.toLowerCase();
     if (L === "year" || L === "years") { const n = toInt(v); return n ? `/listings/year-from-${n}-caravans-range/` : ""; }
     if (apiUrl) return linkFromApiUrl(apiUrl, v).href;
-    if (L === "type" || L === "category") return v ? `/listings/${slugify(v.replace(/\s*caravans?\s*/gi, " ").trim())}-category/` : "";
+    // "Type"/"Category" intentionally has no link — the backend has no
+    // category filter at all (confirmed live: category/type/body_type params
+    // are silently ignored, params-count group_by=category 500s), so every
+    // /listings/{x}-category/ URL 410s. Shown as plain text instead.
     if (L === "make") return v ? `/listings/${slugify(v)}/` : "";
     if (L.trim() === "vehicle make") return v ? `/listings/${slugify(v)}-vehicle-make/` : "";
     if (L === "model") { const mk = pickFull("Make"); const mkSlug = mk.url?.trim().replace(/^\/+|\/+$/g, "") || slugify(mk.value); return v ? `/listings/${mkSlug}/${slugify(v)}/` : ""; }
@@ -411,7 +414,6 @@ const priceUpperIdx = !isPOA ? PRICE_STEPS.findIndex(s => s >= displayPrice) : -
     make ? { label: make, href: `/listings/${slugify(makeLabel)}/` } : null,
     state ? { label: `Campervans for Sale in ${state}`, href: `/listings/${slugify(state)}-state/` } : null,
     locationCity ? { label: `Campervans for Sale in ${locationCity}`, href: `/listings/${slugify(state)}-state/${slugify(locationCity)}-region/` } : null,
-    shortCategory ? { label: `${shortCategory} Campervans for Sale`, href: `/listings/${slugify(shortCategory)}-category/` } : null,
     priceHi ? { label: `Campervans Under $${priceHi.toLocaleString("en-US")}`, href: `/listings/under-${priceHi}/` } : null,
     (priceHi && priceLo) ? { label: `Campervans Between $${priceLo.toLocaleString("en-US")} to $${priceHi.toLocaleString("en-US")}`, href: `/listings/between-${priceLo}-${priceHi}/` } : null,
     { label: `All Campervans for Sale`, href: `/listings/` },
@@ -459,7 +461,6 @@ const priceUpperIdx = !isPOA ? PRICE_STEPS.findIndex(s => s >= displayPrice) : -
     { label: "Campervans for Sale", href: "/listings/" },
     ...(state ? [{ label: state, href: `/listings/${slugify(state)}-state/` }] : []),
     ...(product.region?.value ? [{ label: product.region.value.replace(/-/g, " "), href: `/listings/${slugify(state)}-state/${product.region.slug ?? slugify(product.region.value)}-region/` }] : []),
-    ...(categoryNames[0] ? [{ label: categoryNames[0], href: `/listings/${slugify(categoryNames[0].replace(/\s*caravan\s*/gi, " ").trim())}-category/` }] : []),
   ];
 
   return (
