@@ -283,6 +283,10 @@ export default function BlogDetailsPage({
     .filter(Boolean)
     .map(c => ({
       label: c.replace(/-/g, " ").replace(/\b\w/g, (ch: string) => ch.toUpperCase()),
+      // Always the plain listings base — the backend has no category filter
+      // (every /listings/{x}-category/ URL 410s), so label is display text
+      // only, never part of the link itself.
+      link: "/listings/",
     }));
   const catLabel = cats[0]?.label ?? "";
   // Always the plain listings base — the backend has no category filter
