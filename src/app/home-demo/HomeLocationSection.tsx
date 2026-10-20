@@ -1,27 +1,29 @@
  "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import { obfuscateUrl, parseObfuscatedResponse } from "@/lib/obfuscation";
 
 const MAJOR_CITIES = [
-  { name: "Adelaide",   href: "/listings/south-australia-state/adelaide-region/",    imgSrc: "/images/Adelaide.png"   },
-  { name: "Brisbane",   href: "/listings/queensland-state/brisbane-region/",         imgSrc: "/images/Brisbane.png"   },
-  { name: "Gold Coast", href: "/listings/queensland-state/gold-coast-region/",       imgSrc: "/images/Gold-Coast.png" },
-  { name: "Melbourne",  href: "/listings/victoria-state/melbourne-region/",          imgSrc: "/images/Melbourne.png"  },
-  { name: "Perth",      href: "/listings/western-australia-state/perth-region/",     imgSrc: "/images/Perth.png"      },
-  { name: "Sydney",     href: "/listings/new-south-wales-state/sydney-region/",      imgSrc: "/images/Sydney.png"     },
+  { name: "Adelaide",   state: "south-australia",     region: "adelaide",     href: "/listings/south-australia-state/adelaide-region/",    imgSrc: "/images/Adelaide.png"   },
+  { name: "Brisbane",   state: "queensland",          region: "brisbane",     href: "/listings/queensland-state/brisbane-region/",         imgSrc: "/images/Brisbane.png"   },
+  { name: "Gold Coast", state: "queensland",          region: "gold-coast",   href: "/listings/queensland-state/gold-coast-region/",       imgSrc: "/images/Gold-Coast.png" },
+  { name: "Melbourne",  state: "victoria",            region: "melbourne",    href: "/listings/victoria-state/melbourne-region/",          imgSrc: "/images/Melbourne.png"  },
+  { name: "Perth",      state: "western-australia",   region: "perth",        href: "/listings/western-australia-state/perth-region/",     imgSrc: "/images/Perth.png"      },
+  { name: "Sydney",     state: "new-south-wales",     region: "sydney",       href: "/listings/new-south-wales-state/sydney-region/",      imgSrc: "/images/Sydney.png"     },
 ];
 
 const MINOR_CITIES = [
-  { name: "Cairns",         href: "/listings/queensland-state/cairns-region/" },
-  { name: "Canberra",       href: "/listings/australian-capital-territory-state/australian-capital-territory-region/" },
-  { name: "Darwin",         href: "/listings/northern-territory-state/darwin-region/" },
-  { name: "Geelong",        href: "/listings/victoria-state/geelong-region/" },
-  { name: "Hobart",         href: "/listings/tasmania-state/hobart-region/" },
-  { name: "Newcastle",      href: "/listings/new-south-wales-state/newcastle-region/" },
-  { name: "Sunshine Coast", href: "/listings/queensland-state/sunshine-coast-region/" },
-  { name: "Townsville",     href: "/listings/queensland-state/townsville-region/" },
-  { name: "Wollongong",     href: "/listings/new-south-wales-state/illawarra-region/" },
-  { name: "Ballarat",       href: "/listings/victoria-state/ballarat-region/" },
+  { name: "Cairns",         state: "queensland",                     region: "cairns",                         href: "/listings/queensland-state/cairns-region/" },
+  { name: "Canberra",       state: "australian-capital-territory",   region: "australian-capital-territory",   href: "/listings/australian-capital-territory-state/australian-capital-territory-region/" },
+  { name: "Darwin",         state: "northern-territory",             region: "darwin",                         href: "/listings/northern-territory-state/darwin-region/" },
+  { name: "Geelong",        state: "victoria",                       region: "geelong",                        href: "/listings/victoria-state/geelong-region/" },
+  { name: "Hobart",         state: "tasmania",                       region: "hobart",                         href: "/listings/tasmania-state/hobart-region/" },
+  { name: "Newcastle",      state: "new-south-wales",                region: "newcastle",                      href: "/listings/new-south-wales-state/newcastle-region/" },
+  { name: "Sunshine Coast", state: "queensland",                     region: "sunshine-coast",                 href: "/listings/queensland-state/sunshine-coast-region/" },
+  { name: "Townsville",     state: "queensland",                     region: "townsville",                     href: "/listings/queensland-state/townsville-region/" },
+  { name: "Wollongong",     state: "new-south-wales",                region: "illawarra",                      href: "/listings/new-south-wales-state/illawarra-region/" },
+  { name: "Ballarat",       state: "victoria",                       region: "ballarat",                       href: "/listings/victoria-state/ballarat-region/" },
 ];
 
 const FILTERS = [
@@ -76,7 +78,51 @@ const FILTERS = [
 ];
 
 
+/** Live region counts, grouped by state — fetched once per unique state
+ * across MAJOR_CITIES/MINOR_CITIES. A city's link is hidden while its
+ * state/region combo has zero current listings, and reappears automatically
+ * the next time this count is fetched (page load) after it has stock again —
+ * no manual re-enabling needed. */
+function useLiveRegionCounts(states: string[]) {
+  const [counts, setCounts] = useState<Record<string, number> | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all(
+      states.map(async (state) => {
+        try {
+          const qs = new URLSearchParams({ group_by: "region", state });
+          const res = await fetch(obfuscateUrl(`/api/d2/?${qs.toString()}`));
+          const json = await parseObfuscatedResponse<{ data?: { region?: { slug: string; count: number }[] } }>(res);
+          return { state, regions: json?.data?.region ?? [] };
+        } catch {
+          return { state, regions: [] };
+        }
+      })
+    ).then((results) => {
+      if (cancelled) return;
+      const map: Record<string, number> = {};
+      for (const { state, regions } of results) {
+        for (const r of regions) map[`${state}:${r.slug}`] = r.count;
+      }
+      setCounts(map);
+    });
+    return () => { cancelled = true; };
+  }, [states.join(",")]);
+
+  return counts;
+}
+
 export default function HomeLocationSection() {
+  const allStates = Array.from(new Set([...MAJOR_CITIES, ...MINOR_CITIES].map((c) => c.state)));
+  const regionCounts = useLiveRegionCounts(allStates);
+
+  const hasStock = (city: { state: string; region: string }) =>
+    regionCounts === null || (regionCounts[`${city.state}:${city.region}`] ?? 0) > 0;
+
+  const majorCities = MAJOR_CITIES.filter(hasStock);
+  const minorCities = MINOR_CITIES.filter(hasStock);
+
   return (
     <section className="hloc-section">
       <div className="container">
@@ -90,7 +136,7 @@ export default function HomeLocationSection() {
         </div>
 
         <div className="hloc-major-grid">
-          {MAJOR_CITIES.map((city) => (
+          {majorCities.map((city) => (
             <a key={city.name} href={city.href} className="hloc-city-card">
               <div className="hloc-city-img-wrap">
                 <div className="hloc-city-circle" />
@@ -111,7 +157,7 @@ export default function HomeLocationSection() {
         </div>
 
         <div className="hloc-minor-wrap">
-          {MINOR_CITIES.map((city, idx) => (
+          {minorCities.map((city, idx) => (
             <a
               key={city.name}
               href={city.href}
