@@ -64,7 +64,14 @@
    // whether it currently has live listings — the pool/exclusive-products
    // check further down already fills a zero-match page with spotlight
    // vans instead of needing a hard 410 here for a real place name.
-   return getRegionsByState(stateSlug).some((r) => r.pageSlug === regionSlug);
+   // Checked against both pageSlug (the normal case) and the full slug
+   // minus "-region" (south-australia-south-east, tasmania-north-west,
+   // western-australia-outback-south — these override pageSlug to a
+   // shorter form since the state name is already embedded in their slug,
+   // but the URL segment itself is still the full, un-shortened form).
+   return getRegionsByState(stateSlug).some(
+     (r) => r.pageSlug === regionSlug || r.slug.replace(/-region$/, '') === regionSlug
+   );
  }
 
  async function isValidSuburb(suburb: string, pincode: string | undefined, apiKey: string | undefined): Promise<boolean> {
