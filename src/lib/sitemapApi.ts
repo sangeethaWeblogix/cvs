@@ -35,6 +35,52 @@ export async function fetchSitemapPaths(type: string): Promise<string[]> {
   }
 }
 
+/**
+ * Live-verify a batch of /listings/ paths against /pool, dropping any with
+ * zero current matches. Needed for sitemap types whose backend min_count=1
+ * filter doesn't validate the full combo together — e.g. "region-make"
+ * only requires the make AND the region to individually have listings
+ * somewhere, not that this specific make has listings in this specific
+ * region, so "jayco/south-australia-state/south-australia-south-east-region/"
+ * passes min_count=1 even with zero actual Jayco campervans there.
+ */
+export async function filterPathsByLiveCount(paths: string[]): Promise<string[]> {
+  if (!API_BASE || paths.length === 0) return paths;
+
+  const checks = await Promise.all(
+    paths.map(async (path) => {
+      const segments = path.replace(/\/$/, "").split("/").filter(Boolean);
+      const params = new URLSearchParams({ per_page: "1", page: "1" });
+      for (const seg of segments) {
+        if (seg.endsWith("-state")) params.set("state", seg.replace(/-state$/, ""));
+        else if (seg.endsWith("-region")) params.set("region", seg.replace(/-region$/, ""));
+        else if (seg.endsWith("-vehicle-make")) params.set("vehicle_make", seg.replace(/-vehicle-make$/, ""));
+        else if (!params.has("campervan_make")) params.set("campervan_make", seg);
+        else if (!params.has("model")) params.set("model", seg);
+      }
+      try {
+        const res = await fetch(`${API_BASE}/pool?${params.toString()}`, {
+          headers: {
+            Accept: "application/json",
+            ...(API_KEY && { "X-Secret-Key": API_KEY }),
+          },
+          cache: "no-store",
+        });
+        if (!res.ok) return false;
+        const raw = await res.text();
+        const idx = raw.indexOf('{"');
+        const json = JSON.parse(idx > 0 ? raw.slice(idx) : raw);
+        const total = json?.pagination?.total_products ?? json?.counts?.total ?? 0;
+        return total > 0;
+      } catch {
+        return false;
+      }
+    })
+  );
+
+  return paths.filter((_, i) => checks[i]);
+}
+
 export function buildSitemapXml(
   paths: string[],
   prefix: "listings" | "product",

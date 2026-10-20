@@ -243,18 +243,23 @@ export function parseSlugToFilters(
       }
     }
 
-    // make / model fallback – only if safe and no search is present
+    // make / model fallback – only if safe and no search is present.
+    // Pure-numeric segments are rejected for MAKE (a bare number here is
+    // almost always some other numeric filter, not a brand name), but
+    // allowed for MODEL once a make is already set — some real model names
+    // are just a digit (e.g. Discoverer's "2"), and by this position in the
+    // slug there's no other numeric filter type it could be confused with.
     if (
       !hasReservedSuffix(part) &&
       !part.includes("=") &&
-      isNaN(Number(part)) &&
       !filters.search // prevent make/model if search is there
     ) {
       if (!filters.make) {
-        filters.make = part;
-        return;
-      }
-      if (!filters.model) {
+        if (isNaN(Number(part))) {
+          filters.make = part;
+          return;
+        }
+      } else if (!filters.model) {
         filters.model = part;
         return;
       }
