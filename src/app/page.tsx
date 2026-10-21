@@ -53,9 +53,9 @@ export const metadata: Metadata = {
     siteName: "Campervans for Sale",
     images: [
       {
-        url: "https://www.campervansforsale.au/images/mfs-logo.png",
-        width: 800,
-        height: 600,
+        url: "https://www.campervansforsale.au/images/camper_logo.png",
+        width: 600,
+        height: 73,
         alt: "Campervans for Sale Australia",
       },
     ],
@@ -96,7 +96,7 @@ const homeJsonLd = {
       "url": BASE_URL,
       "logo": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/mfs-logo-black.png`,
+        "url": `${BASE_URL}/images/camper_logo.png`,
       },
       "contactPoint": {
         "@type": "ContactPoint",
