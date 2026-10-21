@@ -2,6 +2,12 @@
 
 import Image from "next/image";
 import { useLiveRegionCounts } from "@/hooks/useLiveRegionCounts";
+import {
+  HOME_PRICE_BANDS,
+  HOME_GVM_BANDS,
+  HOME_LENGTH_BANDS,
+  HOME_SLEEP_BANDS,
+} from "../listings/browseSectionShared";
 
 const MAJOR_CITIES = [
   { name: "Adelaide",   state: "south-australia",     region: "adelaide",     href: "/listings/south-australia-state/adelaide-region/",    imgSrc: "/images/Adelaide.png"   },
@@ -29,50 +35,22 @@ const FILTERS = [
   {
     icon: <Image src="/images/Budget.png" alt="Budget" width={24} height={24} unoptimized />,
     label: "By Price",
-    items: [
-      { text: "Under $50,000",        href: "/listings/under-50000/" },
-      { text: "$50,000 – $70,000",    href: "/listings/between-50000-70000/" },
-      { text: "$70,000 – $80,000",    href: "/listings/between-70000-80000/" },
-      { text: "$80,000 – $100,000",   href: "/listings/between-80000-100000/" },
-      { text: "$100,000 – $150,000",  href: "/listings/between-100000-150000/" },
-      { text: "$150,000 – $200,000",  href: "/listings/between-150000-200000/" },
-      { text: "$200,000 – $250,000",  href: "/listings/between-200000-250000/" },
-      { text: "Over $250,000",        href: "/listings/over-250000/" },
-    ],
+    items: HOME_PRICE_BANDS,
   },
   {
     icon: <Image src="/images/ATM.png" alt="Weight GVM" width={24} height={24} unoptimized />,
     label: " By Weight (GVM)",
-    items: [
-      { text: "Under 3000kg",   href: "/listings/under-3000-kg-gvm/" },
-      { text: "Under 3500kg",   href: "/listings/under-3500-kg-gvm/" },
-      { text: "Under 4000kg",   href: "/listings/under-4000-kg-gvm/" },
-      { text: "Over 4000kg",    href: "/listings/over-4000-kg-gvm/" },
-    ],
+    items: HOME_GVM_BANDS,
   },
   {
     icon: <Image src="/images/Length.png" alt="Length" width={24} height={24} unoptimized />,
     label: "By Size (Length)",
-    items: [
-      { text: "Under 16ft",     href: "/listings/under-16-length-in-feet/" },
-      { text: "16ft – 18ft",    href: "/listings/between-16-18-length-in-feet/" },
-      { text: "18ft – 20ft",    href: "/listings/between-18-20-length-in-feet/" },
-      { text: "20ft – 22ft",    href: "/listings/between-20-22-length-in-feet/" },
-      { text: "Over 22ft",      href: "/listings/over-22-length-in-feet/" },
-    ],
+    items: HOME_LENGTH_BANDS,
   },
   {
     icon: <Image src="/images/Sleeping.png" alt="Sleeping" width={24} height={24} unoptimized />,
     label: "By Sleeping Capacity",
-    items: [
-      { text: "2 Berth",     href: "/listings/2-people-sleeping-capacity/" },
-      { text: "3 Berth",     href: "/listings/3-people-sleeping-capacity/" },
-      { text: "4 Berth",     href: "/listings/4-people-sleeping-capacity/" },
-      { text: "5 Berth",     href: "/listings/5-people-sleeping-capacity/" },
-      { text: "6+ Berth",     href: "/listings/over-5-people-sleeping-capacity/" },
-      
-      
-    ],
+    items: HOME_SLEEP_BANDS,
   },
 ];
 
@@ -82,9 +60,13 @@ interface Props {
    * render so stock-less cities are already filtered out of the raw SSR HTML
    * instead of only disappearing after a client fetch resolves. */
   initialCounts?: Record<string, number> | null;
+  /** Server-fetched band availability (see fetchBandAvailability), keyed by
+   * href — same reasoning as initialCounts but for the Price/Weight/Length/
+   * Sleep filter chips below. */
+  bandAvailability?: Record<string, boolean> | null;
 }
 
-export default function HomeLocationSection({ initialCounts }: Props) {
+export default function HomeLocationSection({ initialCounts, bandAvailability }: Props) {
   const allStates = Array.from(new Set([...MAJOR_CITIES, ...MINOR_CITIES].map((c) => c.state)));
   const regionCounts = useLiveRegionCounts(allStates, initialCounts);
 
@@ -93,6 +75,11 @@ export default function HomeLocationSection({ initialCounts }: Props) {
 
   const majorCities = MAJOR_CITIES.filter(hasStock);
   const minorCities = MINOR_CITIES.filter(hasStock);
+
+  const hasBandStock = (href: string) => !bandAvailability || bandAvailability[href] !== false;
+  const visibleFilters = FILTERS
+    .map((f) => ({ ...f, items: f.items.filter((item) => hasBandStock(item.href)) }))
+    .filter((f) => f.items.length > 0);
 
   return (
     <section className="hloc-section">
@@ -145,8 +132,8 @@ export default function HomeLocationSection({ initialCounts }: Props) {
    
         </div>
         <div className="hloc-filters">
-          
-          {FILTERS.map((f) => (
+
+          {visibleFilters.map((f) => (
             <div key={f.label} className="hloc-filter-row">
               <div className="hloc-filter-label">
                 <span className="hloc-filter-icon-box">{f.icon}</span>

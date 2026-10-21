@@ -10,8 +10,18 @@ import { fetchTypeCounts } from "@/api/homeApi/typeCounts/api";
 import { fetchHomeFeatured } from "@/api/homeApi/featured/api";
 import { fetchBlogs } from "@/api/blog/api";
 import { fetchRegionCounts } from "@/lib/fetchRegionCounts";
+import { fetchBandAvailability } from "@/lib/fetchBandAvailability";
+import {
+  HOME_PRICE_BANDS,
+  HOME_GVM_BANDS,
+  HOME_LENGTH_BANDS,
+  HOME_SLEEP_BANDS,
+} from "./listings/browseSectionShared";
 
 const SEED_MAX = 15;
+const HOME_FILTER_BANDS = [
+  ...HOME_PRICE_BANDS, ...HOME_GVM_BANDS, ...HOME_LENGTH_BANDS, ...HOME_SLEEP_BANDS,
+];
 
 // Must match the states used across HomeLocationSection's MAJOR_CITIES +
 // MINOR_CITIES — fetched here so that component's stock filtering is
@@ -114,6 +124,7 @@ export default async function Page() {
     featuredUsed,
     blog,
     locationRegionCounts,
+    homeBandAvailability,
   ] = await Promise.all([
     fetchStateBasedCaravans(),
     fetchRequirements(),
@@ -124,6 +135,7 @@ export default async function Page() {
     fetchHomeFeatured({ type: "used", seed }),
     fetchBlogs(1),
     fetchRegionCounts(HOME_LOCATION_STATES),
+    fetchBandAvailability(HOME_FILTER_BANDS),
   ]);
 
   const featured = { all: featuredAll, new: featuredNew, used: featuredUsed };
@@ -142,6 +154,7 @@ export default async function Page() {
         featured={featured}
         blogPosts={blog.items}
         locationRegionCounts={locationRegionCounts}
+        homeBandAvailability={homeBandAvailability}
       />
     </>
   );

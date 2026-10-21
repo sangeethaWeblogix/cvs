@@ -56,6 +56,7 @@ interface Props {
   featured: { all: FeaturedListing[]; new: FeaturedListing[]; used: FeaturedListing[] };
   blogPosts: BlogPost[];
   locationRegionCounts?: Record<string, number> | null;
+  homeBandAvailability?: Record<string, boolean> | null;
 }
 /* --------------------------------- Page ---------------------------------- */
 export default function HomePage({
@@ -67,6 +68,7 @@ export default function HomePage({
   featured,
   blogPosts,
   locationRegionCounts,
+  homeBandAvailability,
 
  }: Props) {
 
@@ -285,7 +287,7 @@ export default function HomePage({
       */}
 
       {/* ── Find by Location ── */}
-      <HomeLocationSection initialCounts={locationRegionCounts} />
+      <HomeLocationSection initialCounts={locationRegionCounts} bandAvailability={homeBandAvailability} />
 
       {/* ── Buyer Guide + Why Australians ── */}
       <HomeBuyerGuide />

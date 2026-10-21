@@ -152,6 +152,46 @@ export const SLEEP_BANDS = [
   { text: "6+ Berth", href: "/listings/over-5-people-sleeping-capacity/", query: "from_sleep=6" },
 ];
 
+// HomeLocationSection's own "Search Your Way" filter chips — a different,
+// coarser set of thresholds than PRICE_BANDS/GVM_BANDS/LENGTH_BANDS/
+// SLEEP_BANDS above (those back StateBrowseSection's scoped browse panels).
+// Kept data-only (no icon JSX, hence living here rather than in the "use
+// client" HomeLocationSection.tsx) so page.tsx can import the same list
+// server-side for the live band-count fetch that seeds initial render.
+export const HOME_PRICE_BANDS = [
+  { text: "Under $50,000",        href: "/listings/under-50000/",           query: "to_price=50000" },
+  { text: "$50,000 – $70,000",    href: "/listings/between-50000-70000/",   query: "from_price=50000&to_price=70000" },
+  { text: "$70,000 – $80,000",    href: "/listings/between-70000-80000/",   query: "from_price=70000&to_price=80000" },
+  { text: "$80,000 – $100,000",   href: "/listings/between-80000-100000/",  query: "from_price=80000&to_price=100000" },
+  { text: "$100,000 – $150,000",  href: "/listings/between-100000-150000/", query: "from_price=100000&to_price=150000" },
+  { text: "$150,000 – $200,000",  href: "/listings/between-150000-200000/", query: "from_price=150000&to_price=200000" },
+  { text: "$200,000 – $250,000",  href: "/listings/between-200000-250000/", query: "from_price=200000&to_price=250000" },
+  { text: "Over $250,000",        href: "/listings/over-250000/",           query: "from_price=250000" },
+];
+
+export const HOME_GVM_BANDS = [
+  { text: "Under 3000kg", href: "/listings/under-3000-kg-gvm/", query: "to_gvm=3000" },
+  { text: "Under 3500kg", href: "/listings/under-3500-kg-gvm/", query: "to_gvm=3500" },
+  { text: "Under 4000kg", href: "/listings/under-4000-kg-gvm/", query: "to_gvm=4000" },
+  { text: "Over 4000kg",  href: "/listings/over-4000-kg-gvm/",  query: "from_gvm=4000" },
+];
+
+export const HOME_LENGTH_BANDS = [
+  { text: "Under 16ft",  href: "/listings/under-16-length-in-feet/",      query: "to_length=16" },
+  { text: "16ft – 18ft", href: "/listings/between-16-18-length-in-feet/", query: "from_length=16&to_length=18" },
+  { text: "18ft – 20ft", href: "/listings/between-18-20-length-in-feet/", query: "from_length=18&to_length=20" },
+  { text: "20ft – 22ft", href: "/listings/between-20-22-length-in-feet/", query: "from_length=20&to_length=22" },
+  { text: "Over 22ft",   href: "/listings/over-22-length-in-feet/",       query: "from_length=22" },
+];
+
+export const HOME_SLEEP_BANDS = [
+  { text: "2 Berth",  href: "/listings/2-people-sleeping-capacity/",      query: "from_sleep=2&to_sleep=2" },
+  { text: "3 Berth",  href: "/listings/3-people-sleeping-capacity/",      query: "from_sleep=3&to_sleep=3" },
+  { text: "4 Berth",  href: "/listings/4-people-sleeping-capacity/",      query: "from_sleep=4&to_sleep=4" },
+  { text: "5 Berth",  href: "/listings/5-people-sleeping-capacity/",      query: "from_sleep=5&to_sleep=5" },
+  { text: "6+ Berth", href: "/listings/over-5-people-sleeping-capacity/", query: "from_sleep=6" },
+];
+
 export const CATEGORY_LABELS: Record<string, string> = {
   "off-road": "Off Road",
   luxury: "Luxury",
