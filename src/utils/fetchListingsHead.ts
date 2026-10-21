@@ -27,7 +27,7 @@ type ApiResponse = {
     meta_title?: string;
     meta_description?: string;
     footer_description?: string;
-    faq?: string;
+    faq?: string | Faq[];
   };
   pagination?: {
     total_products?: number;
@@ -45,12 +45,16 @@ type ApiResponse = {
 const API_BASE = process.env.NEXT_PUBLIC_MFS_API_BASE;
 const API_KEY = process.env.MFS_API_KEY;
 
-/** Same backend endpoint as /api/d1/ (pool_test) — used here instead
- * of new_optimize_code because pool_test has proven far more reliable
- * (new_optimize_code intermittently returns a PHP notice from the ACF plugin
- * instead of JSON). Response is flat (products/premium_products/etc. at the
- * top level); adapted into the nested ApiResponse shape buildListingsJsonLd
- * already expects, so no caller changes are needed. */
+/** The same /pool endpoint fetchInitialPool.ts and middleware.ts already
+ * rely on — this used to call pool_test instead, but that route 404s
+ * upstream (confirmed directly), which is why every /listings/* page's
+ * JSON-LD (CollectionPage/ItemList/SearchResultsPage/FAQPage) was silently
+ * missing: fetchListingsForHead always got null back and layout.tsx just
+ * skips rendering the <script> tags when that happens. /pool's response is
+ * flat (featured_products/new_products/used_products/exclusive_products/
+ * premium_products/seo_v2 at the top level, no products/emp_exclusive_
+ * products keys) — adapted below into the nested ApiResponse shape
+ * buildListingsJsonLd already expects, so no caller changes are needed. */
 async function fetchPoolListingsForHead(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   filters: any,
@@ -80,7 +84,7 @@ async function fetchPoolListingsForHead(
   if (filters.condition) params.set("condition", String(filters.condition));
   if (filters.search || filters.keyword) params.set("search", String(filters.search ?? filters.keyword));
 
-  const url = `${API_BASE}/pool_test?${params.toString()}`;
+  const url = `${API_BASE}/pool?${params.toString()}`;
 
   let res: Response;
   try {
@@ -112,14 +116,51 @@ async function fetchPoolListingsForHead(
     seo_v2: json.seo_v2,
     pagination: json.pagination,
     data: {
-      products: json.products ?? [],
-      exclusive_products: json.exclusive_products ?? [],
-      emp_exclusive_products: json.emp_exclusive_products ?? [],
-      premium_products: json.premium_products ?? [],
+      products: [
+        ...(json.featured_products ?? []),
+        ...(json.new_products ?? []),
+        ...(json.used_products ?? []),
+        ...(json.exclusive_products ?? []),
+      ].map(normalizeItem),
+      exclusive_products: (json.exclusive_products ?? []).map(normalizeItem),
+      emp_exclusive_products: [],
+      premium_products: (json.premium_products ?? []).map(normalizeItem),
     },
-    emp_exclusive_products: json.emp_exclusive_products ?? [],
+    emp_exclusive_products: [],
   };
   return data;
+}
+
+/** /pool's raw product fields use different names/types than this file's
+ * Item shape (title vs name, r2_thumbnails vs image_format, category vs
+ * categories, numeric regular_price/sale_price vs string, slug vs a full
+ * product link) — same mismatch listingShared.ts's normalizeListing already
+ * handles for the main grid, mirrored here for this file's own Item type. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function normalizeItem(raw: any): Item {
+  return {
+    name: raw.name ?? raw.title ?? "",
+    make: raw.make,
+    model: raw.model,
+    link: raw.link ?? (raw.slug ? `${BASE_URL}/product/${raw.slug}/` : ""),
+    length: raw.length != null ? String(raw.length) : undefined,
+    regular_price: raw.regular_price != null ? String(raw.regular_price) : undefined,
+    sale_price: raw.sale_price != null ? String(raw.sale_price) : undefined,
+    image: raw.image,
+    image_format: Array.isArray(raw.image_format)
+      ? raw.image_format
+      : Array.isArray(raw.r2_thumbnails)
+        ? raw.r2_thumbnails
+        : undefined,
+    categories: Array.isArray(raw.categories)
+      ? raw.categories
+      : Array.isArray(raw.category)
+        ? raw.category
+        : raw.category
+          ? [raw.category]
+          : undefined,
+    axle: raw.axle,
+  };
 }
 
 function parseLengthFt(raw: string): number {
@@ -129,8 +170,8 @@ function parseLengthFt(raw: string): number {
   return parseFloat(raw);
 }
 
-function cleanPrice(raw: string): string {
-  return raw.replace(/[$,]/g, "").trim();
+function cleanPrice(raw: string | number | null | undefined): string {
+  return String(raw ?? "").replace(/[$,]/g, "").trim();
 }
 
 function stripHtml(raw: string): string {
@@ -149,15 +190,17 @@ function stripHtml(raw: string): string {
 
 type Faq = { q: string; a: string };
 
-function parseFaq(raw?: string): Faq[] {
+/** seo_v2.faq comes back as either a JSON-encoded string or an already-parsed
+ * array, depending on endpoint/response (same ambiguity listingShared.ts's
+ * SeoV2 type notes) — /pool returns it already parsed, so JSON.parse(raw)
+ * on an array threw and silently dropped every page's FAQPage schema. */
+function parseFaq(raw?: string | Faq[]): Faq[] {
   if (!raw) return [];
-  try {
-    const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed)) return [];
-    return parsed.filter((f): f is Faq => !!f?.q && !!f?.a);
-  } catch {
-    return [];
-  }
+  const parsed = Array.isArray(raw) ? raw : (() => {
+    try { return JSON.parse(raw); } catch { return null; }
+  })();
+  if (!Array.isArray(parsed)) return [];
+  return parsed.filter((f): f is Faq => !!f?.q && !!f?.a);
 }
 
 function buildProductListItem(item: Item, position: number) {
@@ -253,6 +296,19 @@ const weburl = "https://www.campervansforsale.au"
           item: b.url,
         })),
       },
+      ...(allProducts.length > 0
+        ? [
+            {
+              "@type": "ItemList",
+              itemListElement: allProducts.map((item, idx) => ({
+                "@type": "ListItem",
+                position: idx + 1,
+                url: item.link,
+                name: item.name,
+              })),
+            },
+          ]
+        : []),
       ...(faqItems.length > 0
         ? [
             {
