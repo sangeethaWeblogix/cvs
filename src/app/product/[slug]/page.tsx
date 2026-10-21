@@ -287,14 +287,20 @@ export default async function ProductDetailPage({ params }: PageProps) {
           ? "https://schema.org/NewCondition"
           : "https://schema.org/UsedCondition",
     }),
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "AUD",
-      ...(priceStr && { price: priceStr }),
-      availability: "https://schema.org/InStock",
-      url: canonicalUrl,
-      seller: { "@type": "Organization", name: "Campervans For Sale" },
-    },
+    // Google's Product rich-results validation requires Offer.price — a POA
+    // ("price on application") listing has no numeric price at all, so an
+    // Offer without one is invalid structured data. Omit the whole Offer
+    // rather than publish one missing a required field.
+    ...(priceStr && {
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "AUD",
+        price: priceStr,
+        availability: "https://schema.org/InStock",
+        url: canonicalUrl,
+        seller: { "@type": "Organization", name: "Campervans For Sale" },
+      },
+    }),
   };
 
   const seed = Math.ceil(Math.random() * 10);
