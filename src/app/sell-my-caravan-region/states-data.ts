@@ -62,13 +62,30 @@ export function getStateBySlug(slug: string): StateData | undefined {
 }
 
 export function buildStateMetadata(state: StateData): Metadata {
+  const title = `Sell My Campervan in ${state.label} | List Until Sold for $49`;
+  const description = `Sell your campervan in ${state.label} for just $49. List until sold, pay no commission and connect directly with campervan buyers across ${state.capital} and regional ${state.label}.`;
+  const url = `${BASE_URL}/sell-my-campervan/${state.slug}/`;
   return {
-    title: `Sell My Campervan in ${state.label} | List Until Sold for $49`,
-    description: `Sell your campervan in ${state.label} for just $49. List until sold, pay no commission and connect directly with campervan buyers across ${state.capital} and regional ${state.label}.`,
+    title,
+    description,
     robots: "index, follow",
-    alternates: {
-      canonical: `${BASE_URL}/sell-my-campervan/${state.slug}/`,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: "Campervans for Sale",
+      images: [
+        {
+          url: `${BASE_URL}/images/cfs-logo-black.png`,
+          width: 1024,
+          height: 240,
+          alt: "Campervans for Sale Australia",
+        },
+      ],
+      type: "website",
     },
+    twitter: { card: "summary_large_image", title, description },
   };
 }
 

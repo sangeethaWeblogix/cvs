@@ -13,6 +13,28 @@ export const metadata: Metadata = {
     canonical: "https://www.campervansforsale.au/blog/",
 
    },
+  openGraph: {
+    title: "Latest News, Reviews & Advice",
+    description:
+      "Latest news, in-depth reviews, and expert advice on the latest in the campervan market. Stay informed and make smarter decisions.",
+    url: "https://www.campervansforsale.au/blog/",
+    siteName: "Campervans for Sale",
+    images: [
+      {
+        url: "https://www.campervansforsale.au/images/cfs-logo-black.png",
+        width: 1024,
+        height: 240,
+        alt: "Campervans for Sale Australia",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Latest News, Reviews & Advice",
+    description:
+      "Latest news, in-depth reviews, and expert advice on the latest in the campervan market. Stay informed and make smarter decisions.",
+  },
 };
 
 export const dynamic = "force-dynamic";

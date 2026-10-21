@@ -16,8 +16,28 @@ import { ReactNode } from "react";
    alternates: {
     canonical: "https://www.campervansforsale.au/contact/",
    },
-   
- 
+   openGraph: {
+     title: "Contact Campervans For Sale | Australia’s Campervan Marketplace",
+     description:
+       "Have a question about campervans in Australia? Contact Campervans For Sale for support, inquiries, or help finding your next campervan today.",
+     url: "https://www.campervansforsale.au/contact/",
+     siteName: "Campervans for Sale",
+     images: [
+       {
+         url: "https://www.campervansforsale.au/images/cfs-logo-black.png",
+         width: 1024,
+         height: 240,
+         alt: "Campervans for Sale Australia",
+       },
+     ],
+     type: "website",
+   },
+   twitter: {
+     card: "summary_large_image",
+     title: "Contact Campervans For Sale | Australia’s Campervan Marketplace",
+     description:
+       "Have a question about campervans in Australia? Contact Campervans For Sale for support, inquiries, or help finding your next campervan today.",
+   },
  };
  
    export default function Layout({ children }: { children: ReactNode }) {
