@@ -9,6 +9,7 @@ import StateFilterBar, { FilterState } from "./StateFilterBar";
 import StateListingGrid, { SeoV2, Listing, buildFeaturedOrder } from "./StateListingGrid";
 import { normalizeListing } from "./listingShared";
 import StateBrowseSection from "./StateBrowseSection";
+import MakeBrowseByState from "./MakeBrowseByState";
 import ExploreOtherTravelOptions from "./ExploreOtherTravelOptions";
 import type { BrowseSectionData } from "./browseSectionShared";
 import StateContent from "./StateContent";
@@ -17,6 +18,26 @@ import type { InitialParamsCount } from "./fetchInitialParamsCount";
 // import { useBanners } from "@/components/BannerHandler";
 // import { useBannerTracking } from "@/hooks/useBannerTracking";
 import "./main.css?=7";
+
+const toTitleCase = (slug: string) =>
+  slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+
+/** A plain make/vehicle-make page (no state/region/category/model) has no
+ * on-site link pointing at its own make+state combo pages — they only exist
+ * via state-make-sitemap.xml / state-vehicle-make-sitemap.xml, making them
+ * orphan pages. Adds that missing "Browse by State" section, live-filtered
+ * so it never links to a combo with zero current stock. Renders nothing for
+ * every other filter combination — purely additive. */
+function renderMakeBrowseByState(filters: FilterState) {
+  if (filters.state || filters.region || filters.category || filters.model) return null;
+  if (filters.make && !filters.engine_make) {
+    return <MakeBrowseByState make={filters.make} label={toTitleCase(filters.make)} />;
+  }
+  if (filters.engine_make && !filters.make) {
+    return <MakeBrowseByState vehicleMake={filters.engine_make} label={`${toTitleCase(filters.engine_make)}-Based`} />;
+  }
+  return null;
+}
 
 // clickid pagination — same scheme as /listings/: no ?page=N in the URL,
 // instead a random ?clickid= id maps (via localStorage, with a `pN` suffix
@@ -723,6 +744,7 @@ export default function StateHome({
             />
           )}
           <StateBrowseSection state={filters.state} region={filters.region} category={filters.category} initialData={browseData} />
+        {renderMakeBrowseByState(filters)}
           <StateContent footerDescription={ip.seo?.footer_description} faq={ip.seo?.faq} />
           {filters.category === 'off-road' && (
             <section className="lsd-offroad-extra"><div className="container">
@@ -770,6 +792,7 @@ export default function StateHome({
           hideViewAll
         />
         <StateBrowseSection state={filters.state} region={filters.region} category={filters.category} initialData={browseData} />
+        {renderMakeBrowseByState(filters)}
         <StateContent footerDescription={initialSeo.footer_description} faq={initialSeo.faq} />
         <div className="lsd-sell-cta">
           <div className="container">
@@ -871,6 +894,7 @@ export default function StateHome({
         {maxPages > 1 && pagination}
 
         <StateBrowseSection state={filters.state} region={filters.region} category={filters.category} initialData={browseData} />
+        {renderMakeBrowseByState(filters)}
         <StateContent footerDescription={seo?.footer_description} faq={seo?.faq} />
         {filters.category === 'off-road' && (
           <section className="lsd-offroad-extra"><div className="container">
@@ -937,6 +961,7 @@ export default function StateHome({
       {maxPages > 1 && pagination}
 
       <StateBrowseSection state={filters.state} region={filters.region} category={filters.category} initialData={browseData} />
+      {renderMakeBrowseByState(filters)}
       <StateContent footerDescription={seo?.footer_description} faq={seo?.faq} />
       {filters.category === 'off-road' && (
         <section className="lsd-offroad-extra"><div className="container">

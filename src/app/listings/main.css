@@ -1170,6 +1170,22 @@ input.loc-search-input:focus { box-shadow: 0 0 0 1.5px #7e7e7e !important; }
 .lsd-offroad-extra__body a { color: #1153a6; text-decoration: none; }
 .lsd-offroad-extra__body a:hover { text-decoration: underline; }
 
+/* ── Make/vehicle-make "Browse by State" (orphan-page link fix) ── */
+.lsd-make-states { padding: 24px 0 0; background: #fff; }
+.lsd-make-states__title { font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 14px; }
+.lsd-make-states__pills { display: flex; flex-wrap: wrap; gap: 10px; }
+.lsd-make-states__pill {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid #e8e8e8;
+  border-radius: 999px;
+  color: #1a1a1a;
+  font-size: 14px;
+  text-decoration: none;
+  transition: border-color .2s, color .2s;
+}
+.lsd-make-states__pill:hover { border-color: #1153a6; color: #1153a6; }
+
 /* ── Promo banner cards (empty grid slot filler) ── */
 .lsd-promo-spacer { visibility: hidden; pointer-events: none; }
 .lsd-promo-card {
