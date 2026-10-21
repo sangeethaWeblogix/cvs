@@ -166,9 +166,9 @@ export async function metaFromSlug(
       url: canonical,
       images: [
         {
-          url: "https://www.campervansforsale.au/images/mfs-logo.png",
-          width: 800,
-          height: 600,
+          url: "https://www.campervansforsale.au/images/cfs-logo-black.png",
+          width: 1024,
+          height: 240,
           alt: "Campervans for Sale Australia",
         },
       ],

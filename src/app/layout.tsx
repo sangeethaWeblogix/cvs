@@ -108,40 +108,25 @@ import fetchListingsForHead, { buildListingsJsonLd, buildBreadcrumbs } from "@/u
       const slugString = pathname.replace(/^\/listings\//, "").replace(/\/$/, "");
       const slugParts = slugString.split("/").filter(Boolean);
 
-      // Middleware signals 0 products via x-robots: noindex — use it directly, no API call needed
-      if (xRobots === "noindex") {
-        slugRobots = "noindex";
-        slugCanonical = `https://www.campervansforsale.au/listings/${slugParts.join("/")}/`;
-        slugDescription = "Browse new and used campervans for sale across Australia. Compare prices, layouts, sleeping capacity and key specifications from dealers and private sellers.";
+      // All SEO from metaFromSlug — pure computation, no API call
+      const meta = await metaFromSlug(slugParts, {});
+      slugCanonical = (meta.alternates?.canonical as string) ?? "";
+      if (meta.title && typeof meta.title === "object" && "absolute" in meta.title) {
+        slugTitle = (meta.title as { absolute: string }).absolute;
+      }
+      slugDescription = "Browse new and used campervans for sale across Australia. Compare prices, layouts, sleeping capacity and key specifications from dealers and private sellers.";
+
+      // Robots: trust the middleware's live x-robots header (computed from
+      // real-time stock + band-filter rules via the /pool API) over
+      // metaFromSlug's static url.csv snapshot — the header reflects current
+      // stock, the CSV can go stale and disagree with the X-Robots-Tag
+      // response header a crawler actually sees.
+      if (xRobots) {
+        slugRobots = xRobots;
+      } else if (meta.robots && typeof meta.robots === "object" && "index" in meta.robots) {
+        slugRobots = (meta.robots as { index: boolean }).index ? "index, follow" : "noindex, nofollow";
       } else {
-        // try {
-          // All SEO from metaFromSlug — pure computation, no API call
-          const meta = await metaFromSlug(slugParts, {});
-          slugCanonical = (meta.alternates?.canonical as string) ?? "";
-          if (meta.robots && typeof meta.robots === "object" && "index" in meta.robots) {
-            slugRobots = (meta.robots as { index: boolean }).index ? "index, follow" : "noindex";
-          } else {
-            slugRobots = "index, follow";
-          }
-          if (meta.title && typeof meta.title === "object" && "absolute" in meta.title) {
-            slugTitle = (meta.title as { absolute: string }).absolute;
-          }
-          slugDescription = "Browse new and used campervans for sale across Australia. Compare prices, layouts, sleeping capacity and key specifications from dealers and private sellers.";
-        // } catch {
-        //   const parts = slugParts
-        //     .map((p: string) =>
-        //       p.replace(/-(category|state|region|condition|search|suburb)$/, "")
-        //        .replace(/-/g, " ")
-        //        .replace(/\b\w/g, (c: string) => c.toUpperCase())
-        //     )
-        //     .filter(Boolean);
-        //   slugTitle = parts.length
-        //     ? `${parts.join(" ")} Campervans for Sale in Australia`
-        //     : "Campervans for Sale in Australia";
-        //   slugCanonical = `https://www.campervansforsale.au/listings/${slugParts.join("/")}/`;
-        //   slugDescription = "Browse campervans for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.";
-        //   slugRobots = "index, follow";
-        // }
+        slugRobots = "index, follow";
       }
     }
 
@@ -165,22 +150,31 @@ import fetchListingsForHead, { buildListingsJsonLd, buildBreadcrumbs } from "@/u
           {isProductPage && productMeta.description && <meta name="description" content={productMeta.description} />}
           {isProductPage && productMeta.canonical && <link rel="canonical" href={productMeta.canonical} />}
           {isProductPage && <meta name="robots" content="index, follow" />}
+          {isProductPage && <meta property="og:type" content="website" />}
           {isProductPage && productMeta.title && <meta property="og:title" content={productMeta.title} />}
           {isProductPage && productMeta.description && <meta property="og:description" content={productMeta.description} />}
           {isProductPage && productMeta.ogImage && <meta property="og:image" content={productMeta.ogImage} />}
           {isProductPage && productMeta.canonical && <meta property="og:url" content={productMeta.canonical} />}
+          {isProductPage && <meta name="twitter:card" content="summary_large_image" />}
           {isProductPage && productMeta.title && <meta name="twitter:title" content={productMeta.title} />}
           {isProductPage && productMeta.description && <meta name="twitter:description" content={productMeta.description} />}
+          {isProductPage && productMeta.ogImage && <meta name="twitter:image" content={productMeta.ogImage} />}
           {/* Per-slug SEO tags for /listings/* — rendered before streaming starts */}
           {/* <title> is set by generateMetadata in [...slug]/page.tsx via fast metaFromSlug (no API call) */}
           {isListingSlug && slugDescription && <meta name="description" content={slugDescription} />}
           {isListingSlug && slugCanonical && <link rel="canonical" href={slugCanonical} />}
           {isListingSlug && <meta name="robots" content={slugRobots} />}
+          {isListingSlug && <meta property="og:type" content="website" />}
           {isListingSlug && slugTitle && <meta property="og:title" content={slugTitle} />}
           {isListingSlug && slugDescription && <meta property="og:description" content={slugDescription} />}
           {isListingSlug && slugCanonical && <meta property="og:url" content={slugCanonical} />}
+          {isListingSlug && <meta property="og:image" content="https://www.campervansforsale.au/images/cfs-logo-black.png" />}
+          {isListingSlug && <meta property="og:image:width" content="1024" />}
+          {isListingSlug && <meta property="og:image:height" content="240" />}
+          {isListingSlug && <meta name="twitter:card" content="summary_large_image" />}
           {isListingSlug && slugTitle && <meta name="twitter:title" content={slugTitle} />}
           {isListingSlug && slugDescription && <meta name="twitter:description" content={slugDescription} />}
+          {isListingSlug && <meta name="twitter:image" content="https://www.campervansforsale.au/images/cfs-logo-black.png" />}
           {/* Contact page JSON-LD */}
           {isContactPage && (
             <script

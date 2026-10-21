@@ -480,6 +480,15 @@
      }
    }
 
+   // Forward the computed decision as a REQUEST header too (response headers
+   // never reach the React render tree) — root layout.tsx reads this via
+   // headers() to put the matching <meta name="robots"> tag in the HTML,
+   // since without it the tag fell back to a stale url.csv snapshot that
+   // disagreed with this live, stock-aware X-Robots-Tag response header.
+   if (isListingsPath(url.pathname)) {
+     requestHeaders.set("x-robots", robotsHeader);
+   }
+
    /* 4️⃣ Create response */
    const response = NextResponse.next({ request: { headers: requestHeaders } });
 
