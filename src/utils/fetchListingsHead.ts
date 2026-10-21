@@ -163,13 +163,6 @@ function normalizeItem(raw: any): Item {
   };
 }
 
-function parseLengthFt(raw: string): number {
-  // handles "19'6 ft" (feet+inches) and "24.93 ft" (decimal feet)
-  const feetInches = raw.match(/^(\d+)'(\d+)/);
-  if (feetInches) return parseInt(feetInches[1]) + parseInt(feetInches[2]) / 12;
-  return parseFloat(raw);
-}
-
 function cleanPrice(raw: string | number | null | undefined): string {
   return String(raw ?? "").replace(/[$,]/g, "").trim();
 }
@@ -201,51 +194,6 @@ function parseFaq(raw?: string | Faq[]): Faq[] {
   })();
   if (!Array.isArray(parsed)) return [];
   return parsed.filter((f): f is Faq => !!f?.q && !!f?.a);
-}
-
-function buildProductListItem(item: Item, position: number) {
-  // Every field below is conditionally included rather than sent as an
-  // empty string — /pool's raw items often lack make/model/axle/length,
-  // and an empty-string Brand.name or a non-numeric QuantitativeValue.value
-  // is what was causing "Schema.org validation error" (and an empty
-  // Offer.price is the same "Google rich results validation error" the
-  // per-product page's schema already had fixed — see page.tsx).
-  const rawPrice = item.sale_price && item.sale_price !== "" ? item.sale_price : item.regular_price;
-  const price = rawPrice ? cleanPrice(rawPrice) : "";
-  const lengthFt = parseLengthFt(item.length ?? "");
-  const widthMt = !isNaN(lengthFt) && lengthFt > 0 ? (lengthFt * 0.3048).toFixed(2) : "";
-  const bodyType = item.categories && item.categories.length > 0 ? item.categories.join(", ") : "";
-  const images =
-    item.image_format && item.image_format.length > 0
-      ? item.image_format
-          .slice(0, 5)
-          .map((url) => ({ "@type": "ImageObject", url }))
-      : item.image
-      ? [{ "@type": "ImageObject", url: item.image }]
-      : [];
-  return {
-    "@type": "ListItem",
-    position,
-    item: {
-      "@type": "Vehicle",
-      ...(bodyType && { bodyType }),
-      ...(item.axle && { vehicleConfiguration: item.axle }),
-      ...(widthMt && { width: { "@type": "QuantitativeValue", unitCode: "MT", value: widthMt } }),
-      url: item.link,
-      name: item.name,
-      ...(item.model && { model: item.model }),
-      ...(item.make && { brand: { "@type": "Brand", name: item.make } }),
-      ...(price && {
-        offers: {
-          "@type": "Offer",
-          priceCurrency: "AUD",
-          price,
-          availability: "https://schema.org/InStock",
-        },
-      }),
-      ...(images.length > 0 && { image: images }),
-    },
-  };
 }
 
 function slugToTitleCase(slug: string): string {
@@ -393,6 +341,12 @@ const weburl = "https://www.campervansforsale.au"
     ],
   };
 
+  // mainEntity used to nest an OfferCatalog of Vehicle items here, duplicating
+  // what collectionPageLd's ItemList already covers (url + name per product).
+  // OfferCatalog.itemListElement expects Offer-typed items specifically, so
+  // wrapping Vehicle there was flagged as an "unexpected type" schema.org
+  // validation error on every listings page — dropped rather than
+  // restructured, since it added no rich-result feature beyond the ItemList.
   const searchResultsLd = {
     "@context": "https://schema.org/",
     "@type": "SearchResultsPage",
@@ -400,13 +354,6 @@ const weburl = "https://www.campervansforsale.au"
     potentialAction: {
       "@type": "SearchAction",
       target: { "@type": "EntryPoint", urlTemplate: weburl },
-    },
-    mainEntity: {
-      "@type": "OfferCatalog",
-      numberOfItems: allProducts.length,
-      itemListElement: allProducts.map((item, idx) =>
-        buildProductListItem(item, idx + 1)
-      ),
     },
   };
 
