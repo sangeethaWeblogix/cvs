@@ -106,6 +106,14 @@ export const POPULAR_REGION_PATHS = [
   { name: "Ballarat",       path: "victoria-state/ballarat-region/" },
 ];
 
+// Shared state/region slug breakdown of POPULAR_REGION_PATHS, used by both
+// the server-side live-count fetch (fetchRegionCounts, seeding SSR output)
+// and the client component (FooterPopularLocations) that filters by it.
+export const PARSED_POPULAR_REGION_PATHS = POPULAR_REGION_PATHS.map((l) => {
+  const [stateSeg, regionSeg] = l.path.split("/");
+  return { ...l, state: stateSeg.replace(/-state$/, ""), region: regionSeg.replace(/-region$/, "") };
+});
+
 // Price/GVM/length/sleep band definitions doubling as the query params used
 // to look up each band's own count (no bucketed group_by exists on the
 // backend for numeric fields, so counts come from pool-listings'

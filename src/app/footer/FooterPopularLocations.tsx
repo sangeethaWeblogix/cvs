@@ -1,22 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import { POPULAR_REGION_PATHS } from "@/app/listings/browseSectionShared";
+import { PARSED_POPULAR_REGION_PATHS } from "@/app/listings/browseSectionShared";
 import { useLiveRegionCounts } from "@/hooks/useLiveRegionCounts";
 
 const PREVIEW_COUNT = 7;
 
-const PARSED_PATHS = POPULAR_REGION_PATHS.map((l) => {
-  const [stateSeg, regionSeg] = l.path.split("/");
-  return { ...l, state: stateSeg.replace(/-state$/, ""), region: regionSeg.replace(/-region$/, "") };
-});
+interface Props {
+  /** Server-fetched region counts (see fetchRegionCounts) — seeds the first
+   * render so stock-less locations are already filtered out of the raw SSR
+   * HTML instead of only disappearing after a client fetch resolves. */
+  initialCounts?: Record<string, number> | null;
+}
 
-export default function FooterPopularLocations() {
+export default function FooterPopularLocations({ initialCounts }: Props) {
   const [expanded, setExpanded] = useState(false);
-  const allStates = Array.from(new Set(PARSED_PATHS.map((l) => l.state)));
-  const regionCounts = useLiveRegionCounts(allStates);
+  const allStates = Array.from(new Set(PARSED_POPULAR_REGION_PATHS.map((l) => l.state)));
+  const regionCounts = useLiveRegionCounts(allStates, initialCounts);
 
-  const livePaths = PARSED_PATHS.filter(
+  const livePaths = PARSED_POPULAR_REGION_PATHS.filter(
     (l) => regionCounts === null || (regionCounts[`${l.state}:${l.region}`] ?? 0) > 0
   );
   const locations = expanded ? livePaths : livePaths.slice(0, PREVIEW_COUNT);

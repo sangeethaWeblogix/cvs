@@ -2,7 +2,11 @@ import { STATES } from "@/app/listings/browseSectionShared";
 import FooterPopularLocations from "./FooterPopularLocations";
 import FooterSellByLocationLink from "./FooterSellByLocationLink";
 
-export default function FooterColumns() {
+interface Props {
+  initialRegionCounts?: Record<string, number> | null;
+}
+
+export default function FooterColumns({ initialRegionCounts }: Props) {
   return (
     <div className="foot-cols">
       <div className="foot-col">
@@ -23,7 +27,7 @@ export default function FooterColumns() {
         </ul>
       </div>
 
-      <FooterPopularLocations />
+      <FooterPopularLocations initialCounts={initialRegionCounts} />
 
       <div className="foot-col">
         <h4 className="foot-col__title">Private Sellers</h4>

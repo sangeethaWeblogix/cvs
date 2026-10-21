@@ -8,11 +8,17 @@ import { obfuscateUrl, parseObfuscatedResponse } from "@/lib/obfuscation";
  * should treat null as "show everything" so nothing flashes empty before
  * the fetch resolves). Used anywhere a static list of state/region links
  * needs to hide entries that currently have zero live listings, and show
- * them again automatically once that region has stock. */
-export function useLiveRegionCounts(states: string[]) {
-  const [counts, setCounts] = useState<Record<string, number> | null>(null);
+ * them again automatically once that region has stock.
+ *
+ * Pass `initial` (from fetchRegionCounts, run server-side) to seed the very
+ * first render with live data instead of null — without it, the raw SSR
+ * HTML (what a non-JS crawler or a request made before hydration sees)
+ * always lists every region, since the client fetch below hasn't run yet. */
+export function useLiveRegionCounts(states: string[], initial?: Record<string, number> | null) {
+  const [counts, setCounts] = useState<Record<string, number> | null>(initial ?? null);
 
   useEffect(() => {
+    if (initial) return;
     let cancelled = false;
     Promise.all(
       states.map(async (state) => {

@@ -77,9 +77,16 @@ const FILTERS = [
 ];
 
 
-export default function HomeLocationSection() {
+interface Props {
+  /** Server-fetched region counts (see fetchRegionCounts) — seeds the first
+   * render so stock-less cities are already filtered out of the raw SSR HTML
+   * instead of only disappearing after a client fetch resolves. */
+  initialCounts?: Record<string, number> | null;
+}
+
+export default function HomeLocationSection({ initialCounts }: Props) {
   const allStates = Array.from(new Set([...MAJOR_CITIES, ...MINOR_CITIES].map((c) => c.state)));
-  const regionCounts = useLiveRegionCounts(allStates);
+  const regionCounts = useLiveRegionCounts(allStates, initialCounts);
 
   const hasStock = (city: { state: string; region: string }) =>
     regionCounts === null || (regionCounts[`${city.state}:${city.region}`] ?? 0) > 0;

@@ -55,6 +55,7 @@ interface Props {
   typeCounts?: TypeCounts;
   featured: { all: FeaturedListing[]; new: FeaturedListing[]; used: FeaturedListing[] };
   blogPosts: BlogPost[];
+  locationRegionCounts?: Record<string, number> | null;
 }
 /* --------------------------------- Page ---------------------------------- */
 export default function HomePage({
@@ -65,6 +66,7 @@ export default function HomePage({
   typeCounts,
   featured,
   blogPosts,
+  locationRegionCounts,
 
  }: Props) {
 
@@ -283,7 +285,7 @@ export default function HomePage({
       */}
 
       {/* ── Find by Location ── */}
-      <HomeLocationSection />
+      <HomeLocationSection initialCounts={locationRegionCounts} />
 
       {/* ── Buyer Guide + Why Australians ── */}
       <HomeBuyerGuide />

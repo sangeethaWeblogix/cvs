@@ -9,8 +9,18 @@ import { fetchHomePage } from "@/api/home/api";
 import { fetchTypeCounts } from "@/api/homeApi/typeCounts/api";
 import { fetchHomeFeatured } from "@/api/homeApi/featured/api";
 import { fetchBlogs } from "@/api/blog/api";
+import { fetchRegionCounts } from "@/lib/fetchRegionCounts";
 
 const SEED_MAX = 15;
+
+// Must match the states used across HomeLocationSection's MAJOR_CITIES +
+// MINOR_CITIES — fetched here so that component's stock filtering is
+// already resolved in the first HTML byte instead of only after a
+// client-side fetch (see fetchRegionCounts for why that matters).
+const HOME_LOCATION_STATES = [
+  "south-australia", "queensland", "victoria", "western-australia",
+  "new-south-wales", "australian-capital-territory", "northern-territory", "tasmania",
+];
 
 export const dynamic = "force-dynamic";
 
@@ -103,6 +113,7 @@ export default async function Page() {
     featuredNew,
     featuredUsed,
     blog,
+    locationRegionCounts,
   ] = await Promise.all([
     fetchStateBasedCaravans(),
     fetchRequirements(),
@@ -112,6 +123,7 @@ export default async function Page() {
     fetchHomeFeatured({ type: "new", seed }),
     fetchHomeFeatured({ type: "used", seed }),
     fetchBlogs(1),
+    fetchRegionCounts(HOME_LOCATION_STATES),
   ]);
 
   const featured = { all: featuredAll, new: featuredNew, used: featuredUsed };
@@ -129,6 +141,7 @@ export default async function Page() {
         typeCounts={typeCounts}
         featured={featured}
         blogPosts={blog.items}
+        locationRegionCounts={locationRegionCounts}
       />
     </>
   );
