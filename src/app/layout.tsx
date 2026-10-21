@@ -22,6 +22,7 @@ import { headers } from "next/headers";
 import { metaFromSlug } from "@/utils/seo/meta";
 import { fetchProductMeta } from "@/utils/fetchProductMeta";
 import fetchListingsForHead, { buildListingsJsonLd, buildBreadcrumbs } from "@/utils/fetchListingsHead";
+import { parseSlugToFilters } from "@/app/components/urlBuilder";
 
   const montserrat = Montserrat({
     subsets: ["latin"],
@@ -94,10 +95,13 @@ import fetchListingsForHead, { buildListingsJsonLd, buildBreadcrumbs } from "@/u
       if (listingsData) {
         const crumbs = buildBreadcrumbs(pathname);
         const pageUrl = `https://www.campervansforsale.au${normalizedPath}`;
+        const slugParts = pathname.replace(/^\/listings\//, "").replace(/\/$/, "").split("/").filter(Boolean);
+        const parsedFilters = isListingSlug ? parseSlugToFilters(slugParts, {}) : {};
         const { collectionPageLd, searchResultsLd } = buildListingsJsonLd(
           listingsData,
           pageUrl,
-          crumbs
+          crumbs,
+          parsedFilters
         );
         listingsCollectionLd = collectionPageLd;
         listingsSearchResultsLd = searchResultsLd;

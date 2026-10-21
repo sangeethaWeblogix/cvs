@@ -250,10 +250,66 @@ function buildProductListItem(item: Item, position: number) {
   };
 }
 
+function slugToTitleCase(slug: string): string {
+  return slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+/** A /listings/{make}/{model}/ page with no other filter (state/price/etc.)
+ * is effectively a model page — Ahrefs expects Product schema there even
+ * though the backend may return more than one matching unit. Built from the
+ * cheapest matching item's offer (single Offer) or, with several, an
+ * AggregateOffer spanning their price range — never attached to a generic
+ * multi-item listing page (e.g. a price band), which isn't one product. */
+function buildModelProductLd(
+  make: string,
+  model: string,
+  products: Item[],
+  pageUrl: string
+) {
+  const prices = products
+    .map((p) => Number(cleanPrice(p.sale_price && p.sale_price !== "" ? p.sale_price : p.regular_price)))
+    .filter((n) => !isNaN(n) && n > 0);
+  const images =
+    products[0]?.image_format && products[0].image_format.length > 0
+      ? products[0].image_format.slice(0, 5)
+      : products[0]?.image
+      ? [products[0].image]
+      : [];
+
+  const offers =
+    prices.length === 0
+      ? undefined
+      : prices.length === 1 || products.length === 1
+      ? { "@type": "Offer", url: pageUrl, priceCurrency: "AUD", price: prices[0], availability: "https://schema.org/InStock" }
+      : {
+          "@type": "AggregateOffer",
+          priceCurrency: "AUD",
+          lowPrice: Math.min(...prices),
+          highPrice: Math.max(...prices),
+          offerCount: products.length,
+        };
+
+  return {
+    "@type": "Product",
+    name: `${slugToTitleCase(make)} ${slugToTitleCase(model)}`,
+    brand: { "@type": "Brand", name: slugToTitleCase(make) },
+    ...(images.length > 0 && { image: images }),
+    ...(offers && { offers }),
+  };
+}
+
+type ListingsFilters = {
+  make?: string; model?: string; state?: unknown; region?: unknown; category?: unknown;
+  suburb?: unknown; from_price?: unknown; to_price?: unknown; minKg?: unknown; maxKg?: unknown;
+  from_length?: unknown; to_length?: unknown; from_sleep?: unknown; to_sleep?: unknown;
+  condition?: unknown; search?: unknown; keyword?: unknown;
+};
+
 export function buildListingsJsonLd(
   response: ApiResponse,
   pageUrl: string,
-  breadcrumbs: { name: string; url: string }[]
+  breadcrumbs: { name: string; url: string }[],
+  filters: ListingsFilters = {}
 ) {
   const pageTitle =
     response?.seo_v2?.h1 ||
@@ -266,6 +322,15 @@ export function buildListingsJsonLd(
     ...(response.data?.emp_exclusive_products || []),
   ];
 const weburl = "https://www.campervansforsale.au"
+
+  // "Model page" = make + model and nothing else narrowing the result further.
+  const isModelOnlyPage =
+    !!filters.make &&
+    !!filters.model &&
+    !filters.state && !filters.region && !filters.category && !filters.suburb &&
+    !filters.from_price && !filters.to_price && !filters.minKg && !filters.maxKg &&
+    !filters.from_length && !filters.to_length && !filters.from_sleep && !filters.to_sleep &&
+    !filters.condition && !filters.search && !filters.keyword;
 
   const footerDescription = response?.seo_v2?.footer_description
     ? stripHtml(response.seo_v2.footer_description)
@@ -308,6 +373,9 @@ const weburl = "https://www.campervansforsale.au"
               })),
             },
           ]
+        : []),
+      ...(isModelOnlyPage && allProducts.length > 0
+        ? [buildModelProductLd(filters.make!, filters.model!, allProducts, pageUrl)]
         : []),
       ...(faqItems.length > 0
         ? [
