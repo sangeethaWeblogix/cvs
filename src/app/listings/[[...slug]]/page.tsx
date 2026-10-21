@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import fs from "fs";
 import path from "path";
+import { headers } from "next/headers";
 import StateHome from "../home";
 import { parseDemoFilters, buildListingsSlug } from "../urlUtils";
 import { metaFromSlug } from "@/utils/seo/meta";
@@ -65,8 +66,15 @@ export default async function LocationStateDemoPage({
   // correctly (featured/new/used split vs combined grid) from the first byte.
   // Without this, SSR always uses isIndexed=true and the client-side
   // /api/d3/ check then triggers a second pool fetch to fix the layout.
+  //
+  // Prefer middleware's live x-robots header (stock + band-filter aware —
+  // see middleware.ts) over the static url.csv snapshot below: the CSV can
+  // go stale and disagree with it, which was silently skipping StateHero
+  // (and its H1) on pages middleware actually marks indexable, same root
+  // cause as the robots-meta-tag mismatch fixed in layout.tsx earlier.
   const canonicalPath = buildListingsSlug(initialFilters);
-  const isIndexed = isPathIndexed(canonicalPath);
+  const xRobots = (await headers()).get("x-robots") ?? "";
+  const isIndexed = xRobots ? !xRobots.includes("noindex") : isPathIndexed(canonicalPath);
 
   // shuffle_seed is injected by the HTML cache warmer (e.g. ?shuffle_seed=3) so
   // each KV HTML variant gets a genuinely different product pool from WordPress.
