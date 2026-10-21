@@ -1,7 +1,7 @@
 'use client'
 
 
-import Link from 'next/link'
+import ObfuscatedEmailLink from '@/components/ObfuscatedEmailLink'
 
 export default function AboutUs() {
   return (
@@ -71,13 +71,7 @@ export default function AboutUs() {
                 available to assist you with any questions, concerns, or inquiries.
                 We’re here to ensure your experience with Marketplace Network is smooth
                 and satisfactory. Please email your queries to{' '}
-                <Link
-                  href="mailto:enquiries@campervansforsale.au"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  enquiries@campervansforsale.au
-                </Link>
+                <ObfuscatedEmailLink user="enquiries" domain="campervansforsale.au" />
               </p>
 
               <h4 className="wp-block-heading">Browse Marketplace Network Today</h4>

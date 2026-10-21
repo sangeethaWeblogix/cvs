@@ -1,6 +1,7 @@
 'use client'
 
- 
+import ObfuscatedEmailLink from '@/components/ObfuscatedEmailLink'
+
 export default function CaravanBuyingSafetyGuide() {
   return (
     <section className="services static_page section-padding pt-30 pb-30 style-1">
@@ -218,9 +219,7 @@ export default function CaravanBuyingSafetyGuide() {
               <p>You can contact our team at:</p>
 
               <p>
-                <a href="mailto:admin@campervansforsale.au">
-                  admin@campervansforsale.au
-                </a>
+                <ObfuscatedEmailLink user="admin" domain="campervansforsale.au" />
               </p>
 
               <h3>Important Disclaimer</h3>

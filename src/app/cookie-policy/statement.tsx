@@ -1,5 +1,7 @@
 'use client'
 
+import ObfuscatedEmailLink from '@/components/ObfuscatedEmailLink'
+
 export default function CookiePolicy() {
   return (
     <section className="services static_page section-padding pt-30 pb-30 style-1">
@@ -124,9 +126,7 @@ export default function CookiePolicy() {
 
               <p>
                 <strong>Email:</strong>{" "}
-                <a href="mailto:admin@marketplacenetwork.com.au">
-                  admin@marketplacenetwork.com.au
-                </a>
+                <ObfuscatedEmailLink user="admin" domain="marketplacenetwork.com.au" />
               </p>
 
             </div>
