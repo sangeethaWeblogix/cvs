@@ -62,7 +62,7 @@ export function getStateBySlug(slug: string): StateData | undefined {
 }
 
 export function buildStateMetadata(state: StateData): Metadata {
-  const title = `Sell My Campervan in ${state.label} | List Until Sold for $49`;
+  const title = `Sell Your Campervan in ${state.label} - $49`;
   const description = `Sell your campervan in ${state.label} for just $49 — list until sold, no commission, and connect with buyers across ${state.capital} and regional areas.`;
   const url = `${BASE_URL}/sell-my-campervan/${state.slug}/`;
   return {

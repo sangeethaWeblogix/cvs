@@ -118,7 +118,7 @@ export function getRegionsByState(stateSlug: string): RegionInfo[] {
  const BASE_URL = "https://www.campervansforsale.au";
 
 export function buildRegionMetadata(region: RegionInfo): Metadata {
-  const title = `Sell My Campervan in ${region.label} | List Until Sold for $49`;
+  const title = `Sell Your Campervan in ${region.label} - $49`;
   // Some region labels already embed the state name (e.g. "Western
   // Australia Outback South", "South Australia South East") — appending
   // state.label again there would both repeat it and blow past ~160 chars.
