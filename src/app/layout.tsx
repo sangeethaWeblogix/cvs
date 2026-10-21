@@ -20,7 +20,6 @@ import { fetchBanners } from "@/api/banners/api";
 import GlobalErrorTracker from "@/components/GlobalErrorTracker";
 import { headers } from "next/headers";
 import { metaFromSlug } from "@/utils/seo/meta";
-import { fetchProductMeta } from "@/utils/fetchProductMeta";
 import fetchListingsForHead, { buildListingsJsonLd, buildBreadcrumbs } from "@/utils/fetchListingsHead";
 import { parseSlugToFilters } from "@/app/components/urlBuilder";
 
@@ -54,7 +53,7 @@ import { parseSlugToFilters } from "@/app/components/urlBuilder";
     const pathname = h.get("x-pathname") ?? "";
     const xRobots = h.get("x-robots") ?? "";
     // Kicked off here, awaited just before render so it overlaps with the
-    // productMeta/listingsForHead fetches below instead of blocking on them.
+    // listingsForHead fetch below instead of blocking on it.
     const bannersPromise = fetchBanners();
     const isListingSlug =
       pathname.startsWith("/listings/") &&
@@ -66,24 +65,12 @@ import { parseSlugToFilters } from "@/app/components/urlBuilder";
     let slugCanonical = "";
     let slugRobots = "";
 
-    const isProductPage =
-      pathname.startsWith("/product/") &&
-      pathname !== "/product/" &&
-      pathname !== "/product";
-
     const isContactPage = pathname === "/contact/" || pathname === "/contact";
     const isMainListings = pathname === "/listings/" || pathname === "/listings";
 
     // Static pages whose metadata ends up after </head> due to streaming — inject directly
     const STATIC_META: Record<string, { title: string; description: string; canonical: string }> = {};
     const staticMeta = STATIC_META[pathname] ?? null;
-
-    let productMeta = { title: "", description: "", canonical: "", ogImage: "" };
-
-    if (isProductPage) {
-      const slug = pathname.replace(/^\/product\//, "").replace(/\/$/, "");
-      productMeta = await fetchProductMeta(slug);
-    }
 
     // Listings JSON-LD — fetched here so both schemas render inside <head>
     // Second call hits Next.js data cache (revalidate: 3600), no extra network round-trip.
@@ -149,20 +136,6 @@ import { parseSlugToFilters } from "@/app/components/urlBuilder";
           {staticMeta && <meta property="og:url" content={staticMeta.canonical} />}
           {staticMeta && <meta name="twitter:title" content={staticMeta.title} />}
           {staticMeta && <meta name="twitter:description" content={staticMeta.description} />}
-          {/* Product page SEO — injected here to avoid metadata-in-body streaming issue */}
-          {isProductPage && productMeta.title && <title>{productMeta.title}</title>}
-          {isProductPage && productMeta.description && <meta name="description" content={productMeta.description} />}
-          {isProductPage && productMeta.canonical && <link rel="canonical" href={productMeta.canonical} />}
-          {isProductPage && <meta name="robots" content="index, follow" />}
-          {isProductPage && <meta property="og:type" content="website" />}
-          {isProductPage && productMeta.title && <meta property="og:title" content={productMeta.title} />}
-          {isProductPage && productMeta.description && <meta property="og:description" content={productMeta.description} />}
-          {isProductPage && productMeta.ogImage && <meta property="og:image" content={productMeta.ogImage} />}
-          {isProductPage && productMeta.canonical && <meta property="og:url" content={productMeta.canonical} />}
-          {isProductPage && <meta name="twitter:card" content="summary_large_image" />}
-          {isProductPage && productMeta.title && <meta name="twitter:title" content={productMeta.title} />}
-          {isProductPage && productMeta.description && <meta name="twitter:description" content={productMeta.description} />}
-          {isProductPage && productMeta.ogImage && <meta name="twitter:image" content={productMeta.ogImage} />}
           {/* Per-slug SEO tags for /listings/* — rendered before streaming starts */}
           {/* <title> is set by generateMetadata in [...slug]/page.tsx via fast metaFromSlug (no API call) */}
           {isListingSlug && slugDescription && <meta name="description" content={slugDescription} />}

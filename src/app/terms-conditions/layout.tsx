@@ -9,20 +9,20 @@ import { ReactNode } from "react";
      template: "%s ",
    },
    description:
-     "Read the Terms of Use for CampervansForSale.au, a marketplace platform operated by Marketplace Network Pty Ltd (ABN 70 694 987 052). Learn about listings, user responsibilities, and platform policies.",
+     "Terms of Use for CampervansForSale.au, operated by Marketplace Network Pty Ltd (ABN 70 694 987 052) — listings, user responsibilities, and policies.",
    icons: { icon: "/favicon.ico" },
    robots: "index, follow",
    alternates: {
     canonical: "https://www.campervansforsale.au/terms-conditions/",
 
    },
-   
+
    openGraph: {
       url: "https://www.campervansforsale.au/terms-conditions/",
      title: "Terms of Use – CampervansForSale.au | Marketplace Network",
        description:
-     "Read the Terms of Use for CampervansForSale.au, a marketplace platform operated by Marketplace Network Pty Ltd (ABN 70 694 987 052). Learn about listings, user responsibilities, and platform policies.",
-     
+     "Terms of Use for CampervansForSale.au, operated by Marketplace Network Pty Ltd (ABN 70 694 987 052) — listings, user responsibilities, and policies.",
+
    },
  };
  

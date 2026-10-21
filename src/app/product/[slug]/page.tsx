@@ -71,7 +71,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const slugTitle = slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
   const title = seo.metatitle || seo.meta_title || pd.name || data?.name || slugTitle || "Campervan for Sale";
-  const description = seo.metadescription || seo.meta_description || pd.short_description || "View campervan details on Campervans For Sale Australia.";
+  // The backend auto-generates this from title + price + seller + location
+  // with no length cap — a long seller/suburb name can push it well past
+  // ~160 chars, which Ahrefs flags and Google truncates in the SERP anyway.
+  // Cut at the last full word before the limit rather than mid-word.
+  const rawDescription = seo.metadescription || seo.meta_description || pd.short_description || "View campervan details on Campervans For Sale Australia.";
+  const description = truncateDescription(rawDescription);
   const canonicalUrl = `https://www.campervansforsale.au/product/${slug}/`;
   const rawImages = pd.image_url ?? pd.images ?? [];
   const images: string[] = (Array.isArray(rawImages) ? rawImages : [rawImages]).filter(Boolean);
@@ -99,6 +104,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 function titleCase(s: string): string {
   return s.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+function truncateDescription(text: string, max = 157): string {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max);
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${lastSpace > 0 ? cut.slice(0, lastSpace) : cut}…`;
 }
 
 function attr(label: string, value: unknown): { label: string; value: string } | null {

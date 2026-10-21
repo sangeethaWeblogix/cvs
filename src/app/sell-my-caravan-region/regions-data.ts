@@ -119,7 +119,12 @@ export function getRegionsByState(stateSlug: string): RegionInfo[] {
 
 export function buildRegionMetadata(region: RegionInfo): Metadata {
   const title = `Sell My Campervan in ${region.label} | List Until Sold for $49`;
-  const description = `Sell your campervan in ${region.label} for just $49. List until sold, pay no commission and connect directly with campervan buyers across ${region.label} and ${region.state.label}.`;
+  // Some region labels already embed the state name (e.g. "Western
+  // Australia Outback South", "South Australia South East") — appending
+  // state.label again there would both repeat it and blow past ~160 chars.
+  const description = region.label.includes(region.state.label)
+    ? `Sell your campervan in ${region.label} for just $49 — list until sold, no commission, direct buyer contact.`
+    : `Sell your campervan in ${region.label}, ${region.state.label} for just $49 — list until sold, no commission, direct buyer contact.`;
   const url = `${BASE_URL}/sell-my-campervan/${region.state.slug}/${region.pageSlug}/`;
   return {
     title,

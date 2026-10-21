@@ -5,7 +5,7 @@ import "./statement.css?=123";
 export async function generateMetadata(): Promise<Metadata> {
   const metaTitle = "Buyer Safety Guide - CampervansForSale";
   const metaDescription =
-    "Learn how to buy a campervan safely on CampervansForSale.au. Follow our buyer safety checklist including VIN checks, PPSR searches, secure payments, and scam prevention tips.";
+    "Learn how to buy a campervan safely on CampervansForSale.au with our buyer checklist: VIN checks, PPSR searches, secure payments, and scam prevention tips.";
 
   const robots = "index";
 
