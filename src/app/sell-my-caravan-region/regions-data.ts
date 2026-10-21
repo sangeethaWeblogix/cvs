@@ -133,9 +133,9 @@ export function buildRegionMetadata(region: RegionInfo): Metadata {
       siteName: "Campervans for Sale",
       images: [
         {
-          url: `${BASE_URL}/images/cfs-logo-black.png`,
-          width: 1024,
-          height: 240,
+          url: `${BASE_URL}/images/camper_logo.png`,
+          width: 600,
+          height: 73,
           alt: "Campervans for Sale Australia",
         },
       ],

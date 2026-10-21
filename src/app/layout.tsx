@@ -168,13 +168,13 @@ import fetchListingsForHead, { buildListingsJsonLd, buildBreadcrumbs } from "@/u
           {isListingSlug && slugTitle && <meta property="og:title" content={slugTitle} />}
           {isListingSlug && slugDescription && <meta property="og:description" content={slugDescription} />}
           {isListingSlug && slugCanonical && <meta property="og:url" content={slugCanonical} />}
-          {isListingSlug && <meta property="og:image" content="https://www.campervansforsale.au/images/cfs-logo-black.png" />}
-          {isListingSlug && <meta property="og:image:width" content="1024" />}
-          {isListingSlug && <meta property="og:image:height" content="240" />}
+          {isListingSlug && <meta property="og:image" content="https://www.campervansforsale.au/images/camper_logo.png" />}
+          {isListingSlug && <meta property="og:image:width" content="600" />}
+          {isListingSlug && <meta property="og:image:height" content="73" />}
           {isListingSlug && <meta name="twitter:card" content="summary_large_image" />}
           {isListingSlug && slugTitle && <meta name="twitter:title" content={slugTitle} />}
           {isListingSlug && slugDescription && <meta name="twitter:description" content={slugDescription} />}
-          {isListingSlug && <meta name="twitter:image" content="https://www.campervansforsale.au/images/cfs-logo-black.png" />}
+          {isListingSlug && <meta name="twitter:image" content="https://www.campervansforsale.au/images/camper_logo.png" />}
           {/* Contact page JSON-LD */}
           {isContactPage && (
             <script
