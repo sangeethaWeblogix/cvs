@@ -68,6 +68,12 @@ export default function StateHero({ title, description, loading, breadcrumbs }: 
         <div className="lsd-hero__content">
           {loading ? (
             <>
+              {/* Visually hidden — the skeleton below is the real visual
+                  loading state. A crawler that evaluates the page before
+                  `loading` resolves to false (SSR without initialPool/
+                  initialSeo, or a slow live fetch) still gets a real H1
+                  instead of none at all. */}
+              <h1 className="lsd-hero__title lsd-hero__title--sr-only">{title || "Campervans for Sale"}</h1>
               <div className="lsd-skeleton lsd-hero__title-skeleton" />
               <div className="lsd-skeleton lsd-hero__desc-skeleton" />
               <div className="lsd-skeleton lsd-hero__desc-skeleton lsd-hero__desc-skeleton--short" />
