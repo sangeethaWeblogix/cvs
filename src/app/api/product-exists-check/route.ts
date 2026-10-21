@@ -26,10 +26,15 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  // 2. KV miss — live fallback to WP product_exists_check
-  const paramsStr = searchParams.toString();
+  // 2. KV miss — live fallback via /pool?per_page=1, read for
+  // pagination.total_products. The old product_exists_check call this
+  // replaced hit a route that doesn't exist upstream (confirmed 404), so
+  // every band panel relying on this endpoint always rendered empty —
+  // fetchParamsCountFromKV above also always returns null (KV isn't wired
+  // up yet), so step 1 never actually short-circuited this fallback.
+  const paramsStr = new URLSearchParams({ per_page: "1", page: "1", ...paramsObj }).toString();
   try {
-    const res = await fetch(`${API_BASE}/product_exists_check?${paramsStr}`, {
+    const res = await fetch(`${API_BASE}/pool?${paramsStr}`, {
       headers: {
         Accept: "application/json",
         ...(API_KEY ? { "X-Secret-Key": API_KEY } : {}),
@@ -41,8 +46,14 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ success: false, exists: false, count: 0 }, { status: res.status });
     }
 
-    const json = await res.json();
-    return NextResponse.json(json, { headers: { "X-Params-Cache": "MISS" } });
+    const raw = await res.text();
+    const idx = raw.indexOf('{"');
+    const json = JSON.parse(idx > 0 ? raw.slice(idx) : raw);
+    const count = json?.pagination?.total_products ?? json?.counts?.total ?? 0;
+    return NextResponse.json(
+      { success: true, exists: count > 0, count },
+      { headers: { "X-Params-Cache": "MISS" } }
+    );
   } catch (err) {
     console.error(
       `[product-exists-check] WP API fetch failed | params="${paramsStr}" | error="${(err as Error).message}"`

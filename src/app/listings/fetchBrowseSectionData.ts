@@ -13,7 +13,7 @@ const API_KEY = process.env.MFS_API_KEY;
 const wpHeaders = (): Record<string
 , string> => ({
   Accept: "application/json",
-  ...(API_KEY ? { "X-API-Key": API_KEY } : {}),
+  ...(API_KEY ? { "X-Secret-Key": API_KEY } : {}),
 });
 
 async function fetchGroupCountsServer(
@@ -22,7 +22,7 @@ async function fetchGroupCountsServer(
 ): Promise<CountItem[]> {
   try {
     const qs = new URLSearchParams({ group_by: groupBy, ...scope });
-    const res = await fetch(`${API_BASE}/params_count?${qs.toString()}`, {
+    const res = await fetch(`${API_BASE}/params-count?${qs.toString()}`, {
       headers: wpHeaders(),
       next: { revalidate: 3600 },
     });
@@ -35,23 +35,28 @@ async function fetchGroupCountsServer(
 }
 
 /**
- * Band count for all pages — product_exists_check live call which returns
- * { count, exists }. Replaces both the old pool_test (indexed) and
- * exists-only (noindex) paths.
+ * Band count for all pages — a /pool?per_page=1 probe read for
+ * pagination.total_products, same live check sitemapApi.ts's
+ * filterPathsByLiveCount uses. The previous product_exists_check call this
+ * replaced hit a route that doesn't exist upstream (confirmed 404 — same
+ * mistake as the old params_count/X-API-Key usage above), so every band
+ * panel these functions feed was always rendering empty server-side.
  */
 async function fetchBandCountServer(scope: Record<string, string>, query: string): Promise<number> {
-  const bandParams: Record<string, string> = { ...scope };
+  const bandParams: Record<string, string> = { per_page: "1", page: "1", ...scope };
   new URLSearchParams(query).forEach((v, k) => { bandParams[k] = v; });
 
   try {
     const qs = new URLSearchParams(bandParams);
-    const res = await fetch(`${API_BASE}/product_exists_check?${qs.toString()}`, {
+    const res = await fetch(`${API_BASE}/pool?${qs.toString()}`, {
       headers: wpHeaders(),
       next: { revalidate: 3600 },
     });
     if (!res.ok) return 0;
-    const json = await res.json();
-    return json?.count ?? (json?.exists ? 1 : 0);
+    const raw = await res.text();
+    const idx = raw.indexOf('{"');
+    const json = JSON.parse(idx > 0 ? raw.slice(idx) : raw);
+    return json?.pagination?.total_products ?? json?.counts?.total ?? 0;
   } catch {
     return 0;
   }
