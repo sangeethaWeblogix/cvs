@@ -179,6 +179,10 @@ import { parseSlugToFilters } from "@/app/components/urlBuilder";
                         "url": "https://www.campervansforsale.au/images/camper_logo.svg",
                         "caption": "Campervans For Sale by Marketplace Network",
                       },
+                      "sameAs": [
+                        "https://www.facebook.com/campervansforsale.au",
+                        "https://www.instagram.com/campervansforsale.au",
+                      ],
                       "contactPoint": {
                         "@type": "ContactPoint",
                         "contactType": "customer service",

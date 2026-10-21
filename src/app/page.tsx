@@ -98,6 +98,10 @@ const homeJsonLd = {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/camper_logo.png`,
       },
+      "sameAs": [
+        "https://www.facebook.com/campervansforsale.au",
+        "https://www.instagram.com/campervansforsale.au",
+      ],
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer support",
