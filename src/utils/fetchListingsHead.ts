@@ -223,7 +223,7 @@ function buildProductListItem(item: Item, position: number) {
     "@type": "ListItem",
     position,
     item: {
-      "@type": "Campervan",
+      "@type": "Vehicle",
       bodyType: item.categories && item.categories.length > 0
         ? item.categories.join(", ")
         : "",

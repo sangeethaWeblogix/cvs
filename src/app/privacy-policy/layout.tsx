@@ -22,7 +22,22 @@ import { ReactNode } from "react";
      title: "Privacy Policy - campervansforsale.au - Campervan Marketplace",
        description:
      "Learn about Campervan Marketplace's privacy policy on data collection, usage, security measures, and your rights regarding your information.",
-     
+     siteName: "Campervans for Sale",
+     images: [
+       {
+         url: "https://www.campervansforsale.au/images/camper_logo.png",
+         width: 600,
+         height: 73,
+         alt: "Campervans for Sale Australia",
+       },
+     ],
+     type: "website",
+   },
+   twitter: {
+     card: "summary_large_image",
+     title: "Privacy Policy - campervansforsale.au - Campervan Marketplace",
+     description:
+       "Learn about Campervan Marketplace's privacy policy on data collection, usage, security measures, and your rights regarding your information.",
    },
  };
  

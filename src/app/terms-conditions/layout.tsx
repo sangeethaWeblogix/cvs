@@ -22,7 +22,22 @@ import { ReactNode } from "react";
      title: "Terms of Use – CampervansForSale.au | Marketplace Network",
        description:
      "Terms of Use for CampervansForSale.au, operated by Marketplace Network Pty Ltd (ABN 70 694 987 052) — listings, user responsibilities, and policies.",
-
+     siteName: "Campervans for Sale",
+     images: [
+       {
+         url: "https://www.campervansforsale.au/images/camper_logo.png",
+         width: 600,
+         height: 73,
+         alt: "Campervans for Sale Australia",
+       },
+     ],
+     type: "website",
+   },
+   twitter: {
+     card: "summary_large_image",
+     title: "Terms of Use – CampervansForSale.au | Marketplace Network",
+     description:
+       "Terms of Use for CampervansForSale.au, operated by Marketplace Network Pty Ltd (ABN 70 694 987 052) — listings, user responsibilities, and policies.",
    },
  };
  

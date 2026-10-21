@@ -22,10 +22,20 @@ export async function generateMetadata(): Promise<Metadata> {
       title: metaTitle,
       description: metaDescription,
       url: "https://www.campervansforsale.au/privacy-collection-statement/",
+      siteName: "Campervans for Sale",
+      images: [
+        {
+          url: "https://www.campervansforsale.au/images/camper_logo.png",
+          width: 600,
+          height: 73,
+          alt: "Campervans for Sale Australia",
+        },
+      ],
       type: "article",
     },
 
     twitter: {
+      card: "summary_large_image",
       title: metaTitle,
       description: metaDescription,
     },
