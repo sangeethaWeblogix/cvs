@@ -1,8 +1,7 @@
  "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
-import { obfuscateUrl, parseObfuscatedResponse } from "@/lib/obfuscation";
+import { useLiveRegionCounts } from "@/hooks/useLiveRegionCounts";
 
 const MAJOR_CITIES = [
   { name: "Adelaide",   state: "south-australia",     region: "adelaide",     href: "/listings/south-australia-state/adelaide-region/",    imgSrc: "/images/Adelaide.png"   },
@@ -77,41 +76,6 @@ const FILTERS = [
   },
 ];
 
-
-/** Live region counts, grouped by state — fetched once per unique state
- * across MAJOR_CITIES/MINOR_CITIES. A city's link is hidden while its
- * state/region combo has zero current listings, and reappears automatically
- * the next time this count is fetched (page load) after it has stock again —
- * no manual re-enabling needed. */
-function useLiveRegionCounts(states: string[]) {
-  const [counts, setCounts] = useState<Record<string, number> | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    Promise.all(
-      states.map(async (state) => {
-        try {
-          const qs = new URLSearchParams({ group_by: "region", state });
-          const res = await fetch(obfuscateUrl(`/api/d2/?${qs.toString()}`));
-          const json = await parseObfuscatedResponse<{ data?: { region?: { slug: string; count: number }[] } }>(res);
-          return { state, regions: json?.data?.region ?? [] };
-        } catch {
-          return { state, regions: [] };
-        }
-      })
-    ).then((results) => {
-      if (cancelled) return;
-      const map: Record<string, number> = {};
-      for (const { state, regions } of results) {
-        for (const r of regions) map[`${state}:${r.slug}`] = r.count;
-      }
-      setCounts(map);
-    });
-    return () => { cancelled = true; };
-  }, [states.join(",")]);
-
-  return counts;
-}
 
 export default function HomeLocationSection() {
   const allStates = Array.from(new Set([...MAJOR_CITIES, ...MINOR_CITIES].map((c) => c.state)));

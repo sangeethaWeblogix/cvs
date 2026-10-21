@@ -2,12 +2,24 @@
 
 import { useState } from "react";
 import { POPULAR_REGION_PATHS } from "@/app/listings/browseSectionShared";
+import { useLiveRegionCounts } from "@/hooks/useLiveRegionCounts";
 
 const PREVIEW_COUNT = 7;
 
+const PARSED_PATHS = POPULAR_REGION_PATHS.map((l) => {
+  const [stateSeg, regionSeg] = l.path.split("/");
+  return { ...l, state: stateSeg.replace(/-state$/, ""), region: regionSeg.replace(/-region$/, "") };
+});
+
 export default function FooterPopularLocations() {
   const [expanded, setExpanded] = useState(false);
-  const locations = expanded ? POPULAR_REGION_PATHS : POPULAR_REGION_PATHS.slice(0, PREVIEW_COUNT);
+  const allStates = Array.from(new Set(PARSED_PATHS.map((l) => l.state)));
+  const regionCounts = useLiveRegionCounts(allStates);
+
+  const livePaths = PARSED_PATHS.filter(
+    (l) => regionCounts === null || (regionCounts[`${l.state}:${l.region}`] ?? 0) > 0
+  );
+  const locations = expanded ? livePaths : livePaths.slice(0, PREVIEW_COUNT);
 
   return (
     <div className="foot-col">
