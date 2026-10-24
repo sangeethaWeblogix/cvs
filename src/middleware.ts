@@ -303,7 +303,7 @@
      'listings', 'product', 'api', '_next', 'blog', 'author',
      '410', '404', '410-new', 'images', 'fonts', 'icons',
      'demo', 'product-detail-demo',
-     'sell-my-campervan',
+     'sell-my-campervan', 'site-map',
    ]);
    const pathSegments = url.pathname.split('/').filter(Boolean);
    if (pathSegments.length >= 2 && !KNOWN_MULTI_SEGMENT.has(pathSegments[0])) {

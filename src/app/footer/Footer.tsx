@@ -26,6 +26,7 @@ const Footer = async () => {
                 <li><a href="/privacy-policy/" rel="nofollow">Privacy Policy</a></li>
                 <li><a href="/privacy-collection-statement/" rel="nofollow">Privacy Collection Statement</a></li>
                 <li><a href="/cookie-policy/" rel="nofollow">Cookie Policy</a></li>
+                <li><a href="/site-map/">Site Map</a></li>
               </ul>
               <p className="foot-bottom__copy">
                 &copy; {currentYear ?? "----"} Marketplace Network Pty Ltd &middot; ABN 70 694 987 052

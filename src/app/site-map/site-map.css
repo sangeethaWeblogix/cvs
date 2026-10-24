@@ -1,0 +1,17 @@
+.sm-wrap { padding: 40px 0 60px; }
+.sm-wrap h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+.sm-intro { color: #555; margin-bottom: 28px; max-width: 760px; }
+.sm-breadcrumb { font-size: 14px; margin-bottom: 18px; }
+.sm-breadcrumb a { color: #3f3e82; text-decoration: none; }
+.sm-breadcrumb a:hover { text-decoration: underline; }
+.sm-group { margin-bottom: 36px; }
+.sm-group h2 { font-size: 22px; font-weight: 600; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #e4e4e4; }
+.sm-list { list-style: none; margin: 0; padding: 0; columns: 3 280px; column-gap: 32px; }
+.sm-list li { break-inside: avoid; padding: 4px 0; font-size: 15px; line-height: 1.4; }
+.sm-list a { color: #3f3e82; text-decoration: none; }
+.sm-list a:hover { text-decoration: underline; }
+.sm-sections { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.sm-sections li { border: 1px solid #e4e4e4; border-radius: 8px; padding: 16px 18px; background: #fff; }
+.sm-sections a { font-weight: 600; color: #3f3e82; text-decoration: none; font-size: 17px; }
+.sm-sections a:hover { text-decoration: underline; }
+.sm-sections p { margin: 6px 0 0; color: #666; font-size: 14px; }
