@@ -115,6 +115,7 @@ function truncateDescription(text: string, max = 157): string {
 
 function attr(label: string, value: unknown): { label: string; value: string } | null {
   if (value === null || value === undefined || value === "") return null;
+  if (typeof value === "boolean") return { label, value: value ? "Yes" : "No" };
   return { label, value: String(value) };
 }
 
@@ -140,7 +141,9 @@ function normalizeProductDetail(raw: any) {
     attr("Model", isCustomBuilt ? null : raw.model?.name),
     attr("Years", raw.year),
     attr("Conditions", raw.condition),
-    attr("RV Class", raw.category?.[0]),
+    attr("RV Class", raw.rv_class ?? raw.category?.[0]),
+    attr("Body Type", raw.body_type),
+    attr("Roof Type", raw.roof_type),
     attr("Length", raw.length),
     attr("Width", raw.width),
     attr("Height", raw.height),
@@ -149,11 +152,22 @@ function normalizeProductDetail(raw: any) {
     attr("Payload Weight", raw.payload_weight),
     attr("GCM", raw.gcm),
     attr("Engine Capacity", raw.engine_capacity),
+    attr("Engine Type", raw.engine_type),
+    attr("Engine Power", raw.engine_power),
+    attr("Engine Torque", raw.engine_torque),
     attr("Fuel Type", raw.fuel_type),
     attr("Transmission", raw.transmission),
+    attr("Drivetrain", raw.drivetrain),
+    attr("Suspension", raw.suspension),
+    attr("Brakes", raw.brakes),
+    attr("Tyre Size", raw.tyre_size),
     attr("Odometer", raw.odometer),
     attr("sleeps", raw.sleep),
     attr("Seats", raw.seats),
+    attr("Fridge", raw.fridge),
+    attr("Toilet", raw.toilet),
+    attr("Shower", raw.shower),
+    attr("GPS", raw.gps),
     attr("Location", raw.state ? titleCase(raw.state) : null),
   ].filter(Boolean);
 
