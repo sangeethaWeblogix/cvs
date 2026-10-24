@@ -12,41 +12,63 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+const ICONS: Record<string, string> = {
+  locations: "bi-geo-alt-fill",
+  makes: "bi-truck",
+  "makes-by-location": "bi-pin-map-fill",
+  "price-size-weight": "bi-sliders",
+  products: "bi-grid-fill",
+};
+
+const OTHER_PAGES = [
+  { href: "/", label: "Home" },
+  { href: "/listings/", label: "All Campervans for Sale" },
+  { href: "/sell-my-campervan/", label: "Sell My Campervan" },
+  { href: "/dealer-advertising/", label: "Dealer Advertising" },
+  { href: "/blog/", label: "Blog" },
+  { href: "/buyer-safety-guide/", label: "Buyer Safety Guide" },
+  { href: "/about-us/", label: "About Us" },
+  { href: "/contact/", label: "Contact Us" },
+];
+
 export default function SiteMapPage() {
   const sections = listHubSections();
 
   return (
-    <section className="sm-wrap">
-      <div className="container">
-        <h1>Site Map</h1>
-        <p className="sm-intro">
-          Every way to browse campervans for sale on CampervansForSale.au. Pick a section below to see all current
-          listings and filters.
-        </p>
+    <div className="sm-page">
+      <header className="sm-hero">
+        <div className="container">
+          <nav className="sm-breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <span className="sep">/</span>
+            <span>Site Map</span>
+          </nav>
+          <h1>Site Map</h1>
+        </div>
+      </header>
 
-        <ul className="sm-sections">
+      <div className="container">
+        <ul className="sm-cards">
           {sections.map((s) => (
-            <li key={s.id}>
-              <a href={`/site-map/${s.id}/`}>{s.title}</a>
-              <p>{s.description}</p>
+            <li className="sm-card" key={s.id}>
+              <a href={`/site-map/${s.id}/`}>
+                <span className="sm-card__icon" aria-hidden="true">
+                  <i className={`bi ${ICONS[s.id] ?? "bi-list-ul"}`} />
+                </span>
+                <span className="sm-card__title">{s.title}</span>
+                <i className="bi bi-arrow-right sm-card__arrow" aria-hidden="true" />
+              </a>
             </li>
           ))}
         </ul>
 
-        <div className="sm-group" style={{ marginTop: 36 }}>
-          <h2>Other Pages</h2>
-          <ul className="sm-list">
-            <li><a href="/">Home</a></li>
-            <li><a href="/listings/">All Campervans for Sale</a></li>
-            <li><a href="/sell-my-campervan/">Sell My Campervan</a></li>
-            <li><a href="/dealer-advertising/">Dealer Advertising</a></li>
-            <li><a href="/blog/">Blog</a></li>
-            <li><a href="/buyer-safety-guide/">Buyer Safety Guide</a></li>
-            <li><a href="/about-us/">About Us</a></li>
-            <li><a href="/contact/">Contact Us</a></li>
-          </ul>
+        <h2 className="sm-subtitle">Other Pages</h2>
+        <div className="sm-other">
+          {OTHER_PAGES.map((p) => (
+            <a className="sm-pill" href={p.href} key={p.href}>{p.label}</a>
+          ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

@@ -25,28 +25,48 @@ export default async function SiteMapSectionPage({ params }: { params: Params })
   if (!section) notFound();
 
   return (
-    <section className="sm-wrap">
+    <div className="sm-page">
+      <header className="sm-hero">
+        <div className="container">
+          <nav className="sm-breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <span className="sep">/</span>
+            <a href="/site-map/">Site Map</a>
+            <span className="sep">/</span>
+            <span>{section.title}</span>
+          </nav>
+          <h1>{section.title}</h1>
+        </div>
+      </header>
+
       <div className="container">
-        <nav className="sm-breadcrumb" aria-label="Breadcrumb">
-          <a href="/">Home</a> › <a href="/site-map/">Site Map</a> › {section.title}
-        </nav>
-
-        <h1>{section.title}</h1>
-        <p className="sm-intro">{section.description}</p>
-
         {section.groups.map((group) => (
-          <div className="sm-group" key={group.heading}>
-            <h2>{group.heading}</h2>
-            <ul className="sm-list">
-              {group.paths.map((path) => (
-                <li key={path}>
-                  <a href={`/${group.prefix}/${path}`}>{hubLinkLabel(path, group.prefix)}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <section className="sm-group" key={group.heading}>
+            <div className="sm-group__head">
+              <h2>{group.heading}</h2>
+              <span className="sm-count">{group.paths.length}</span>
+            </div>
+
+            {group.prefix === "product" ? (
+              <ul className="sm-list">
+                {group.paths.map((path) => (
+                  <li key={path}>
+                    <a href={`/${group.prefix}/${path}`}>{hubLinkLabel(path, group.prefix)}</a>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div className="sm-pills">
+                {group.paths.map((path) => (
+                  <a className="sm-pill" href={`/${group.prefix}/${path}`} key={path}>
+                    {hubLinkLabel(path, group.prefix)}
+                  </a>
+                ))}
+              </div>
+            )}
+          </section>
         ))}
       </div>
-    </section>
+    </div>
   );
 }
