@@ -12,14 +12,6 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const ICONS: Record<string, string> = {
-  locations: "bi-geo-alt-fill",
-  makes: "bi-truck",
-  "makes-by-location": "bi-pin-map-fill",
-  "price-size-weight": "bi-sliders",
-  products: "bi-grid-fill",
-};
-
 const OTHER_PAGES = [
   { href: "/", label: "Home" },
   { href: "/listings/", label: "All Campervans for Sale" },
@@ -52,11 +44,7 @@ export default function SiteMapPage() {
           {sections.map((s) => (
             <li className="sm-card" key={s.id}>
               <a href={`/site-map/${s.id}/`}>
-                <span className="sm-card__icon" aria-hidden="true">
-                  <i className={`bi ${ICONS[s.id] ?? "bi-list-ul"}`} />
-                </span>
                 <span className="sm-card__title">{s.title}</span>
-                <i className="bi bi-arrow-right sm-card__arrow" aria-hidden="true" />
               </a>
             </li>
           ))}
