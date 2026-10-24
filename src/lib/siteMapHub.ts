@@ -194,7 +194,7 @@ export function hubLinkLabel(path: string, prefix: "listings" | "product"): stri
   const subject = make
     ? `${titleCase(make)}${model ? ` ${titleCase(model)}` : ""} Campervans`
     : vehicleMake
-      ? `${titleCase(vehicleMake)}-Based Campervans`
+      ? `${titleCase(vehicleMake)} Campervans`
       : "Campervans";
 
   const stateName = titleCase(state);
