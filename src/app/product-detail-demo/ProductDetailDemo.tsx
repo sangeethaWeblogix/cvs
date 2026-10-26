@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useEnquiryForm } from "@/app/components/ListContent/enquiryform";
 import { encodeObfuscated } from "@/lib/obfuscation";
 import CaravanDetailModal from "@/app/product/[slug]/CaravanDetailModal";
+import { lengthBandHref, gvmBandHref, sleepBandHref } from "@/utils/seo/band-links";
 import "./demo.css";
 
 /* ── Types ── */
@@ -331,9 +332,9 @@ export default function ProductDetailDemo({ data, similarData }: Props) {
     if (L.trim() === "vehicle make") return v ? `/listings/${slugify(v)}-vehicle-make/` : "";
     if (L === "model") { const mk = pickFull("Make"); const mkSlug = mk.url?.trim().replace(/^\/+|\/+$/g, "") || slugify(mk.value); return v ? `/listings/${mkSlug}/${slugify(v)}/` : ""; }
     if (L === "condition" || L === "conditions") return v ? `/listings/${slugify(v)}-condition/` : "";
-    if (L === "sleeping capacity" || L === "sleep" || L === "sleeps") { const n = toInt(v); return n ? `/listings/under-${n}-people-sleeping-capacity/` : ""; }
-    if (L === "length") { const n = toInt(v); return n ? `/listings/under-${n}-length-in-feet/` : ""; }
-    if (L === "gvm") { const n = toInt(v); return n ? `/listings/under-${n}-kg-gvm/` : ""; }
+    if (L === "sleeping capacity" || L === "sleep" || L === "sleeps") return sleepBandHref(toInt(v) ?? 0);
+    if (L === "length") return lengthBandHref(parseFloat(v));
+    if (L === "gvm") return gvmBandHref(toInt(v) ?? 0);
     return "";
   };
 
