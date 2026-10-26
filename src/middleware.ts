@@ -169,8 +169,8 @@
    if (filters.sleeps) p.set('sleep', `${filters.sleeps}`);
    if (filters.from_sleep) p.set('from_sleep', `${filters.from_sleep}`);
    if (filters.to_sleep) p.set('to_sleep', `${filters.to_sleep}`);
-   if (filters.acustom_fromyears) p.set('acustom_fromyears', `${filters.acustom_fromyears}`);
-   if (filters.acustom_toyears) p.set('acustom_toyears', `${filters.acustom_toyears}`);
+   if (filters.acustom_fromyears) p.set('from_year', `${filters.acustom_fromyears}`);
+   if (filters.acustom_toyears) p.set('to_year', `${filters.acustom_toyears}`);
    return p;
  }
 
@@ -202,6 +202,22 @@
    if (isListingsPath(url.pathname) && url.pathname.includes('-kg-atm')) {
      url.pathname = url.pathname.replace(/-kg-atm/g, '-kg-gvm');
      return NextResponse.redirect(url, 301);
+   }
+
+   /* 301: legacy "-caravans-range" year slugs → "-campervans-range" (the site
+      sells campervans). Same reasoning as the -kg-atm redirect above: the
+      builder now only emits the new spelling, so an unredirected old URL
+      would mismatch its own canonical form. */
+   if (isListingsPath(url.pathname)) {
+     // Also collapses a same-year range ("2017-2017-…") to the single-year
+     // form ("2017-…") — in one hop so old links don't chain redirects.
+     const fixedPath = url.pathname
+       .replace(/-caravans-range/g, '-campervans-range')
+       .replace(/\/(\d{4})-\1-campervans-range/g, '/$1-campervans-range');
+     if (fixedPath !== url.pathname) {
+       url.pathname = fixedPath;
+       return NextResponse.redirect(url, 301);
+     }
    }
 
    /* 🚫 Block /page/N/ path segments OR ?page= query param → HTTP 410 Gone (no redirect) */

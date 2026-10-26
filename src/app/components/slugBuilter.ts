@@ -118,11 +118,12 @@ export function buildSlugFromFilters(f: Filters): string {
 const toYear = asNum(f.acustom_toyears);
 
 if (fromYear !== undefined && toYear !== undefined) {
-  segments.push(`${fromYear}-${toYear}-caravans-range`);
+  // A single year (from === to) reads "2017-campervans-range", not "2017-2017-…".
+  segments.push(fromYear === toYear ? `${fromYear}-campervans-range` : `${fromYear}-${toYear}-campervans-range`);
 } else if (fromYear !== undefined) {
-  segments.push(`year-from-${fromYear}-caravans-range`);
+  segments.push(`year-from-${fromYear}-campervans-range`);
 } else if (toYear !== undefined) {
-  segments.push(`year-to-${toYear}-caravans-range`);
+  segments.push(`year-to-${toYear}-campervans-range`);
 }
   const query = new URLSearchParams();
 

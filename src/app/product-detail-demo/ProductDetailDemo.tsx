@@ -322,7 +322,7 @@ export default function ProductDetailDemo({ data, similarData }: Props) {
   const makeDetailUrl = (label: string, value: string, apiUrl: string): string => {
     const v = value.trim();
     const L = label.toLowerCase();
-    if (L === "year" || L === "years") { const n = toInt(v); return n ? `/listings/year-from-${n}-caravans-range/` : ""; }
+    if (L === "year" || L === "years") { const n = toInt(v); return n ? `/listings/${n}-campervans-range/` : ""; }
     if (apiUrl) return linkFromApiUrl(apiUrl, v).href;
     // "Type"/"Category" intentionally has no link — the backend has no
     // category filter at all (confirmed live: category/type/body_type params
