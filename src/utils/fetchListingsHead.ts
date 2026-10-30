@@ -3,6 +3,7 @@
 
  import { cache } from "react";
 import { parseSlugToFilters } from "@/app/components/urlBuilder";
+import { fetchSitemapPaths } from "@/lib/sitemapApi";
 
 /** Local shapes for the pool_test response fields this file actually reads —
  * kept here instead of importing from the (removed) old listings API module. */
@@ -18,6 +19,9 @@ type Item = {
   image_format?: string[];
   categories?: string[];
   axle?: string;
+  sku?: string;
+  condition?: string;
+  lengthFt?: number;
 };
 
 type ApiResponse = {
@@ -26,6 +30,7 @@ type ApiResponse = {
     h1?: string;
     meta_title?: string;
     meta_description?: string;
+    short_description?: string;
     footer_description?: string;
     faq?: string | Faq[];
   };
@@ -160,6 +165,9 @@ function normalizeItem(raw: any): Item {
           ? [raw.category]
           : undefined,
     axle: raw.axle,
+    sku: raw.sku,
+    condition: raw.condition,
+    lengthFt: Number(raw.length) > 0 ? Number(raw.length) : undefined,
   };
 }
 
@@ -198,6 +206,148 @@ function parseFaq(raw?: string | Faq[]): Faq[] {
 
 function slugToTitleCase(slug: string): string {
   return slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+/* ---------- Vehicle items for the ItemList ----------
+ * /pool items carry only title/sku/condition/price/length — no make, model,
+ * year, chassis or features. Those are recovered from the title against the
+ * backend's own make / vehicle-make / model lists (the same ones the XML
+ * sitemaps use), so a field is only emitted when it was actually found. */
+
+type Taxonomy = { makes: string[]; vehicleMakes: string[]; models: string[] };
+let taxonomyCache: { at: number; value: Taxonomy } | null = null;
+
+async function getTaxonomy(): Promise<Taxonomy> {
+  if (taxonomyCache && Date.now() - taxonomyCache.at < 60 * 60 * 1000) return taxonomyCache.value;
+  const [makes, vehicleMakes, models] = await Promise.all([
+    fetchSitemapPaths("makes"),
+    fetchSitemapPaths("vehicle-makes"),
+    fetchSitemapPaths("models"),
+  ]);
+  const value: Taxonomy = {
+    makes: makes.map((p) => p.replace(/\/$/, "")),
+    vehicleMakes: vehicleMakes.map((p) => p.replace(/\/$/, "").replace(/-vehicle-make$/, "")),
+    models: models.map((p) => p.replace(/\/$/, "")),
+  };
+  // Don't cache an empty result — a failed fetch shouldn't stick for an hour.
+  if (value.makes.length > 0) taxonomyCache = { at: Date.now(), value };
+  return value;
+}
+
+const BRAND_CASE: Record<string, string> = {
+  kea: "KEA",
+  ldv: "LDV",
+  "mercedes-benz": "Mercedes-Benz",
+  "mercedes benz": "Mercedes-Benz",
+};
+
+const brandLabel = (slug: string) => BRAND_CASE[slug] ?? slugToTitleCase(slug);
+
+/** Case-insensitive match of a slug's words (hyphens ≈ spaces/hyphens) in a title. */
+function findInTitle(title: string, slug: string): RegExpMatchArray | null {
+  const words = slug.split("-").filter(Boolean).map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  if (words.length === 0) return null;
+  return title.match(new RegExp(`(?<![A-Za-z0-9])${words.join("[\\s-]+")}(?![A-Za-z0-9])`, "i"));
+}
+
+const FEATURES: [RegExp, string][] = [
+  [/lithium battery/i, "lithium battery"],
+  [/solar panels?/i, "solar panels"],
+  [/revers(?:e|ing) camera/i, "reverse camera"],
+  [/awning/i, "awning"],
+  [/slide[\s-]?out/i, "slide out"],
+  [/diesel heater/i, "diesel heater"],
+  [/tow bar/i, "tow bar"],
+  [/cruise control/i, "cruise control"],
+  [/turbo(?:charged)?/i, "turbocharged"],
+  [/drop[\s-]?down bed/i, "drop down bed"],
+  [/inverter system/i, "inverter system"],
+  [/washing machine/i, "washing machine"],
+  [/air[\s-]?con(?:ditioning|ditioner)?/i, "air conditioning"],
+  [/microwave/i, "microwave"],
+  [/external shower/i, "external shower"],
+  [/shower/i, "shower"],
+  [/toilet/i, "toilet"],
+];
+
+function buildVehicleLd(item: Item, tax: Taxonomy) {
+  const title = item.name;
+  const url = item.link;
+  const yearMatch = title.match(/^(\d{4})\b/);
+  const year = yearMatch && Number(yearMatch[1]) >= 1950 && Number(yearMatch[1]) <= 2100 ? yearMatch[1] : "";
+
+  // Longest make name first so "Dove Camper Conversions"/"Custom Built" win over shorter ones.
+  const makeSlug = [...tax.makes]
+    .sort((a, b) => b.length - a.length)
+    .find((slug) => findInTitle(title, slug));
+  const chassisSlug = [...tax.vehicleMakes]
+    .sort((a, b) => b.length - a.length)
+    .find((slug) => findInTitle(title, slug));
+
+  let model = "";
+  if (makeSlug) {
+    const best = tax.models
+      .filter((m) => m.startsWith(`${makeSlug}/`))
+      .map((m) => m.slice(makeSlug.length + 1))
+      .sort((a, b) => b.length - a.length)
+      .find((slug) => findInTitle(title, slug));
+    if (best) {
+      const matched = findInTitle(title, best)?.[0] ?? "";
+      model = matched === matched.toLowerCase() ? slugToTitleCase(best) : matched;
+    }
+  }
+
+  const price = Number(cleanPrice(item.sale_price && item.sale_price !== "" ? item.sale_price : item.regular_price));
+  const isNew = String(item.condition ?? "").toLowerCase() === "new";
+  const condition = isNew ? "https://schema.org/NewCondition" : "https://schema.org/UsedCondition";
+
+  const transmission = /\bautomatic\b/i.test(title) ? "Automatic" : /\bmanual\b/i.test(title) ? "Manual" : "";
+  const fuel = /\bdiesel\b/i.test(title) ? "Diesel" : /\bpetrol\b/i.test(title) ? "Petrol" : "";
+  const displacement = title.match(/\b(\d(?:\.\d)?)\s?L\b/);
+
+  const features = FEATURES.filter(([re]) => re.test(title)).map(([, label]) => label);
+  const featuresText = features.length ? features.join(", ").replace(/^./, (c) => c.toUpperCase()) : "";
+
+  const images = (item.image_format ?? (item.image ? [item.image] : [])).slice(0, 5);
+
+  const additionalProperty = [
+    ...(chassisSlug ? [{ "@type": "PropertyValue", name: "Chassis", value: brandLabel(chassisSlug) }] : []),
+    ...(item.lengthFt ? [{ "@type": "PropertyValue", name: "Length", value: item.lengthFt, unitCode: "FOT" }] : []),
+    ...(featuresText ? [{ "@type": "PropertyValue", name: "Features", value: featuresText }] : []),
+  ];
+
+  return {
+    "@type": "Vehicle",
+    "@id": `${url}#vehicle`,
+    name: title,
+    url,
+    ...(item.sku && { sku: item.sku }),
+    bodyType: "Campervan",
+    ...(makeSlug && { brand: { "@type": "Brand", name: brandLabel(makeSlug) } }),
+    ...(model && { model }),
+    ...(year && { vehicleModelDate: year }),
+    ...(fuel && { fuelType: fuel }),
+    ...(transmission && { vehicleTransmission: transmission }),
+    ...(displacement && {
+      vehicleEngine: {
+        "@type": "EngineSpecification",
+        engineDisplacement: { "@type": "QuantitativeValue", value: Number(displacement[1]), unitCode: "LTR" },
+      },
+    }),
+    ...(additionalProperty.length > 0 && { additionalProperty }),
+    ...(images.length > 0 && { image: images }),
+    itemCondition: condition,
+    ...(price > 0 && {
+      offers: {
+        "@type": "Offer",
+        url,
+        price,
+        priceCurrency: "AUD",
+        availability: "https://schema.org/InStock",
+        itemCondition: condition,
+      },
+    }),
+  };
 }
 
 /** A /listings/{make}/{model}/ page with no other filter (state/price/etc.)
@@ -251,7 +401,7 @@ type ListingsFilters = {
   condition?: unknown; search?: unknown; keyword?: unknown;
 };
 
-export function buildListingsJsonLd(
+export async function buildListingsJsonLd(
   response: ApiResponse,
   pageUrl: string,
   breadcrumbs: { name: string; url: string }[],
@@ -261,13 +411,11 @@ export function buildListingsJsonLd(
     response?.seo_v2?.h1 ||
     response?.seo_v2?.meta_title ||
     "Campervans for Sale in Australia";
-  const totalProducts = response?.pagination?.total_products ?? 0;
 
   const allProducts = [
     ...(response.data?.products || []),
     ...(response.data?.emp_exclusive_products || []),
   ];
-const weburl = "https://www.campervansforsale.au"
 
   // "Model page" = make + model and nothing else narrowing the result further.
   const isModelOnlyPage =
@@ -278,28 +426,46 @@ const weburl = "https://www.campervansforsale.au"
     !filters.from_length && !filters.to_length && !filters.from_sleep && !filters.to_sleep &&
     !filters.condition && !filters.search && !filters.keyword;
 
-  const footerDescription = response?.seo_v2?.footer_description
-    ? stripHtml(response.seo_v2.footer_description)
+  const shortDescription = response?.seo_v2?.short_description
+    ? stripHtml(response.seo_v2.short_description)
     : "";
-  const pageDescription =
-    footerDescription || response?.seo_v2?.meta_description || "";
+  const pageDescription = shortDescription || response?.seo_v2?.meta_description || "";
 
   const faqItems = parseFaq(response?.seo_v2?.faq);
+
+  const taxonomy = allProducts.length > 0 ? await getTaxonomy() : { makes: [], vehicleMakes: [], models: [] };
+  const siteId = `${BASE_URL}/#website`;
+  const webPageId = `${pageUrl}#webpage`;
+  const breadcrumbId = `${pageUrl}#breadcrumb`;
+  const itemListId = `${pageUrl}#itemlist`;
+  // The CollectionPage name carries the live count ("37 Campervans for Sale in …");
+  // the list's own name is the plain heading, as page 1 of the results.
+  const listName = pageTitle.replace(/^d[d,]*s+/, "");
 
   const collectionPageLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "CollectionPage",
-        "@id": pageUrl,
-        name: pageTitle,
-        url: pageUrl,
+        "@type": "WebSite",
+        "@id": siteId,
+        url: `${BASE_URL}/`,
+        name: "Campervans For Sale",
         inLanguage: "en-AU",
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": webPageId,
+        url: pageUrl,
+        name: pageTitle,
         ...(pageDescription && { description: pageDescription }),
-        ...(totalProducts > 0 && { numberOfItems: totalProducts }),
+        inLanguage: "en-AU",
+        isPartOf: { "@id": siteId },
+        breadcrumb: { "@id": breadcrumbId },
+        ...(allProducts.length > 0 && { mainEntity: { "@id": itemListId } }),
       },
       {
         "@type": "BreadcrumbList",
+        "@id": breadcrumbId,
         itemListElement: breadcrumbs.map((b, i) => ({
           "@type": "ListItem",
           position: i + 1,
@@ -311,11 +477,15 @@ const weburl = "https://www.campervansforsale.au"
         ? [
             {
               "@type": "ItemList",
+              "@id": itemListId,
+              name: `${listName} – Page 1`,
+              numberOfItems: allProducts.length,
+              itemListOrder: "https://schema.org/ItemListUnordered",
               itemListElement: allProducts.map((item, idx) => ({
                 "@type": "ListItem",
                 position: idx + 1,
                 url: item.link,
-                name: item.name,
+                item: buildVehicleLd(item, taxonomy),
               })),
             },
           ]
@@ -341,23 +511,7 @@ const weburl = "https://www.campervansforsale.au"
     ],
   };
 
-  // mainEntity used to nest an OfferCatalog of Vehicle items here, duplicating
-  // what collectionPageLd's ItemList already covers (url + name per product).
-  // OfferCatalog.itemListElement expects Offer-typed items specifically, so
-  // wrapping Vehicle there was flagged as an "unexpected type" schema.org
-  // validation error on every listings page — dropped rather than
-  // restructured, since it added no rich-result feature beyond the ItemList.
-  const searchResultsLd = {
-    "@context": "https://schema.org/",
-    "@type": "SearchResultsPage",
-    audience: { "@type": "Audience", audienceType: "campervan buyers" },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: { "@type": "EntryPoint", urlTemplate: weburl },
-    },
-  };
-
-  return { collectionPageLd, searchResultsLd };
+  return { collectionPageLd };
 }
 
 // React.cache deduplicates within a single request; the 1hr cross-request cache

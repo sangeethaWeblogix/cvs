@@ -72,10 +72,9 @@ import { parseSlugToFilters } from "@/app/components/urlBuilder";
     const STATIC_META: Record<string, { title: string; description: string; canonical: string }> = {};
     const staticMeta = STATIC_META[pathname] ?? null;
 
-    // Listings JSON-LD — fetched here so both schemas render inside <head>
+    // Listings JSON-LD — fetched here so the schema renders inside <head>
     // Second call hits Next.js data cache (revalidate: 3600), no extra network round-trip.
     let listingsCollectionLd: object | null = null;
-    let listingsSearchResultsLd: object | null = null;
     if (isMainListings || isListingSlug) {
       const normalizedPath = pathname.endsWith("/") ? pathname : pathname + "/";
       const listingsData = await fetchListingsForHead(normalizedPath);
@@ -84,14 +83,13 @@ import { parseSlugToFilters } from "@/app/components/urlBuilder";
         const pageUrl = `https://www.campervansforsale.au${normalizedPath}`;
         const slugParts = pathname.replace(/^\/listings\//, "").replace(/\/$/, "").split("/").filter(Boolean);
         const parsedFilters = isListingSlug ? parseSlugToFilters(slugParts, {}) : {};
-        const { collectionPageLd, searchResultsLd } = buildListingsJsonLd(
+        const { collectionPageLd } = await buildListingsJsonLd(
           listingsData,
           pageUrl,
           crumbs,
           parsedFilters
         );
         listingsCollectionLd = collectionPageLd;
-        listingsSearchResultsLd = searchResultsLd;
       }
     }
 
@@ -229,13 +227,6 @@ import { parseSlugToFilters } from "@/app/components/urlBuilder";
             <script
               type="application/ld+json"
               dangerouslySetInnerHTML={{ __html: JSON.stringify(listingsCollectionLd) }}
-            />
-          )}
-          {/* Listings page JSON-LD — SearchResultsPage with product list */}
-          {listingsSearchResultsLd && (
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(listingsSearchResultsLd) }}
             />
           )}
           {/* ✅ Google Tag Manager (Head) */}
