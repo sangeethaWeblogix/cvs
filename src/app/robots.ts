@@ -27,6 +27,11 @@ export default function robots(): MetadataRoute.Robots {
           
         ],
       },
+      {
+        // block third-party SEO/data crawlers site-wide
+        userAgent: ["CCBot", "AhrefsBot", "MJ12bot"],
+        disallow: "/",
+      },
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,
   };
