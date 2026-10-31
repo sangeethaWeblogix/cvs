@@ -3,9 +3,11 @@ import {
   GVM_BANDS,
   LENGTH_BANDS,
   SLEEP_BANDS,
+  FILTERS_NO_STATE_QUERIES,
   type CountItem,
   type BrowseSectionData,
 } from "./browseSectionShared";
+import { normalizeCountItems } from "@/lib/paramsCountKv";
 
 const API_BASE = process.env.NEXT_PUBLIC_MFS_API_BASE;
 const API_KEY = process.env.MFS_API_KEY;
@@ -28,7 +30,10 @@ async function fetchGroupCountsServer(
     });
     if (!res.ok) return [];
     const json = await res.json();
-    return json?.data?.[groupBy] ?? [];
+    // Upstream returns the single group's list directly under .data (see
+    // middleware.ts / api/d2) — the nested .data[groupBy] form is kept as a fallback.
+    const items = Array.isArray(json?.data) ? json.data : json?.data?.[groupBy];
+    return normalizeCountItems(items ?? []);
   } catch {
     return [];
   }
@@ -147,8 +152,25 @@ export async function fetchBrowseSectionData(
     };
   }
 
-  // Default mode (no state/category, or state-only) — the pills rendered
-  // here are static (STATES/TYPES_NO_STATE/FILTERS_NO_STATE) or come from
-  // getRegionsByState, none of which need count data at all.
-  return {};
+  // Default mode (no state/category, or state-only) — the pills are static
+  // (STATES/FILTERS_NO_STATE) or come from getRegionsByState, so they need
+  // live counts to hide the ones whose page would be empty (and 410).
+  const scope: Record<string, string> = hasState ? { state: state! } : {};
+  const [placeCounts, filterCounts] = await Promise.all([
+    fetchGroupCountsServer(hasState ? "region" : "state", scope),
+    Promise.all(FILTERS_NO_STATE_QUERIES.map((qs) => Promise.all(qs.map((q) => fetchBandCountServer(scope, q))))),
+  ]);
+  return hasState ? { regionCounts: placeCounts, filterCounts } : { stateCounts: placeCounts, filterCounts };
+}
+
+/** Live counts behind the footer's state and new/used links, so none lead to
+ * an empty (410) page — they reappear by themselves once stock arrives.
+ * An empty stateCounts means unknown (API down); callers keep every state then. */
+export async function fetchFooterLinkCounts() {
+  const [stateCounts, newCount, usedCount] = await Promise.all([
+    fetchGroupCountsServer("state", {}),
+    fetchBandCountServer({}, "condition=new"),
+    fetchBandCountServer({}, "condition=used"),
+  ]);
+  return { stateCounts, conditionCounts: { new: newCount, used: usedCount } as Record<string, number> };
 }

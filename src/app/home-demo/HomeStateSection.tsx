@@ -6,11 +6,13 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import CaravansByStateSkeleton from "../components/Caravansbystateskeleton";
+import { isCanonicalListingPath } from "../listings/urlUtils";
 
 interface Item {
   state: string;
   display_text: string;
   permalink: string;
+  campervan_count?: number;
 }
 
 interface Props {
@@ -26,7 +28,14 @@ const stateMeta: Record<string, { code: string; image: string }> = {
   tasmania:           { code: "TAS", image: "/images/tas_map.svg" },
 };
 
-export default function HomeStateSection({ stateBands }: Props) {
+export default function HomeStateSection({ stateBands: allStateBands }: Props) {
+  // States with no listings (their page would 410) or a non-canonical link are
+  // left out; they return by themselves once by-state counts stock there.
+  const stateBands = allStateBands.filter(
+    (item) =>
+      (item.campervan_count === undefined || Number(item.campervan_count) > 0) &&
+      isCanonicalListingPath(item.permalink)
+  );
   const loading = stateBands.length === 0;
 
   return (

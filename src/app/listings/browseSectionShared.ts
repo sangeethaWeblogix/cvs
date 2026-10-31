@@ -192,6 +192,16 @@ export const HOME_SLEEP_BANDS = [
   { text: "6+ Berth", href: "/listings/over-5-people-sleeping-capacity/", query: "from_sleep=6" },
 ];
 
+// Count query for each FILTERS_NO_STATE link ([column][link]) — those links
+// use the same thresholds as the HOME_* bands above, so the default browse
+// panel can hide bands with no live listings (empty band pages 410).
+export const FILTERS_NO_STATE_QUERIES: string[][] = FILTERS_NO_STATE.map((f) =>
+  f.links.map((l) =>
+    [...HOME_PRICE_BANDS, ...HOME_GVM_BANDS, ...HOME_LENGTH_BANDS, ...HOME_SLEEP_BANDS]
+      .find((b) => b.href === l.href)?.query ?? ""
+  )
+);
+
 export const CATEGORY_LABELS: Record<string, string> = {
   "off-road": "Off Road",
   luxury: "Luxury",
@@ -225,13 +235,15 @@ export function buildPopularRegionsForCategory(category: string) {
 
 // State is the ONLY active filter — show every real region of that state
 // (not just the curated popular subset), since there's nothing else to
-// narrow the browsing by.
+// narrow the browsing by. Uses the full region slug (the form params-count
+// returns and the pool filters on), not pageSlug — "south-east-region"
+// matches no listings, "south-australia-south-east-region" does.
 export function buildAllRegionsForState(state: string) {
   const stateSlug = toStateSlug(state);
-  return getRegionsByState(stateSlug).map((r) => ({
-    name: r.label,
-    href: `/listings/${r.state.slug}-state/${r.pageSlug}-region/`,
-  }));
+  return getRegionsByState(stateSlug).map((r) => {
+    const slug = r.slug.replace(/-region$/, "");
+    return { name: r.label, slug, href: `/listings/${r.state.slug}-state/${slug}-region/` };
+  });
 }
 
 // Category pills on a state page carry the state along too — category
@@ -269,4 +281,6 @@ export interface BrowseSectionData {
   gvmCounts?: number[] | null;
   lengthCounts?: number[] | null;
   sleepCounts?: number[] | null;
+  /** Default mode only — one count per FILTERS_NO_STATE link, [column][link]. */
+  filterCounts?: number[][] | null;
 }

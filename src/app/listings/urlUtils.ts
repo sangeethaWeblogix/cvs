@@ -177,3 +177,17 @@ export function parseDemoFilters(
   if (condition) filters.condition = condition.toLowerCase();
   return filters;
 }
+
+/** True when a /listings/ href is already in canonical segment order — the
+ * same parse → rebuild round-trip middleware.ts runs, which answers 410 to
+ * any other order. Used to keep internal links off 410 pages. */
+export function isCanonicalListingPath(href: string): boolean {
+  const slugParts = href.split("?")[0].replace(/^\/listings/, "").split("/").filter(Boolean);
+  if (slugParts.length === 0) return true;
+  try {
+    const norm = (p: string) => p.replace(/\/$/, "").toLowerCase();
+    return norm(buildSlugFromFilters(parseSlugToFilters(slugParts))) === norm(`/listings/${slugParts.join("/")}`);
+  } catch {
+    return false;
+  }
+}

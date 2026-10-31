@@ -1,27 +1,37 @@
-import { STATES } from "@/app/listings/browseSectionShared";
+import { STATES, toStateSlug, type CountItem } from "@/app/listings/browseSectionShared";
 import FooterPopularLocations from "./FooterPopularLocations";
 import FooterSellByLocationLink from "./FooterSellByLocationLink";
 
 interface Props {
   initialRegionCounts?: Record<string, number> | null;
+  /** Live state + new/used counts (fetchFooterLinkCounts) — links whose page
+   * would be empty (410) are left out and return once stock arrives. */
+  linkCounts?: { stateCounts: CountItem[]; conditionCounts: Record<string, number> } | null;
 }
 
-export default function FooterColumns({ initialRegionCounts }: Props) {
+export default function FooterColumns({ initialRegionCounts, linkCounts }: Props) {
+  const stateCounts = linkCounts?.stateCounts;
+  // Empty stateCounts = unknown (API down) — keep every state then.
+  const states = STATES.filter((s) =>
+    !stateCounts?.length || stateCounts.some((c) => c.slug === toStateSlug(s.name) && c.count > 0)
+  );
+  const hasCondition = (condition: string) => !linkCounts || (linkCounts.conditionCounts[condition] ?? 0) > 0;
+
   return (
     <div className="foot-cols">
       <div className="foot-col">
         <h4 className="foot-col__title">Browse Campervans</h4>
         <ul className="foot-col__list">
           <li><a href="/listings/">All Campervans for Sale</a></li>
-          <li><a href="/listings/new-condition/">New Campervans</a></li>
-          <li><a href="/listings/used-condition/">Used Campervans</a></li>
+          {hasCondition("new") && <li><a href="/listings/new-condition/">New Campervans</a></li>}
+          {hasCondition("used") && <li><a href="/listings/used-condition/">Used Campervans</a></li>}
         </ul>
       </div>
 
       <div className="foot-col">
         <h4 className="foot-col__title">Browse by State</h4>
         <ul className="foot-col__list">
-          {STATES.map((s) => (
+          {states.map((s) => (
             <li key={s.href}><a href={s.href}>{s.name}</a></li>
           ))}
         </ul>

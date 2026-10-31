@@ -9,6 +9,7 @@ import {
   STATES,
   // TYPES_NO_STATE, // type section disabled — should not appear on the listing page
   FILTERS_NO_STATE,
+  FILTERS_NO_STATE_QUERIES,
   PRICE_BANDS,
   GVM_BANDS,
   LENGTH_BANDS,
@@ -23,6 +24,7 @@ import {
   type BrowseSectionData,
 } from "./browseSectionShared";
 import { parseObfuscatedResponse, obfuscateUrl } from "@/lib/obfuscation";
+import { isCanonicalListingPath } from "./urlUtils";
 
 async function fetchGroupCounts(groupBy: string, scope: Record<string, string>): Promise<CountItem[]> {
   try {
@@ -78,6 +80,7 @@ export default function StateBrowseSection({ state, region, category, initialDat
   const stateRegionMode         = hasState && hasRegion && !hasCategory;
   const categoryStateMode       = hasState && hasCategory && !hasRegion;
   const categoryStateRegionMode = hasState && hasCategory && hasRegion;
+  const defaultMode             = !hasCategory && !hasRegion;
 
   // Every dynamic mode below shares this same count state — only one mode is
   // ever active for a given render, so there's no cross-talk between fetches.
@@ -92,6 +95,7 @@ export default function StateBrowseSection({ state, region, category, initialDat
   const [gvmCounts,      setGvmCounts]      = useState<number[] | null>(initialData?.gvmCounts ?? null);
   const [lengthCounts,   setLengthCounts]   = useState<number[] | null>(initialData?.lengthCounts ?? null);
   const [sleepCounts,    setSleepCounts]    = useState<number[] | null>(initialData?.sleepCounts ?? null);
+  const [filterCounts,   setFilterCounts]   = useState<number[][] | null>(initialData?.filterCounts ?? null);
 
   // initialData only covers the filters the server rendered this page with —
   // filter changes happen via client-side pushState (see home.tsx), not a
@@ -162,6 +166,19 @@ export default function StateBrowseSection({ state, region, category, initialDat
     return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryStateRegionMode, category, state, region]);
+
+  // Default (no category/region) — State or Region pills + the four filter columns.
+  useEffect(() => {
+    if (!defaultMode || (initialData && isInitialFilters)) return;
+    let cancelled = false;
+    const scope: Record<string, string> = state ? { state } : {};
+    if (state) fetchGroupCounts("region", scope).then((d) => { if (!cancelled) setRegionCounts(d); });
+    else fetchGroupCounts("state", scope).then((d) => { if (!cancelled) setStateCounts(d); });
+    Promise.all(FILTERS_NO_STATE_QUERIES.map((qs) => Promise.all(qs.map((q) => fetchBandCount(scope, q)))))
+      .then((counts) => { if (!cancelled) setFilterCounts(counts); });
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defaultMode, state]);
 
   // Shared shape for the "By Budget/GVM/Length/Sleep"-style vertical-list
   // filter columns used by every dynamic mode below.
@@ -439,9 +456,17 @@ export default function StateBrowseSection({ state, region, category, initialDat
     );
   }
 
-  const regions = hasState ? buildAllRegionsForState(state!) : STATES;
+  // Only places/bands with live listings are linked — an empty listings page
+  // answers 410. An empty count list means unknown (API down or still
+  // loading), so the full static list shows; links return once stock arrives.
+  const placeCounts = hasState ? regionCounts : stateCounts;
+  const regions = (hasState ? buildAllRegionsForState(state!) : STATES.map((s) => ({ ...s, slug: toStateSlug(s.name) })))
+    .filter((r) => !placeCounts?.length || placeCounts.some((c) => c.slug === r.slug && c.count > 0))
+    .filter((r) => isCanonicalListingPath(r.href));
   // const types   = hasState ? buildTypesForState(state!) : TYPES_NO_STATE;
-  const filters = hasState ? buildFiltersForState(state!) : FILTERS_NO_STATE;
+  const filters = (hasState ? buildFiltersForState(state!) : FILTERS_NO_STATE)
+    .map((f, fi) => ({ ...f, links: f.links.filter((_, li) => (filterCounts?.[fi]?.[li] ?? 1) > 0) }))
+    .filter((f) => f.links.length > 0);
 
   const leftTitle  = hasState ? `Browse Campervans by Region in ${stateLabel(state!)}` : "Browse Campervans by State";
   // const rightTitle = hasState ? `Browse Campervans by Type in ${stateLabel(state!)}`   : "Browse Campervans by Type";

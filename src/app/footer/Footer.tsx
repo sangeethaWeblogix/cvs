@@ -5,18 +5,22 @@ import FooterNetwork from "./FooterNetwork";
 import FooterSellAccordion from "./FooterSellAccordion";
 import { PARSED_POPULAR_REGION_PATHS } from "@/app/listings/browseSectionShared";
 import { fetchRegionCounts } from "@/lib/fetchRegionCounts";
+import { fetchFooterLinkCounts } from "@/app/listings/fetchBrowseSectionData";
 
 const Footer = async () => {
   const currentYear = new Date().getFullYear();
   const allStates = Array.from(new Set(PARSED_POPULAR_REGION_PATHS.map((l) => l.state)));
-  const initialRegionCounts = await fetchRegionCounts(allStates);
+  const [initialRegionCounts, linkCounts] = await Promise.all([
+    fetchRegionCounts(allStates),
+    fetchFooterLinkCounts(),
+  ]);
 
   return (
     <>
       <footer className="style-8">
         <div className="container">
           <div className="foot py-4 brd-gray">
-            <FooterColumns initialRegionCounts={initialRegionCounts} />
+            <FooterColumns initialRegionCounts={initialRegionCounts} linkCounts={linkCounts} />
             <FooterNetwork />
             <FooterSellAccordion />
 
