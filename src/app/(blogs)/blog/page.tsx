@@ -2,6 +2,7 @@ import Blogs from "./page/[page]/BlogListClient";
 import "./blog.css?=3";
 import { Metadata } from "next";
 import { fetchBlogs } from "@/api/blog/api";
+import { decodeEntities } from "@/utils/decodeEntities";
 
 export const metadata: Metadata = {
   title: { default: "Latest News, Reviews & Advice", template: "%s " },
@@ -74,7 +75,7 @@ export default async function BlogPage() {
               "@type": "ListItem",
               position: i + 1,
               url: post.link,
-              name: post.title,
+              name: decodeEntities(post.title),
             })),
           },
         ]

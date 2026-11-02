@@ -19,6 +19,11 @@
   font-size: 18px;
   font-weight: 600;
 }
+.all-news.blog-listing .section-head.style-5 h1 {
+    margin-bottom: 35px;
+    font-size: 25px;
+    font-weight: 700;
+}
 .all-news.blog-listing p {
   font-size: 15px;
   color: #000;

@@ -9,6 +9,7 @@ import { useParams } from "next/navigation";
 import {  type BlogPost, type BlogPageResult } from "@/api/blog/api";
 import { formatPostDate } from "@/utils/date";
 import { toSlug } from "@/utils/seo/slug";
+import { decodeEntities, cleanExcerpt } from "@/utils/decodeEntities";
 import BlogCardSkelton from "../../../../components/blogCardSkeleton";
 import { useBanners } from "@/components/BannerHandler";
 import { useBannerTracking } from "@/hooks/useBannerTracking";
@@ -42,12 +43,6 @@ export default function BlogListClient({ data, currentPage }: Props) {
   const blogPosts = data.items;
 // ✅ இதை போடுங்க — data வந்துச்சான்னு check பண்ணு
 const loading = !data || !blogPosts || blogPosts.length === 0 && data.totalPages === 0;
-  function decodeHTML(str: string = "") {
-    if (!str) return "";
-    if (typeof window === "undefined") return str; // SSR safe
-    const doc = new DOMParser().parseFromString(str, "text/html");
-    return doc.documentElement.textContent || "";
-  }
   // React to route segment changes (back/forward, manual URL input)
  
 
@@ -148,7 +143,7 @@ const loading = !data || !blogPosts || blogPosts.length === 0 && data.totalPages
                             <a href={href}>
                               <Image
                                 src={post.image}
-                                alt={post.title}
+                                alt={decodeEntities(post.title)}
                                 width={1024}
                                 height={683}
                                 className="w-100 h-auto"
@@ -170,10 +165,10 @@ const loading = !data || !blogPosts || blogPosts.length === 0 && data.totalPages
                               </a>
                             </small>
                             <a href={href} className="card-title mb-10">
-                              {post.title}
+                              {decodeEntities(post.title)}
                             </a>
 
-                            <p>{decodeHTML(post.excerpt)}</p>{" "}
+                            <p>{cleanExcerpt(post.excerpt)}</p>{" "}
                             <a
                               href={href}
                               className="btn rounded-pill bg-blue4 fw-bold text-white mt-10"
