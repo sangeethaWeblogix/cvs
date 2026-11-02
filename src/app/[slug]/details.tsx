@@ -715,6 +715,20 @@ export default function BlogDetailsPage({
           </p>
         </div>
       </section>
+
+      {/* ── Explore Other Travel Options (same copy as the home page) ── */}
+      <section className="bds-explore-section">
+        <h2 className="bds-explore-title">Explore Other Travel Options</h2>
+        <p className="bds-explore-body">
+          Need more space than a campervan? Browse{" "}
+          <a href="https://www.motorhomesforsale.com.au/" className="bds-explore-link" target="_blank" rel="noopener noreferrer">motorhomes for sale</a>
+          , or take a look at{" "}
+          <a href="https://www.caravansforsale.com.au/" className="bds-explore-link" target="_blank" rel="noopener noreferrer">caravans for sale</a>
+          {" "}if you prefer to tow. You can also compare{" "}
+          <a href="https://www.campingtrailersforsale.com.au/" className="bds-explore-link" target="_blank" rel="noopener noreferrer">camper trailers for sale</a>
+          {" "}for your next camping trip. You&apos;ll find these on our other marketplaces.
+        </p>
+      </section>
     </div>
   );
 }

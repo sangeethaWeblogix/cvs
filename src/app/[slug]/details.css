@@ -1728,6 +1728,34 @@ tr {
   margin: 0 auto;
   padding: 40px 15px 40px;
 }
+/* Explore Other Travel Options — plain text block under the Buy/Sell CTA */
+.bds-explore-section {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 15px 48px;
+}
+.bds-explore-title {
+  color: #000000;
+  margin: 0 0 10px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.bds-explore-body {
+  color: #000000;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.8;
+}
+.single_blog .bds-explore-link,
+.bds-explore-link {
+  color: #1153a6;
+  font-weight: 500;
+  text-decoration: underline;
+}
+.bds-explore-link:hover {
+  color: #3f3e82;
+}
 .bds-cta-card {
   background: #f8f9fa;
   border: 1px solid #e8e8e8;
