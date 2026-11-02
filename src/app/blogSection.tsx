@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { formatPostDate } from "@/utils/date";
 import { toSlug } from "@/utils/seo/slug";
+import { decodeEntities } from "@/utils/decodeEntities";
 
 interface BlogPost {
   id: number;
@@ -24,7 +25,9 @@ interface Props {
 }
 
 export default function HomeLatestBlogs({ posts: rawPosts }: Props) {
-  const posts = rawPosts.filter((p) => !!p?.id && !!p?.title && !!p?.slug);
+  const posts = rawPosts
+    .filter((p) => !!p?.id && !!p?.title && !!p?.slug)
+    .map((p) => ({ ...p, title: decodeEntities(p.title) }));
 
   const getHref = (p: BlogPost) => {
     const slug = p.slug?.trim() || toSlug(p.title || "post");

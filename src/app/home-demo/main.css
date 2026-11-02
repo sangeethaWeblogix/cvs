@@ -1639,6 +1639,11 @@ a.ignoretext {
   color: #000;
 }
 
+.date-author {
+      color: #888;
+    font-size: 13px;
+}
+
 .blog.style-8 .side-posts .item .info h3.title {
   height: auto;
   margin-top: 0;
