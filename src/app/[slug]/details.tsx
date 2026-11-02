@@ -463,9 +463,9 @@ export default function BlogDetailsPage({
         </div>
         {/* Right: banner image */}
         <div className="blog-hero__right">
-          {post.banner_image ? (
+          {post.banner_image || post.image ? (
             <Image
-              src={post.banner_image}
+              src={(post.banner_image || post.image) as string}
               alt={plainTitle}
               width={0}
               height={0}

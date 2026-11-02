@@ -303,7 +303,7 @@ small {
 }
 
 .blog-page.style-5 h1 {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 28px;
     margin-bottom: 20px;
 }
@@ -734,7 +734,7 @@ tr {
 .blog-hero__title {
   color: #fff !important;
   font-size: 30px !important;
-  font-weight: 800 !important;
+  font-weight: 700 !important;
   line-height: 1.25 !important;
   margin-bottom: 16px !important;
 }
@@ -1317,7 +1317,7 @@ tr {
 }
 
 /* ── Content typography ── */
-.blog-article-main h2.wp-block-heading {
+.blog-article-main h2.wp-block-heading, .blog-article-main h2 {
   font-size: 1.45rem;
   font-weight: 700;
   color: #13131e;
@@ -1495,6 +1495,13 @@ tr {
 }
 .blog-faq-answer p { margin: 0 0 8px; }
 .blog-faq-answer p:last-child { margin-bottom: 0; }
+.blog-faq-answer a {
+  color: #4f4ea2;
+}
+.blog-faq-answer a:hover {
+  color: #4f4ea2;
+  text-decoration: underline;
+}
 
 /* Right CTA card */
 .blog-faq-cta {
@@ -1705,6 +1712,14 @@ tr {
   .bfl-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Contact Seller modal title (rendered inside the article) — undo .blog-article-main h3 spacing */
+.blog-article-main .lsd-contact-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #000;
 }
 
 /* ── Buy or Sell CTA ── */

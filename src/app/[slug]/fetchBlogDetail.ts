@@ -40,8 +40,9 @@ function slimProductSections(json: any) {
 // cache() dedupes identical (slug, seed) calls within a single request, so
 // generateMetadata + layout + page no longer each hit the WP API separately.
 export const fetchBlogDetail = cache(async (slug: string, seed?: number) => {
-  const seedParam = seed ? `&seed=${seed}` : "";
-  const url = `${API_BASE}/blog-detail-new/?slug=${encodeURIComponent(
+  // Blog detail lives at /mpn/v1/blog/{slug}, a sibling of /campervans (API_BASE).
+  const seedParam = seed ? `?seed=${seed}` : "";
+  const url = `${API_BASE?.replace(/\/campervans\/?$/, "")}/blog/${encodeURIComponent(
     slug
   )}${seedParam}`;
 
@@ -50,7 +51,7 @@ export const fetchBlogDetail = cache(async (slug: string, seed?: number) => {
     try {
       const res = await fetchWithTimeout(url);
       if (!res.ok) {
-        lastErr = new Error(`blog-detail-new status ${res.status}`);
+        lastErr = new Error(`blog detail status ${res.status}`);
         continue;
       }
       const raw = await res.text();
