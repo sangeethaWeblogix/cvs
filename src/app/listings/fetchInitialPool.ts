@@ -18,6 +18,8 @@ const APP_URL         = process.env.NEXT_PUBLIC_APP_URL || "https://www.camperva
 // Direct WP API — used when seed > 0 to bypass Cloudflare's pool cache (which strips seed).
 const WP_API_BASE     = process.env.NEXT_PUBLIC_MFS_API_BASE;
 const WP_API_KEY      = process.env.MFS_API_KEY;
+const SERVER_UA =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36";
 
 /** Build the /api/d1/ query string from the full FilterState. */
 function buildApiParams(filters: FilterState, seed: number, perPage = 24): URLSearchParams {
@@ -104,31 +106,41 @@ function parsePoolJson(json: any, isIndexed: boolean): InitialPool | null {
 async function fetchFromApi(filters: FilterState, seed: number, perPage = 24): Promise<any | null> {
   const params = buildApiParams(filters, seed, perPage);
 
-  // When a specific seed is requested, the Cloudflare Worker's pool cache must be
-  // bypassed — it normalises its cache key by deleting `seed`, so every seed would
-  // return the same cached pool. Call WordPress directly instead.
-  if (seed > 0 && WP_API_BASE) {
+  // Primary: call WordPress directly. A specific seed needs this anyway (the
+  // Cloudflare Worker's pool cache strips `seed` from its key, so every seed
+  // would return the same pool), and for seed=0 it avoids a server-to-self HTTP
+  // hop through the public domain — that hop was failing in production, which
+  // left initialPool null and the SSR HTML with no H1, hero or listings at all
+  // (while the other direct-to-WP SSR fetches on the same page worked fine).
+  if (WP_API_BASE) {
     try {
       const res = await fetch(`${WP_API_BASE}/pool?${params.toString()}`, {
         headers: {
           Accept: "application/json",
+          "User-Agent": SERVER_UA,
           ...(WP_API_KEY && { "X-Secret-Key": WP_API_KEY }),
         },
         cache: "no-store",
+        signal: AbortSignal.timeout(15000),
       });
-      if (!res.ok) return null;
-      const raw = await res.text();
-      const jsonStart = raw.indexOf("{");
-      return jsonStart >= 0 ? JSON.parse(raw.substring(jsonStart)) : null;
+      if (res.ok) {
+        const raw = await res.text();
+        // Host bot-challenge pages are HTML, never JSON — fall through to the proxy.
+        if (!raw.trimStart().startsWith("<")) {
+          const jsonStart = raw.indexOf("{");
+          if (jsonStart >= 0) return JSON.parse(raw.substring(jsonStart));
+        }
+      }
     } catch {
-      return null;
+      // fall through to the /api/pool-listings/ proxy below
     }
   }
 
-  // Default: go through /api/pool-listings/ (proxies to WP's /pool).
+  // Fallback: go through /api/pool-listings/ (proxies to WP's /pool).
   try {
     const res = await fetch(`${APP_URL}/api/pool-listings/?${params.toString()}`, {
       cache: "no-store",
+      signal: AbortSignal.timeout(15000),
     });
     if (!res.ok) return null;
     return await res.json();
