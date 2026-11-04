@@ -80,6 +80,12 @@ export const fetchBlogs = async (page: number = 1): Promise<BlogPageResult> => {
     console.log(`[Blog API] GET ${url} (attempt ${attempt}/${MAX_ATTEMPTS})`); // ✅ Server terminal-ல் தெரியும்
     try {
       const res = await fetchWithTimeout(url);
+      // Host bot-protection challenge (HTTP 202 + HTML) — retrying only adds more
+      // requests from the blocked IP, so bail out immediately.
+      if (res.headers.get("sg-captcha")) {
+        lastErr = new Error("Blocked by host captcha challenge (SG-Captcha)");
+        break;
+      }
 
       if (!res.ok) {
         console.error(`❌ Blog API failed: ${res.status} (attempt ${attempt}/${MAX_ATTEMPTS})`);

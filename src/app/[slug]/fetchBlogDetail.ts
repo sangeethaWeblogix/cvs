@@ -50,6 +50,12 @@ export const fetchBlogDetail = cache(async (slug: string, seed?: number) => {
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
     try {
       const res = await fetchWithTimeout(url);
+      // Host bot-protection challenge (HTTP 202 + HTML) — retrying only adds more
+      // requests from the blocked IP, so bail out immediately.
+      if (res.headers.get("sg-captcha")) {
+        lastErr = new Error("Blocked by host captcha challenge (SG-Captcha)");
+        break;
+      }
       if (!res.ok) {
         lastErr = new Error(`blog detail status ${res.status}`);
         continue;
