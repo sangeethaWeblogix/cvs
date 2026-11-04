@@ -64,7 +64,38 @@ function getBandText(parsed: ReturnType<typeof parseSlugToFilters>): string {
   return [gvmPart, pricePart, sleepPart, lengthPart].filter(Boolean).join(" ");
 }
 
+const STATE_ABBR: Record<string, string> = {
+  "Victoria": "VIC",
+  "New South Wales": "NSW",
+  "Queensland": "QLD",
+  "South Australia": "SA",
+  "Western Australia": "WA",
+  "Tasmania": "TAS",
+  "Northern Territory": "NT",
+  "Australian Capital Territory": "ACT",
+};
+
+const MAX_TITLE_LENGTH = 70;
+
+/** Keeps long make/model/location titles under ~70 chars (Ahrefs "Title too
+ * long"), shortening only when needed: drop the trailing ", Australia", then
+ * abbreviate the state, then drop a bare " in Australia". */
+function fitTitle(title: string): string {
+  if (title.length <= MAX_TITLE_LENGTH) return title;
+  let t = title.replace(/, Australia$/, "");
+  if (t.length <= MAX_TITLE_LENGTH) return t;
+  t = t.replace(/, ([A-Za-z ]+)$/, (m, st: string) => (STATE_ABBR[st] ? `, ${STATE_ABBR[st]}` : m));
+  if (t.length <= MAX_TITLE_LENGTH) return t;
+  return t.replace(/ in Australia$/, "");
+}
+
 export function generateTitleFromFilters(
+  parsed: ReturnType<typeof parseSlugToFilters>
+): string {
+  return fitTitle(buildTitleFromFilters(parsed));
+}
+
+function buildTitleFromFilters(
   parsed: ReturnType<typeof parseSlugToFilters>
 ): string {
   // Build location suffix (shared)
@@ -161,6 +192,7 @@ export async function metaFromSlug(
     robots: { index: robotsResult.index },
     alternates: { canonical, languages: {}, media: {} },
     openGraph: {
+      type: "website",
       title,
       description,
       url: canonical,

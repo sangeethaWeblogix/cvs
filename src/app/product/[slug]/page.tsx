@@ -76,7 +76,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // ~160 chars, which Ahrefs flags and Google truncates in the SERP anyway.
   // Cut at the last full word before the limit rather than mid-word.
   const rawDescription = seo.metadescription || seo.meta_description || pd.short_description || "View campervan details on Campervans For Sale Australia.";
-  const description = truncateDescription(rawDescription);
+  // The same generated text can also come out under ~110 chars (Ahrefs "Meta
+  // description too short") — pad those with a short, accurate call to action.
+  const paddedDescription =
+    rawDescription.length < 110 ? `${rawDescription.replace(/\.?\s*$/, "")}. View photos, specs & details.` : rawDescription;
+  const description = truncateDescription(paddedDescription);
   const canonicalUrl = `https://www.campervansforsale.au/product/${slug}/`;
   const rawImages = pd.image_url ?? pd.images ?? [];
   const images: string[] = (Array.isArray(rawImages) ? rawImages : [rawImages]).filter(Boolean);
