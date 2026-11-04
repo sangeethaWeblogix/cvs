@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
 import { fetchAttributePaths } from "@/lib/attributePaths";
+import { isIndexableListingsPath } from "@/utils/seo/band-utils";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.campervansforsale.au";
 
 export async function GET() {
-  const paths = await fetchAttributePaths();
+  // Per-state band pages are noindex in middleware, so only unscoped allowlisted bands are listed.
+  const paths = (await fetchAttributePaths()).filter(isIndexableListingsPath);
 
   const lastmod = new Date().toISOString();
   const urls = paths

@@ -163,3 +163,23 @@ export function isAllowedSingleBand(slugSegments: string[]): boolean {
   if (length) return ALLOWED_LENGTH_BANDS.has(length);
   return false;
 }
+
+/** Does this /listings/ path (e.g. "queensland-state/under-3500-kg-gvm/") get
+ * "index, follow" from middleware? Mirrors the band rule there: a band page is
+ * indexable only as a single, allowlisted band with no other filter (state,
+ * region, make, model, category) — anything else is noindex,nofollow. Paths
+ * without a band are not decided here and count as indexable. Used to keep
+ * noindex pages out of the XML sitemaps. */
+export function isIndexableListingsPath(path: string): boolean {
+  const segments = path.split("/").filter(Boolean);
+  const isBand = (s: string) =>
+    /^(under|over)-\d+$/.test(s) ||
+    /^between-\d+-\d+$/.test(s) ||
+    s.includes("-kg-gvm") ||
+    s.includes("-people-sleeping-capacity") ||
+    s.includes("-length-in-feet");
+  const bands = segments.filter(isBand);
+  if (bands.length === 0) return true;
+  if (segments.length !== bands.length) return false;
+  return isAllowedSingleBand(segments);
+}

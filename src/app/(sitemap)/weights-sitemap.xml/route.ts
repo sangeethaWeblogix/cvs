@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import { fetchSitemapPaths, buildSitemapXml } from "@/lib/sitemapApi";
+import { isIndexableListingsPath } from "@/utils/seo/band-utils";
 
 export async function GET() {
-  const paths = await fetchSitemapPaths("gvm");
+  // Only list pages middleware serves as index — noindex pages in a sitemap are an Ahrefs error.
+  const paths = (await fetchSitemapPaths("gvm")).filter(isIndexableListingsPath);
   const sitemap = buildSitemapXml(paths, "listings");
 
   return new NextResponse(sitemap, {
