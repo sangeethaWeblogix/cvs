@@ -15,6 +15,8 @@
   import UTMTracker from "./UTMTracker";
   // import NextTopLoader from "nextjs-toploader";
 import NavigationHistory from "@/components/NavigationHistory";
+import VisitorQualifier from "@/components/VisitorQualifier";
+import VisitorStatus from "@/components/VisitorStatus";
 import { BannerProvider } from "@/components/BannerHandler";
 import { fetchBanners } from "@/api/banners/api";
 import GlobalErrorTracker from "@/components/GlobalErrorTracker";
@@ -271,6 +273,12 @@ import { parseSlugToFilters } from "@/app/components/urlBuilder";
 </Suspense>
 <Suspense fallback={null}>
   <NavigationHistory />
+</Suspense>
+<Suspense fallback={null}>
+  <VisitorQualifier />
+</Suspense>
+<Suspense fallback={null}>
+  <VisitorStatus />
 </Suspense>
 <Suspense fallback={<NavbarSkeleton />}>
   <Navbar />

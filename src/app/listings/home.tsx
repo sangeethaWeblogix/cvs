@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { trackEngagement } from "@/utils/engagement";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
 import StateHero from "./StateHero";
@@ -596,6 +597,7 @@ export default function StateHome({
   const handleFilterChange = (f: FilterState) => {
     setFilters(f); setPage(1); setMaxPages(1); setClickid(null);
     pushFiltersToUrl(f);
+    trackEngagement("filter");
   };
   const handleClearAll = () => {
     setFilters({}); setPage(1); setMaxPages(1); setClickid(null);
