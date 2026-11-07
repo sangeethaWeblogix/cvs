@@ -244,7 +244,7 @@ import { parseSlugToFilters } from "@/app/components/urlBuilder";
                   j.async=true;
                   j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
                   f?f.parentNode.insertBefore(j,f):d.head.appendChild(j);
-                })(window,document,'script','dataLayer','GTM-N3362FGQ');
+                })(window,document,'script','dataLayer','GTM-PRXT67SM');
               `,
             }}
           />
@@ -258,7 +258,7 @@ import { parseSlugToFilters } from "@/app/components/urlBuilder";
           {/* ✅ Google Tag Manager (noscript) - right after body */}
          <noscript>
   <iframe
-    src="https://www.googletagmanager.com/ns.html?id=GTM-N3362FGQ"
+    src="https://www.googletagmanager.com/ns.html?id=GTM-PRXT67SM"
     height="0"
     width="0"
     style={{ display: "none", visibility: "hidden" }}
