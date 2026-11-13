@@ -1,4 +1,5 @@
 import Image from "next/image";
+import HomeFaq from "./HomeFaq";
 
 export default function HomeBuyerGuide() {
   return (
@@ -32,16 +33,23 @@ export default function HomeBuyerGuide() {
             {/* Right: Text */}
             <div className="hbg-text-col">
               <h2 className="hbg-title">
-                Campervans for Sale Australia: <span className="hbg-title-accent">Buyer Guide</span>
+                Campervans for Sale in Australia – Buy with Confidence
               </h2>
-              
+
               <p className="hbg-body">
-                CampervansForSale.au helps Australian buyers browse and compare new and used campervans in one convenient place. Review prices, layouts, features and key specifications before contacting a private seller or visiting a dealership. Compare important details such as year, make, model, sleeping capacity, length, fuel type, transmission, tare weight, GVM and payload capacity to narrow down the options that suit your needs.
+                Looking to buy a campervan in Australia? CampervansForSale.au helps you browse and compare new and used campervans for sale from dealerships and private sellers nationwide. Whether you&apos;re buying your first campervan, upgrading or searching for an affordable second-hand model, find a vehicle that suits your budget and travel plans.
               </p>
               <p className="hbg-body">
-                Use the search filters to browse available campervans by state, location, price, condition, make, sleeping capacity and length. You can then compare standard features, optional upgrades, warranty coverage, finance options and trade-in availability before making your decision. When buying a used campervan, also check its service history, registration status, overall condition and maintenance records. Our platform makes it easier to research available listings and find the right campervan for your budget, travel plans and lifestyle.
+                Explore campervans from popular manufacturers such as Jayco, Frontline, Trakka, Avida and Winnebago, including conversions based on Volkswagen, Toyota and Mercedes-Benz vehicles. From compact 2-berth campervans for couples to spacious high-roof models, pop-top campervans, family-friendly layouts and 4WD campervans, compare options suited to weekend escapes, road trips and off-grid adventures.
               </p>
-              
+              <p className="hbg-body">
+                Use our search filters to find campervans by location, price, condition, make, sleeping capacity, length and GVM. Compare important features such as convertible beds, kitchen facilities, refrigeration, storage, solar panels, lithium batteries, awnings and onboard water systems.
+              </p>
+              <p className="hbg-body">
+                When buying a used campervan, check its service history, mechanical condition, registration, roof seals and interior fit-out. Whether you&apos;re planning short getaways or travelling around Australia,{" "}
+                <a href="/listings/" className="hbg-link">browse our campervan listings</a>
+                , compare available listings and contact dealers or private sellers directly.
+              </p>
             </div>
 
           </div>
@@ -63,6 +71,9 @@ export default function HomeBuyerGuide() {
           </p>
         </div>
       </section>
+
+      {/* ── FAQ ── */}
+      <HomeFaq />
 
       {/* ── Sell CTA Card ── */}
       <section className="hbg-sell-section">

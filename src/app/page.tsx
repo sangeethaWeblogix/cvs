@@ -9,6 +9,7 @@ import { fetchHomePage } from "@/api/home/api";
 import { fetchTypeCounts } from "@/api/homeApi/typeCounts/api";
 import { fetchHomeFeatured } from "@/api/homeApi/featured/api";
 import { fetchBlogs } from "@/api/blog/api";
+import { HOME_FAQ_JSONLD } from "./home-demo/faqSchema";
 import { fetchRegionCounts } from "@/lib/fetchRegionCounts";
 import { fetchBandAvailability } from "@/lib/fetchBandAvailability";
 import {
@@ -80,14 +81,6 @@ const homeJsonLd = {
       "name": "Campervans For Sale",
       "description": "Australia's Marketplace for New & Used Campervans",
       "inLanguage": "en-AU",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {
-          "@type": "EntryPoint",
-          "urlTemplate": `${BASE_URL}/listings/{search_term_string}-search/`,
-        },
-        "query-input": "required name=search_term_string",
-      },
     },
     {
       "@type": "Organization",
@@ -109,6 +102,7 @@ const homeJsonLd = {
         "availableLanguage": "English",
       },
     },
+    HOME_FAQ_JSONLD,
   ],
 };
 
