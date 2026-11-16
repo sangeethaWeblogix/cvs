@@ -14,7 +14,7 @@ export const HOME_FAQS: FaqCategory[] = [
       },
       {
         "q": "Where can I find Jayco campervans for sale?",
-        "a": "Browse <a href=\"/listings/jayco/\" class=\"hfaq-link\">Jayco campervans for sale</a> on CampervansForSale.au. Compare available JRV and other models by price, condition, layout and specifications."
+        "a": "Browse <a href=\"/listings/jayco/\" class=\"hfaq-link\">Jayco campervans for sale</a> on <a href=\"/\" class=\"hfaq-link\">CampervansForSale.au</a>. Compare available JRV and other models by price, condition, layout and specifications."
       },
       {
         "q": "Where can I find Avida campervans for sale?",
@@ -52,7 +52,7 @@ export const HOME_FAQS: FaqCategory[] = [
       },
       {
         "q": "Where can I find pop-top campervans for sale?",
-        "a": "Pop-top campervans feature a roof that raises when parked, providing additional headroom. Browse campervan listings and compare available pop-top models by make, dimensions and sleeping capacity."
+        "a": "Pop-top campervans feature a roof that raises when parked, providing additional headroom. Browse <a href=\"/listings/\" class=\"hfaq-link\">campervan listings</a> and compare available pop-top models by make, dimensions and sleeping capacity."
       },
       {
         "q": "What is the difference between a high-top and pop-top campervan?",
@@ -60,7 +60,7 @@ export const HOME_FAQS: FaqCategory[] = [
       },
       {
         "q": "Where can I find 4WD campervans for sale?",
-        "a": "Browse <a href=\"/listings/\" class=\"hfaq-link\">campervans for sale</a> and compare available 4WD and AWD models. Check drivetrain, ground clearance, tyres and manufacturer restrictions before travelling off-road."
+        "a": "Browse campervans for sale and compare available 4WD and AWD models. Check drivetrain, ground clearance, tyres and manufacturer restrictions before travelling off-road."
       },
       {
         "q": "What is the difference between AWD and 4WD campervans?",
@@ -218,7 +218,7 @@ export const HOME_FAQS: FaqCategory[] = [
     "items": [
       {
         "q": "How do I sell my campervan online in Australia?",
-        "a": "Create an advertisement on <a href=\"/sell-my-campervan/\" class=\"hfaq-link\">CampervansForSale.au</a>, enter your campervan's specifications, asking price and photos, and receive enquiries directly from interested buyers."
+        "a": "You can <a href=\"/sell-my-campervan/\" class=\"hfaq-link\">sell your campervan</a> on CampervansForSale.au by entering your campervan's specifications, asking price and photos, and receive enquiries directly from interested buyers."
       },
       {
         "q": "Where can I advertise my campervan for sale?",
