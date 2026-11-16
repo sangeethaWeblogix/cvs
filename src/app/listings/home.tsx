@@ -757,11 +757,11 @@ export default function StateHome({
           <div className="lsd-sell-cta">
             <div className="container">
               <div className="lsd-sell-cta__inner">
-                <h2 className="lsd-sell-cta__title">Looking to Sell Your Campervan?</h2>
+                <h2 className="lsd-sell-cta__title">Looking to sell your campervan?</h2>
                 <p className="lsd-sell-cta__body">
-                  If you&apos;re upgrading or no longer need your current campervan,{" "}
-                  <a href="/sell-my-campervan/" className="lsd-sell-cta__link">sell your campervan</a>{" "}
-                  by creating a listing on CampervansForSale.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
+                  Ready to sell? Visit{" "}
+                  <a href="/sell-my-campervan/" className="lsd-sell-cta__link">Sell My Campervan</a>{" "}
+                  to advertise your campervan for just $49 incl. GST. Your listing stays live until sold, helping you connect with potential campervan buyers across Australia.
                 </p>
               </div>
             </div>
@@ -799,11 +799,11 @@ export default function StateHome({
         <div className="lsd-sell-cta">
           <div className="container">
             <div className="lsd-sell-cta__inner">
-              <h2 className="lsd-sell-cta__title">Looking to Sell Your Campervan?</h2>
+              <h2 className="lsd-sell-cta__title">Looking to sell your campervan?</h2>
               <p className="lsd-sell-cta__body">
-                If you&apos;re upgrading or no longer need your current campervan,{" "}
-                <a href="/sell-my-campervan/" className="lsd-sell-cta__link">sell your campervan</a>{" "}
-                by creating a listing on CampervansForSale.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
+                Ready to sell? Visit{" "}
+                <a href="/sell-my-campervan/" className="lsd-sell-cta__link">Sell My Campervan</a>{" "}
+                to advertise your campervan for just $49 incl. GST. Your listing stays live until sold, helping you connect with potential campervan buyers across Australia.
               </p>
             </div>
           </div>
@@ -907,11 +907,11 @@ export default function StateHome({
         <div className="lsd-sell-cta">
           <div className="container">
             <div className="lsd-sell-cta__inner">
-              <h2 className="lsd-sell-cta__title">Looking to Sell Your Campervan?</h2>
+              <h2 className="lsd-sell-cta__title">Looking to sell your campervan?</h2>
               <p className="lsd-sell-cta__body">
-                If you&apos;re upgrading or no longer need your current campervan,{" "}
-                <a href="/sell-my-campervan/" className="lsd-sell-cta__link">sell your campervan</a>{" "}
-                by creating a listing on CampervansForSale.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
+                Ready to sell? Visit{" "}
+                <a href="/sell-my-campervan/" className="lsd-sell-cta__link">Sell My Campervan</a>{" "}
+                to advertise your campervan for just $49 incl. GST. Your listing stays live until sold, helping you connect with potential campervan buyers across Australia.
               </p>
             </div>
           </div>
@@ -974,11 +974,11 @@ export default function StateHome({
       <div className="lsd-sell-cta">
         <div className="container">
           <div className="lsd-sell-cta__inner">
-            <h2 className="lsd-sell-cta__title">Looking to Sell Your Campervan?</h2>
+            <h2 className="lsd-sell-cta__title">Looking to sell your campervan?</h2>
             <p className="lsd-sell-cta__body">
-              If you&apos;re upgrading or no longer need your current campervan,{" "}
-              <a href="/sell-my-campervan/" className="lsd-sell-cta__link">sell your campervan</a>{" "}
-              by creating a listing on CampervansForSale.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
+              Ready to sell? Visit{" "}
+              <a href="/sell-my-campervan/" className="lsd-sell-cta__link">Sell My Campervan</a>{" "}
+              to advertise your campervan for just $49 incl. GST. Your listing stays live until sold, helping you connect with potential campervan buyers across Australia.
             </p>
           </div>
         </div>
